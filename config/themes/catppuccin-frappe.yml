@@ -1,0 +1,51 @@
+name: "catppuccin-frappe"
+foreground: "#ffffff"
+background: "#000000"
+
+tools:
+
+  tmux:
+    clock: 219
+    colors:
+      dim: "$overlay2$"
+    powerline:
+      colors:
+        bg: "$overlay0$"
+        tint_bg0: "$surface2$"
+        tint_bg1: "$overlay2$"
+        selected: "$peach$"
+        eggplant: "$pink$"
+        blue: "$blue$"
+
+  kitty:
+    name: "Catppuccin-Frappe"
+    border_color: "#ff0000"
+    prompt_color: "#00ff00"
+    shared_icon: "★"
+    test: "#ff00ff"
+
+  zsh:
+    colors:
+      red: 203
+      cyan: 117
+      blue: 110
+      green: 149
+      yellow: 179
+      magenta: 176
+
+  nvim:
+    colorscheme: "catppuccin"
+    theme: "frappe"
+    fields:
+      bg: "base"
+      fg: "text"
+      dark_bg: "mantle"
+      light_fg: "surface0"
+      comment: "overlay0"
+      yellow: "yellow"
+      green: "green"
+      orange: "peach"
+      blue: "blue"
+      red: "red"
+      mauve: "mauve"
+      pink: "pink"

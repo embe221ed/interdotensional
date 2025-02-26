@@ -1,0 +1,51 @@
+name: "tokyonight-day"
+foreground: "#ffffff"
+background: "#000000"
+
+tools:
+
+  tmux:
+    clock: 213
+    colors:
+      dim: "$overlay0$"
+    powerline:
+      colors:
+        bg: "$fg_gutter$"
+        tint_bg0: "$surface0$"
+        tint_bg1: "$overlay2$"
+        selected: "$neon_blue$"
+        eggplant: "$magenta2$"
+        blue: "$blue$"
+
+  kitty:
+    name: "Tokyonight-Day"
+    border_color: "#ff0000"
+    prompt_color: "#00ff00"
+    shared_icon: "★"
+    test: "#ff00ff"
+
+  zsh:
+    colors:
+      red: 196
+      cyan: 38
+      blue: 75
+      green: 40
+      yellow: 214
+      magenta: 198
+
+  nvim:
+    colorscheme: "tokyonight"
+    theme: "day"
+    fields:
+      bg: "bg"
+      fg: "fg"
+      dark_bg: "bg_dark"
+      light_fg: "fg"
+      comment: "comment"
+      yellow: "yellow"
+      green: "green"
+      orange: "orange"
+      blue: "blue"
+      red: "red"
+      mauve: "magenta"
+      pink: "magenta2"

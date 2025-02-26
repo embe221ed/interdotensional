@@ -1,0 +1,51 @@
+name: "catppuccin-latte"
+foreground: "#ffffff"
+background: "#000000"
+
+tools:
+
+  tmux:
+    clock: 213
+    colors:
+      dim: "$overlay0$"
+    powerline:
+      colors:
+        bg: "$crust$"
+        tint_bg0: "$surface0$"
+        tint_bg1: "$overlay2$"
+        selected: "$flamingo$"
+        eggplant: "$pink$"
+        blue: "$sky$"
+
+  kitty:
+    name: "Catppuccin-Latte"
+    border_color: "#ff0000"
+    prompt_color: "#00ff00"
+    shared_icon: "★"
+    test: "#ff00ff"
+
+  zsh:
+    colors:
+      red: 203
+      cyan: 39
+      blue: 110
+      green: 149
+      yellow: 179
+      magenta: 176
+
+  nvim:
+    colorscheme: "catppuccin"
+    theme: "latte"
+    fields:
+      bg: "base"
+      fg: "text"
+      dark_bg: "mantle"
+      light_fg: "surface0"
+      comment: "overlay0"
+      yellow: "yellow"
+      green: "green"
+      orange: "peach"
+      blue: "blue"
+      red: "red"
+      mauve: "mauve"
+      pink: "pink"

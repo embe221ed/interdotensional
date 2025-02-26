@@ -1,0 +1,34 @@
+theme: "catppuccin-latte"
+
+font:
+  family: "JetBrains Mono"
+  postscript_name: "JetBrainsMono"
+  features: "calt zero"
+  bold: "auto"
+  italic: "auto"
+  bold_italic_font: "auto"
+  size: 15
+  symbol_font: true
+
+ui:
+  border: "rounded"
+
+tmux:
+  pane:
+    border:
+      style: "bold"
+      lines: "heavy"
+      format: " #{user}@#{host_short}:#{s|#(echo $HOME)|~|:pane_current_path} "
+      status: "top"
+  popup:
+    border:
+      style: "bold"
+
+nvim:
+  goto_preview:
+    border: [ "├", "─" ,"╮", "│", "╯", "─", "╰", "│" ]
+  lsp:
+    doc:
+      border: false
+    diagnostic:
+      border: "single"

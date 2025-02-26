@@ -19,7 +19,7 @@ tools:
         blue: "$blue$"
 
   kitty:
-    name: "Tokyonight-Storm"
+    name: "tokyonight_storm"
     border_color: "#ff0000"
     prompt_color: "#00ff00"
     shared_icon: "★"
@@ -39,11 +39,11 @@ tools:
     theme: "storm"
     plugin: |
       {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-      }
+            "folke/tokyonight.nvim",
+            lazy = false,
+            priority = 1000,
+            opts = {},
+          }
     fields:
       bg: "bg"
       fg: "fg"

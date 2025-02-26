@@ -1,4 +1,4 @@
-# interdotensional
+# interd•tensional
 
 interdotensional is a Python-powered tool for managing and generating your dotfiles and configuration files. It uses a centralized YAML configuration and Jinja2 templating to ensure a unified theme across tools like Neovim, Kitty, Tmux, Zsh, and more.
 

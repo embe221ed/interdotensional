@@ -1399,7 +1399,7 @@ editor /opt/neovim/out/bin/nvim
 #: See rc_custom_auth <https://sw.kovidgoyal.net/kitty/remote-
 #: control/#rc-custom-auth> for details.
 
-# allow_remote_control no
+allow_remote_control no
 
 #: Allow other programs to control kitty. If you turn this on, other
 #: programs can control all aspects of kitty, including sending text
@@ -2480,8 +2480,8 @@ map cmd+minus             change_font_size current -0.5
 #: }}}
 {% endraw %}
 # BEGIN_KITTY_THEME
-# {{ theme.tools.kitty.name }}
-include current-theme.conf
+# {{ theme.name }}
+include {{ theme.tools.kitty.name | default(theme.name, true) }}.conf
 # END_KITTY_THEME
 
 # BEGIN_KITTY_FONTS

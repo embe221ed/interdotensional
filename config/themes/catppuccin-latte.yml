@@ -19,7 +19,6 @@ tools:
         blue: "$sky$"
 
   kitty:
-    name: "Catppuccin-Latte"
     border_color: "#ff0000"
     prompt_color: "#00ff00"
     shared_icon: "★"

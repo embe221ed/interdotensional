@@ -8,6 +8,7 @@ tools:
     clock: 219
     colors:
       dim: "$overlay2$"
+      pink: "$pink$"
     powerline:
       colors:
         bg: "$overlay0$"
@@ -36,6 +37,8 @@ tools:
   nvim:
     colorscheme: "catppuccin"
     theme: "frappe"
+    plugin: |
+      { "catppuccin/nvim", name = "catppuccin" }
     fields:
       bg: "base"
       fg: "text"
@@ -49,3 +52,5 @@ tools:
       red: "red"
       mauve: "mauve"
       pink: "pink"
+      teal: "teal"
+      sky: "sky"

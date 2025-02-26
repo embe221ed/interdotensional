@@ -7,7 +7,8 @@ tools:
   tmux:
     clock: 213
     colors:
-      dim: "$overlay0$"
+      dim: "$dark3$"
+      pink: "$magenta2$"
     powerline:
       colors:
         bg: "$fg_gutter$"
@@ -36,6 +37,13 @@ tools:
   nvim:
     colorscheme: "tokyonight"
     theme: "storm"
+    plugin: |
+      {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+      }
     fields:
       bg: "bg"
       fg: "fg"
@@ -49,3 +57,5 @@ tools:
       red: "red"
       mauve: "magenta"
       pink: "magenta2"
+      teal: "blue1"
+      sky: "blue5"

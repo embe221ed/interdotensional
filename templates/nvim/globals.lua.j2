@@ -11,6 +11,7 @@
 vim.g.colorscheme = {
   name = "{{ nvim_theme.colorscheme }}",
   theme = "{{ nvim_theme.theme }}",
+  vanilla = {{ nvim_theme.vanilla | lower }},
   plugin = function()
     return {{ nvim_theme.plugin }}  end
 }

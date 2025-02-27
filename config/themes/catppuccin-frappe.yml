@@ -36,6 +36,7 @@ tools:
   nvim:
     colorscheme: "catppuccin"
     theme: "frappe"
+    vanilla: false
     plugin: |
       { "catppuccin/nvim", name = "catppuccin" }
     fields:

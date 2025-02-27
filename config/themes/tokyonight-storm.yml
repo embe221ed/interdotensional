@@ -37,6 +37,7 @@ tools:
   nvim:
     colorscheme: "tokyonight"
     theme: "storm"
+    vanilla: false
     plugin: |
       {
             "folke/tokyonight.nvim",

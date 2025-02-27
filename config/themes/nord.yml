@@ -37,6 +37,7 @@ tools:
   nvim:
     colorscheme: "nord"
     theme: "polar_night"
+    vanilla: true
     plugin: |
       {
             "gbprod/nord.nvim",

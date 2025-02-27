@@ -43,7 +43,7 @@ tools:
       bg: "base"
       fg: "text"
       alt_bg: "mantle"
-      alt_fg: "surface0"
+      alt_fg: "surface1"
       comment: "overlay0"
       yellow: "yellow"
       green: "green"

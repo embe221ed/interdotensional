@@ -48,8 +48,8 @@ tools:
     fields:
       bg: "bg"
       fg: "fg"
-      dark_bg: "bg_dark"
-      light_fg: "fg"
+      alt_bg: "bg_dark"
+      alt_fg: "fg"
       comment: "comment"
       yellow: "yellow"
       green: "green"
@@ -60,3 +60,4 @@ tools:
       pink: "magenta2"
       teal: "blue1"
       sky: "blue5"
+      accent: "magenta2"

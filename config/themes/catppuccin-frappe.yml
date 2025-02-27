@@ -42,8 +42,8 @@ tools:
     fields:
       bg: "base"
       fg: "text"
-      dark_bg: "mantle"
-      light_fg: "surface0"
+      alt_bg: "mantle"
+      alt_fg: "surface0"
       comment: "overlay0"
       yellow: "yellow"
       green: "green"
@@ -54,3 +54,4 @@ tools:
       pink: "pink"
       teal: "teal"
       sky: "sky"
+      accent: "pink"

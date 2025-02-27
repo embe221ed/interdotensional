@@ -47,8 +47,8 @@ tools:
     fields:
       bg: "polar_night.origin"
       fg: "polar_night.light"
-      dark_bg: "polar_night.bright"
-      light_fg: "polar_night.brightest"
+      alt_bg: "polar_night.bright"
+      alt_fg: "polar_night.brightest"
       comment: "polar_night.light"
       yellow: "aurora.yellow"
       green: "aurora.green"
@@ -59,3 +59,4 @@ tools:
       pink: "aurora.purple"
       teal: "frost.artic_water"
       sky: "frost.ice"
+      accent: "frost.artic_ocean"

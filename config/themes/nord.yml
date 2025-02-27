@@ -1,0 +1,60 @@
+name: "nord"
+foreground: "#ffffff"
+background: "#000000"
+
+tools:
+
+  tmux:
+    clock: 219
+    colors:
+      dim: "$origin$"
+      pink: "$purple$"
+    powerline:
+      colors:
+        bg: "$brightest$"
+        tint_bg0: "$bright$"
+        tint_bg1: "$light$"
+        selected: "$orange$"
+        eggplant: "$purple$"
+        blue: "$ice$"
+
+  kitty:
+    name: "Nord"
+    border_color: "#ff0000"
+    prompt_color: "#00ff00"
+    shared_icon: "★"
+    test: "#ff00ff"
+
+  zsh:
+    colors:
+      red: 203
+      cyan: 117
+      blue: 110
+      green: 149
+      yellow: 179
+      magenta: 176
+
+  nvim:
+    colorscheme: "nord"
+    theme: "polar_night"
+    plugin: |
+      {
+            "gbprod/nord.nvim",
+            lazy = false,
+            priority = 1000,
+          }
+    fields:
+      bg: "polar_night.origin"
+      fg: "polar_night.light"
+      dark_bg: "polar_night.bright"
+      light_fg: "polar_night.brightest"
+      comment: "polar_night.light"
+      yellow: "aurora.yellow"
+      green: "aurora.green"
+      orange: "aurora.orange"
+      blue: "frost.ice"
+      red: "aurora.red"
+      mauve: "aurora.purple"
+      pink: "aurora.purple"
+      teal: "frost.artic_water"
+      sky: "frost.ice"

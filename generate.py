@@ -6,7 +6,13 @@ from lib import substitute_tokens, flatten_dict
 from jinja2 import Environment, FileSystemLoader
 
 
-CONFIG_DIR = os.path.join(os.path.dirname(__file__), 'config')
+DIR = os.path.dirname(__file__)
+THEMES_DIR = 'themes'
+CONFIG_DIR = 'config'
+OUTPUT_DIR = 'output'
+TEMPLATES_DIR = 'templates'
+COLORSCHEMES_DIR = 'colorschemes'
+CONFIG_PATH = os.path.join(DIR, CONFIG_DIR)
 
 # Configure logging
 logging.basicConfig(
@@ -34,10 +40,10 @@ def transform_theme(theme, tool):
 
 
 # Load the theme variables from YAML
-data = load_yaml(os.path.join(CONFIG_DIR, 'general.yml'))
+data = load_yaml(os.path.join(CONFIG_PATH, 'general.yml'))
 
 theme_name = data.get('theme')
-theme_file = os.path.join(CONFIG_DIR, 'themes', f'{theme_name}.yml')
+theme_file = os.path.join(CONFIG_PATH, THEMES_DIR, f'{theme_name}.yml')
 
 # Load theme-specific configuration
 if os.path.exists(theme_file):
@@ -47,29 +53,29 @@ else:
 
 # Load the corresponding colorscheme file
 assert(not theme_config.get('colors'))
-theme_config['colors'] = load_yaml(f'colorschemes/{theme_name}.yml')
+theme_config['colors'] = load_yaml(os.path.join(DIR, COLORSCHEMES_DIR, f'{theme_name}.yml'))
 data['theme'] = theme_config
 
 data = substitute_tokens(data, flatten_dict(data['theme']['colors']))
 
 # Set up Jinja2 environment
-template_loader = FileSystemLoader(searchpath="./templates")
+template_loader = FileSystemLoader(searchpath=os.path.join(DIR, TEMPLATES_DIR))
 env = Environment(loader=template_loader)
 
 env.filters['transform_theme'] = transform_theme
 
 # List of templates and their output files
 configs = {
-    "kitty/kitty.conf.j2": "output/kitty/kitty.conf",
-    "tmux/tmux.conf.j2": "output/tmux/.tmux.conf",
-    "tmux/theme.sh.j2": "output/tmux/theme.sh",
-    "ipython/ipython_config.py.j2": "output/ipython/ipython_config.py",
-    "zsh/theme.zsh-theme.j2": "output/zsh/theme.zsh-theme",
-    "nvim/globals.lua.j2": "output/nvim/globals.lua",
-    "nvim/colors.lua.j2": "output/nvim/colors.lua",
-    "colorls/dark_colors.yaml.j2": "output/colorls/dark_colors.yaml",
-    "colorls/light_colors.yaml.j2": "output/colorls/light_colors.yaml",
-    "colorls/files.yaml.j2": "output/colorls/files.yaml"
+    "kitty/kitty.conf.j2": "kitty/kitty.conf",
+    "tmux/tmux.conf.j2": "tmux/.tmux.conf",
+    "tmux/theme.sh.j2": "tmux/theme.sh",
+    "ipython/ipython_config.py.j2": "ipython/ipython_config.py",
+    "zsh/theme.zsh-theme.j2": "zsh/theme.zsh-theme",
+    "nvim/globals.lua.j2": "nvim/globals.lua",
+    "nvim/colors.lua.j2": "nvim/colors.lua",
+    "colorls/dark_colors.yaml.j2": "colorls/dark_colors.yaml",
+    "colorls/light_colors.yaml.j2": "colorls/light_colors.yaml",
+    "colorls/files.yaml.j2": "colorls/files.yaml"
 }
 
 # Render each template and write to file
@@ -78,10 +84,11 @@ for template_name, output_path in configs.items():
     rendered_content = template.render(**data)
 
     # Ensure output directory exists
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, "w") as out_file:
+    _output_path = os.path.join(DIR, OUTPUT_DIR, output_path)
+    os.makedirs(os.path.dirname(_output_path), exist_ok=True)
+    with open(_output_path, "w") as out_file:
         out_file.write(rendered_content)
 
-    logger.debug(f"Generated {output_path}")
+    logger.debug(f"Generated {OUTPUT_DIR}/{output_path}")
 
 logger.info("All configuration files have been generated.")

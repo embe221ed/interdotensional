@@ -11,9 +11,9 @@ tools:
       pink: "$pink$"
     powerline:
       colors:
-        bg: "$overlay0$"
-        tint_bg0: "$surface2$"
-        tint_bg1: "$overlay2$"
+        bg: "$surface0$"
+        tint_bg0: "$overlay1$"
+        tint_bg1: "$surface0$"
         selected: "$peach$"
         eggplant: "$pink$"
         blue: "$blue$"
@@ -43,7 +43,7 @@ tools:
       bg: "base"
       fg: "text"
       alt_bg: "mantle"
-      alt_fg: "surface0"
+      alt_fg: "surface2"
       comment: "overlay0"
       yellow: "yellow"
       green: "green"

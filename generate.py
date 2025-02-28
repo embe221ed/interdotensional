@@ -66,7 +66,7 @@ configs = {
     "ipython/ipython_config.py.j2": "output/ipython/ipython_config.py",
     "zsh/theme.zsh-theme.j2": "output/zsh/theme.zsh-theme",
     "nvim/globals.lua.j2": "output/nvim/globals.lua",
-    "nvim/colorscheme.lua.j2": "output/nvim/colorscheme.lua",
+    "nvim/colors.lua.j2": "output/nvim/colors.lua",
     "colorls/dark_colors.yaml.j2": "output/colorls/dark_colors.yaml",
     "colorls/light_colors.yaml.j2": "output/colorls/light_colors.yaml",
     "colorls/files.yaml.j2": "output/colorls/files.yaml"

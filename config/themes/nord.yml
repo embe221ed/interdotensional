@@ -60,3 +60,4 @@ tools:
       teal: "frost.artic_water"
       sky: "frost.ice"
       accent: "frost.artic_ocean"
+      none: "NONE"

@@ -1,4 +1,4 @@
-theme: "catppuccin-frappe"
+theme: "catppuccin-latte"
 
 font:
   family: "JetBrains Mono"
@@ -27,6 +27,7 @@ tmux:
 nvim:
   goto_preview:
     border: [ "├", "─" ,"╮", "│", "╯", "─", "╰", "│" ]
+    title_length: 60
   lsp:
     doc:
       border: false

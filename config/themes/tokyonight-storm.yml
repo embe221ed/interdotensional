@@ -49,7 +49,7 @@ tools:
       bg: "bg"
       fg: "fg"
       alt_bg: "bg_dark"
-      alt_fg: "fg"
+      alt_fg: "fg_gutter"
       comment: "comment"
       yellow: "yellow"
       green: "green"
@@ -61,3 +61,4 @@ tools:
       teal: "blue1"
       sky: "blue5"
       accent: "magenta2"
+      none: "NONE"

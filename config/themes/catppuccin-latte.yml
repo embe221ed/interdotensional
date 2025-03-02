@@ -55,3 +55,4 @@ tools:
       teal: "teal"
       sky: "sky"
       accent: "pink"
+      none: "NONE"

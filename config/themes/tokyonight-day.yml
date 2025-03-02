@@ -61,3 +61,4 @@ tools:
       teal: "blue1"
       sky: "blue5"
       accent: "magenta2"
+      none: "NONE"

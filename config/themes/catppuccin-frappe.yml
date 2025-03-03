@@ -1,6 +1,4 @@
 name: "catppuccin-frappe"
-foreground: "#ffffff"
-background: "#000000"
 
 tools:
 
@@ -12,8 +10,8 @@ tools:
     powerline:
       colors:
         bg: "$surface0$"
-        tint_bg0: "$overlay1$"
-        tint_bg1: "$surface0$"
+        tint_bg0: "$overlay0$"
+        tint_bg1: "$text$"
         selected: "$peach$"
         eggplant: "$pink$"
         blue: "$blue$"

@@ -8,6 +8,22 @@
 --------------------------------------------------------------------------------
 -- global custom options
 --------------------------------------------------------------------------------{% set nvim_theme = theme.tools.nvim %}
+vim.g.vimtex_view_method = "skim"
+vim.g.symbol_font = {{ font.symbol_font | lower }}
+vim.g.border = "{{ ui.border }}"
+
+vim.g.indentLine_fileTypeExclude = {
+  "lspinfo",
+  "packer",
+  "checkhealth",
+  "dashboard",
+  "help",
+  "man",
+  "diff",
+  "git",
+  "",
+}
+
 vim.g.colorscheme = {
   name = "{{ nvim_theme.colorscheme }}",
   theme = "{{ nvim_theme.theme }}",
@@ -15,8 +31,6 @@ vim.g.colorscheme = {
   plugin = function()
     return {{ nvim_theme.plugin }}  end
 }
-vim.g.symbol_font = {{ font.symbol_font | lower }}
-vim.g.border = "{{ ui.border }}"
 
 vim.g.lsp = {
   doc = {

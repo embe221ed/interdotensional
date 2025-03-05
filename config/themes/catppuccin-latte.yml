@@ -5,7 +5,7 @@ background: "#000000"
 tools:
 
   tmux:
-    clock: 213
+    clock: 13
     colors:
       dim: "$overlay0$"
       pink: "$pink$"

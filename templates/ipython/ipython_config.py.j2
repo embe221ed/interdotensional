@@ -667,7 +667,7 @@ c.TerminalInteractiveShell.highlight_matching_brackets = True
 #          highlighting. To see available styles, run `pygmentize -L styles`.
 #  Default: traitlets.Undefined
 from os import getenv
-c.TerminalInteractiveShell.highlighting_style = {{ theme.name }}
+c.TerminalInteractiveShell.highlighting_style = "{{ theme.name }}"
 
 ## Override highlighting format for specific tokens
 #  Default: {}

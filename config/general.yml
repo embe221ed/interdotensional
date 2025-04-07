@@ -9,6 +9,9 @@ font:
   bold_italic_font: "auto"
   size: 15
   symbol_font: true
+  cell:
+    height: "+16px"
+    width: "96%"
 
 ui:
   border: "rounded"

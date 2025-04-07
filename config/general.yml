@@ -10,7 +10,7 @@ font:
   size: 15
   symbol_font: true
   cell:
-    height: "+16px"
+    height: "+18px"
     width: "96%"
 
 ui:

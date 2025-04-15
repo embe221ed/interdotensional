@@ -12,6 +12,11 @@ font:
   cell:
     height: "+18px"
     width: "96%"
+  underline:
+    position: "12px"
+    thickness: "130%"
+  strikethrough:
+    position: "8px"
 
 ui:
   border: "rounded"

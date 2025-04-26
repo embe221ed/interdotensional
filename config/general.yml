@@ -2,6 +2,7 @@ theme: "catppuccin-latte"
 
 font:
   family: "JetBrains Mono"
+  style: "Regular"
   postscript_name: "JetBrainsMono"
   features: "calt zero"
   bold: "auto"

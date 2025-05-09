@@ -14,8 +14,8 @@ font:
     height: "+18px"
     width: "96%"
   underline:
-    position: "12px"
-    thickness: "130%"
+    position: "13px"
+    thickness: "100%"
   strikethrough:
     position: "8px"
 

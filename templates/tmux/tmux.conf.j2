@@ -4,10 +4,6 @@
 # Any manual changes will be overwritten during the next generation.
 # Please update the source YAML configuration and templates instead.
 ################################################################################
-# tmux-window-name
-set -g @tmux_window_name_use_tilde "True"
-set -g @tmux_window_name_show_program_args "False"
-run-shell /opt/tmux-window-name/tmux_window_name.tmux
 
 set -g mouse on
 {% set tmux_theme = theme.tools.tmux %}
@@ -23,8 +19,9 @@ set-option -g pane-border-status top
 
 set-window-option -g mode-keys vi
 set-option -sg escape-time 10
-set-option -g default-terminal "xterm-kitty"
-set-option -ga terminal-overrides ",xterm-kitty:Tc"
+set-option -g default-terminal "$TERM"
+set-option -ga terminal-overrides ",*:RGB"
+set-option -g renumber-windows on  # keep numbering sequential
 
 # unbind keys
 unbind Up
@@ -50,11 +47,18 @@ bind -r C-j resize-pane -D 2
 bind -r C-h resize-pane -L 2
 bind -r C-l resize-pane -R 2
 
-# tmux-powerline
+# status line
 set-option -g status on
 set-option -g status-interval 2
-set-option -g status-left-length 80
-set-option -g status-right-length 80
+set-option -g status-style "bg=default,fg={{ tmux_theme.colors.dim }}"
+set-option -g status-left " "
+set-option -g status-right "#[fg={{ tmux_theme.colors.dim }}]#S "
+
+# status (windows)
+set -g window-status-format "●"
+set -g window-status-current-format "●"
+set -g window-status-current-style "#{?window_zoomed_flag,fg=yellow,fg={{ tmux_theme.colors.pink }},nobold}"
+set -g window-status-bell-style "fg=red,nobold"
 
 # popup!
 bind-key -n M-p if-shell -F '#{==:#{session_name},scratch}' {
@@ -66,7 +70,6 @@ bind-key -n M-p if-shell -F '#{==:#{session_name},scratch}' {
 # TPM
 ## List of plugins
 set-option -g @plugin 'tmux-plugins/tpm'
-set-option -g @plugin 'erikw/tmux-powerline'
 
 ## Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'

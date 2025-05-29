@@ -53,4 +53,5 @@ tools:
       teal: "teal"
       sky: "sky"
       accent: "pink"
+      dark_bg: "crust"
       none: "NONE"

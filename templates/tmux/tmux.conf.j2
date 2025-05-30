@@ -23,7 +23,7 @@ set-window-option -g mode-keys vi
 set-option -sg escape-time 10
 set-option -g default-terminal "$TERM"
 set-option -ga terminal-overrides ",*:RGB"
-set-option -g renumber-windows on  # keep numbering sequential
+set-option -g renumber-windows on   # keep numbering sequential
 
 # unbind keys
 unbind Up
@@ -54,7 +54,7 @@ set-option -g status on
 set-option -g status-interval 2
 set-option -g status-style "bg=default,fg={{ tmux_theme.colors.dim }}"
 set-option -g status-left " "
-set-option -g status-right "#[fg={{ tmux_theme.colors.dim }}]#S "
+set-option -g status-right "#S "
 
 # status (windows)
 set -g window-status-format "●"

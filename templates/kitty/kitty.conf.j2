@@ -2497,8 +2497,8 @@ include {{ theme.tools.kitty.name | default(theme.name, true) }}.conf
 # END_KITTY_THEME
 
 # BEGIN_KITTY_FONTS
-font_family      family='{{ font.family }}' style={{ font.style }} postscript_name={{ font.postscript_name }} features='{{ font.features }}'
+font_family      family='{{ font.family }}' style='{{ font.style }}' features='{{ font.features }}'
 bold_font        {{ font.bold }}
-italic_font      {{ font.italic }}
+italic_font      family='{{ font.family }}' style='{{ font.italic }}' features='{{ font.features }}'
 bold_italic_font {{ font.bold_italic_font }}
 # END_KITTY_FONTS

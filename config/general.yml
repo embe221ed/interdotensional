@@ -2,11 +2,11 @@ theme: "catppuccin-latte"
 
 font:
   family: "JetBrains Mono"
-  style: "Light"
+  style: "Regular"
   postscript_name: "JetBrainsMono"
   features: "+calt +zero"
   bold: "auto"
-  italic: "Light Italic"
+  italic: "Italic"
   bold_italic_font: "auto"
   size: 15
   symbol_font: true

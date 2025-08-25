@@ -1,0 +1,61 @@
+name: "onedarkpro-onedark"
+
+tools:
+
+  tmux:
+    clock: 219
+    colors:
+      dim: "$overlay2$"
+      pink: "$pink$"
+    powerline:
+      colors:
+        bg: "$surface0$"
+        tint_bg0: "$overlay0$"
+        tint_bg1: "$text$"
+        selected: "$peach$"
+        eggplant: "$pink$"
+        blue: "$blue$"
+
+  kitty:
+    border_color: "#ff0000"
+    prompt_color: "#00ff00"
+    shared_icon: "★"
+    test: "#ff00ff"
+
+  zsh:
+    colors:
+      red: 203
+      cyan: 117
+      blue: 110
+      green: 149
+      yellow: 179
+      magenta: 176
+
+  nvim:
+    colorscheme: "onedark"
+    theme: "onedark"
+    vanilla: true
+    plugin: |
+      {
+        "olimorris/onedarkpro.nvim",
+        priority = 1000, -- Ensure it loads first
+      }
+    fields:
+      bg: "bg"
+      fg: "fg"
+      alt_bg: "mantle"
+      alt_fg: "black"
+      comment: "comment"
+      yellow: "yellow"
+      green: "green"
+      orange: "orange"
+      blue: "blue"
+      red: "red"
+      mauve: "purple"
+      pink: "purple"
+      teal: "cyan"
+      sky: "blue"
+      accent: "purple"
+      dark_bg: "black"
+      none: "NONE"
+

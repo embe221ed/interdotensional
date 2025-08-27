@@ -70,8 +70,27 @@ bind-key -n M-p if-shell -F '#{==:#{session_name},scratch}' {
   display-popup -w70% -h70% -E "tmux new-session -A -s scratch -c ~"
 }
 
+# === tmux-fzf-links ===
+set-option -g @fzf-links-key C-p
+# set-option -g @fzf-links-history-lines "0"
+set-option -g @fzf-links-editor-open-cmd "tmux new-window -n 'nvim' /usr/local/bin/nvim +%line '%file'"
+set-option -g @fzf-links-browser-open-cmd "open '%url'"
+# set-option -g @fzf-links-fzf-path "fzf"
+set-option -g @fzf-links-fzf-display-options "-w 100% --maxnum-displayed 20 --multi --track --no-preview"
+# set-option -g @fzf-links-path-extension "/usr/local/bin"
+# set-option -g @fzf-links-loglevel-tmux "WARNING"
+# set-option -g @fzf-links-loglevel-file "DEBUG"
+# set-option -g @fzf-links-log-filename "~/log.txt"
+set-option -g @fzf-links-python "/Users/embe221ed/.pyenv/shims/python3"
+# set-option -g @fzf-links-python-path "~/.virtualenvs/my_special_venv/lib/python3.11/site-packages"
+# set-option -g @fzf-links-user-schemes-path "~/.tmux/plugins/tmux-fzf-links/user_schemes/user_schemes.py"
+set-option -g @fzf-links-use-colors on
+# set-option -g @fzf-links-ls-colors-filename "~/.cache/tmux-fzf-links/cached_ls_colors.txt"
+set-option -g @fzf-links-hide-bottom-bar off
+
 # TPM
 ## List of plugins
+set-option -g @plugin 'alberti42/tmux-fzf-links'
 set-option -g @plugin 'tmux-plugins/tpm'
 
 ## Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)

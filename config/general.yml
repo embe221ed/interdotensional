@@ -2,19 +2,19 @@ theme: "catppuccin-latte"
 
 font:
   family: "JetBrains Mono"
-  style: "Regular"
+  style: "Light"
   postscript_name: "JetBrainsMono"
   features: "+calt +zero"
   bold: "auto"
-  italic: "Italic"
+  italic: "Light Italic"
   bold_italic_font: "auto"
   size: 15
   symbol_font: true
   cell:
-    height: "+18px"
+    height: "+14px"
     width: "96%"
   underline:
-    position: "13px"
+    position: "11px"
     thickness: "100%"
   strikethrough:
     position: "8px"

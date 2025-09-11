@@ -7,6 +7,9 @@ tools:
     colors:
       dim: "$overlay0$"
       pink: "$pink$"
+      selected:
+        fg: "$pink$"
+        bg: "$surface0$"
     powerline:
       colors:
         bg: "$crust$"

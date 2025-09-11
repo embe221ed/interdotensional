@@ -11,9 +11,9 @@ set-option -g pane-active-border-style "fg={{ tmux_theme.colors.pink }},{{ tmux.
 set-option -g pane-border-style "fg={{ tmux_theme.colors.dim }},{{ tmux.pane.border.style }}"
 set-option -g popup-border-style "fg={{ tmux_theme.colors.pink }},{{ tmux.popup.border.style }}"
 set-option -g clock-mode-colour colour{{ tmux_theme.clock }}
-set-option -g menu-selected-style "fg={{ theme.colors.text }},bg={{ tmux_theme.colors.pink }}"
-set-option -g mode-style "fg={{ theme.colors.text }},bg={{ tmux_theme.colors.pink }}"
-set-option -g message-style "fg={{ theme.colors.text }},bg={{ tmux_theme.colors.pink }}"
+set-option -g menu-selected-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }}"
+set-option -g mode-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }}"
+set-option -g message-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }}"
 
 set-option -g pane-border-lines {{ tmux.pane.border.lines }}
 set-option -g popup-border-lines {{ ui.border }}
@@ -27,28 +27,32 @@ set-option -ga terminal-overrides ",*:RGB"
 set-option -g renumber-windows on   # keep numbering sequential
 
 # unbind keys
-unbind Up
-unbind Down
-unbind Left
-unbind Right
-unbind '"'
-unbind %
+unbind-key Up
+unbind-key Down
+unbind-key Left
+unbind-key Right
+unbind-key '"'
+unbind-key %
+unbind-key w
 
 # Splitting terminals using | and -
-bind - split-window -v -c '#{pane_current_path}'
-bind | split-window -h -c '#{pane_current_path}'
+bind-key - split-window -v -c '#{pane_current_path}'
+bind-key | split-window -h -c '#{pane_current_path}'
 
 # vim-like pane switching
-bind -r k select-pane -U 
-bind -r j select-pane -D 
-bind -r h select-pane -L 
-bind -r l select-pane -R 
+bind-key -r k select-pane -U 
+bind-key -r j select-pane -D 
+bind-key -r h select-pane -L 
+bind-key -r l select-pane -R 
 
 # vim-like pane resizing
-bind -r C-k resize-pane -U 2
-bind -r C-j resize-pane -D 2
-bind -r C-h resize-pane -L 2
-bind -r C-l resize-pane -R 2
+bind-key -r C-k resize-pane -U 2
+bind-key -r C-j resize-pane -D 2
+bind-key -r C-h resize-pane -L 2
+bind-key -r C-l resize-pane -R 2
+
+# updated choose-tree windows formatting
+bind-key w choose-tree -ZwF "[#{window_name} @ #{s|#(echo $USER)|~|:#{b:pane_current_path}}]"
 
 # status line
 set-option -g status on

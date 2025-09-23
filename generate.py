@@ -73,9 +73,6 @@ configs = {
     "zsh/theme.zsh-theme.j2": "zsh/theme.zsh-theme",
     "nvim/globals.lua.j2": "nvim/globals.lua",
     "nvim/colors.lua.j2": "nvim/colors.lua",
-    "colorls/dark_colors.yaml.j2": "colorls/dark_colors.yaml",
-    "colorls/light_colors.yaml.j2": "colorls/light_colors.yaml",
-    "colorls/files.yaml.j2": "colorls/files.yaml",
     "zellij/config.kdl.j2": "zellij/config.kdl",
     "ghostty/config.j2": "ghostty/config",
 }

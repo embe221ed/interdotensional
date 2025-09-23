@@ -26,7 +26,7 @@
 #: heavy. Setting them manually is useful for font families that have
 #: many weight variants like Book, Medium, Thick, etc. For example::
 
-font_size         {{ font.size }}
+font_size         {{ font.kitty.size }}
 
 #: Font size (in pts)
 
@@ -203,9 +203,9 @@ disable_ligatures cursor
 #: suffix px for pixels or % for percentage of original value. No
 #: suffix means use pts. For example::
 
-modify_font underline_position      {{ font.underline.position }}
-modify_font underline_thickness     {{ font.underline.thickness }}
-modify_font strikethrough_position  {{ font.strikethrough.position }}
+modify_font underline_position      {{ font.kitty.underline.position }}
+modify_font underline_thickness     {{ font.kitty.underline.thickness }}
+modify_font strikethrough_position  {{ font.kitty.strikethrough.position }}
 
 #: Additionally, you can modify the size of the cell in which each
 #: font glyph is rendered and the baseline at which the glyph is
@@ -215,8 +215,8 @@ modify_font strikethrough_position  {{ font.strikethrough.position }}
 #:     modify_font cell_height -2px
 #:     modify_font baseline 3
 
-modify_font cell_width    {{ font.cell.width }}
-modify_font cell_height   {{ font.cell.height }}
+modify_font cell_width    {{ font.kitty.cell.width }}
+modify_font cell_height   {{ font.kitty.cell.height }}
 
 #: Note that modifying the baseline will automatically adjust the
 #: underline and strikethrough positions by the same amount.
@@ -2498,8 +2498,8 @@ include {{ theme.tools.kitty.name | default(theme.name, true) }}.conf
 # END_KITTY_THEME
 
 # BEGIN_KITTY_FONTS
-font_family      family='{{ font.family }}' style='{{ font.style }}' features='{{ font.features }}'
-bold_font        {{ font.bold }}
-italic_font      family='{{ font.family }}' style='{{ font.italic }}' features='{{ font.features }}'
-bold_italic_font {{ font.bold_italic_font }}
+font_family      family='{{ font.family }}' style='{{ font.style }}' features='{{ font.kitty.features }}'
+bold_font        {{ font.kitty.bold }}
+italic_font      family='{{ font.family }}' style='{{ font.italic }}' features='{{ font.kitty.features }}'
+bold_italic_font {{ font.kitty.bold_italic }}
 # END_KITTY_FONTS

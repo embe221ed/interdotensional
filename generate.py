@@ -77,6 +77,7 @@ configs = {
     "colorls/light_colors.yaml.j2": "colorls/light_colors.yaml",
     "colorls/files.yaml.j2": "colorls/files.yaml",
     "zellij/config.kdl.j2": "zellij/config.kdl",
+    "ghostty/config.j2": "ghostty/config",
 }
 
 # Render each template and write to file

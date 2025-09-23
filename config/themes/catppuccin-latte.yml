@@ -25,6 +25,9 @@ tools:
     shared_icon: "★"
     test: "#ff00ff"
 
+  ghostty:
+    name: "Catppuccin Latte"
+
   zsh:
     colors:
       red: 203

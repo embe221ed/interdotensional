@@ -5,7 +5,7 @@ font:
   style: "Light"
   italic: "Light Italic"
   postscript_name: "JetBrainsMono"
-  symbol_font: true
+  symbol_font: false
   kitty:
     features: "+calt +zero"
     bold: "auto"

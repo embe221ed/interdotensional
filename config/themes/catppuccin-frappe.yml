@@ -41,7 +41,7 @@ tools:
     colorscheme: "catppuccin"
     theme: "frappe"
     vanilla: false
-    winblend: 8
+    winblend: 10
     plugin: |
       { "catppuccin/nvim", name = "catppuccin" }
     fields:

@@ -1,14 +1,15 @@
 name: "nord"
-foreground: "#ffffff"
-background: "#000000"
 
 tools:
 
   tmux:
     clock: 219
     colors:
-      dim: "$origin$"
+      dim: "$brighter$"
       pink: "$purple$"
+      selected:
+        fg: "$pink$"
+        bg: "$surface0$"
     powerline:
       colors:
         bg: "$brightest$"
@@ -25,6 +26,9 @@ tools:
     shared_icon: "★"
     test: "#ff00ff"
 
+  ghostty:
+    name: "Nord"
+
   zsh:
     colors:
       red: 203
@@ -38,6 +42,7 @@ tools:
     colorscheme: "nord"
     theme: "polar_night"
     vanilla: false
+    winblend: 8
     plugin: |
       {
             "gbprod/nord.nvim",
@@ -60,4 +65,5 @@ tools:
       teal: "frost.artic_water"
       sky: "frost.ice"
       accent: "frost.artic_ocean"
+      dark_bg: "polar_night.brighter"
       none: "NONE"

@@ -14,6 +14,7 @@ set-option -g clock-mode-colour colour{{ tmux_theme.clock }}
 set-option -g menu-selected-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }}"
 set-option -g mode-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }}"
 set-option -g message-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }}"
+set-option -g prompt-cursor-colour "{{ tmux_theme.colors.pink }}"
 
 set-option -g pane-border-lines {{ tmux.pane.border.lines }}
 set-option -g popup-border-lines {{ ui.border }}
@@ -64,7 +65,7 @@ set-option -g status-right "#S "
 # status (windows)
 set -g window-status-format "● "
 set -g window-status-current-format "● "
-set -g window-status-current-style "#{?window_zoomed_flag,fg=yellow,fg={{ tmux_theme.colors.pink }},nobold}"
+set -g window-status-current-style "#{?window_zoomed_flag,fg=yellow,fg={{ tmux_theme.colors.pink }}}"
 set -g window-status-bell-style "fg=red,nobold"
 
 # popup!

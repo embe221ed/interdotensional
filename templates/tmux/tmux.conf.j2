@@ -17,12 +17,18 @@ set-option -g message-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_t
 set-option -g prompt-cursor-colour "{{ tmux_theme.colors.pink }}"
 
 set-option -g pane-border-lines {{ tmux.pane.border.lines }}
+{% if ui.border == "none" %}
+set-option -g popup-border-lines "padded"
+set-option -g popup-border-style "bg={{ tmux_theme.colors.selected.bg }}"
+set-option -g popup-style "bg={{ tmux_theme.colors.selected.bg }}"
+{% else %}
 set-option -g popup-border-lines {{ ui.border }}
+{% endif %}
 set-option -g pane-border-format "{{ tmux.pane.border.format }}"
 set-option -g pane-border-status top
 
 set-window-option -g mode-keys vi
-set-option -sg escape-time 10
+set-option -sg escape-time 0
 set-option -g default-terminal "$TERM"
 set-option -ga terminal-overrides ",*:RGB"
 set-option -g renumber-windows on   # keep numbering sequential

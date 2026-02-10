@@ -19,12 +19,6 @@ tools:
         eggplant: "$pink$"
         blue: "$blue$"
 
-  kitty:
-    border_color: "#ff0000"
-    prompt_color: "#00ff00"
-    shared_icon: "★"
-    test: "#ff00ff"
-
   ghostty:
     name: "Catppuccin Frappe"
 

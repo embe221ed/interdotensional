@@ -10,8 +10,8 @@ set -g mouse on
 
 set-option -g clock-mode-colour colour{{ tmux_theme.clock }}
 
-set-option -g menu-selected-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }}"
-set-option -g mode-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }}"
+set-option -g menu-selected-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }},bold"
+set-option -g mode-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }},bold"
 set-option -g message-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }}"
 set-option -g prompt-cursor-colour "{{ tmux_theme.colors.pink }}"
 

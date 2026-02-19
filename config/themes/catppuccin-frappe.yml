@@ -22,6 +22,8 @@ tools:
   ghostty:
     name: "Catppuccin Frappe"
 
+  kitty:
+
   zsh:
     colors:
       red: 203

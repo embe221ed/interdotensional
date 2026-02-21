@@ -39,7 +39,7 @@ tools:
     vanilla: false
     winblend: 0
     plugin: |
-      { "catppuccin/nvim", name = "catppuccin" }
+      { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
     fields:
       bg: "base"
       fg: "text"

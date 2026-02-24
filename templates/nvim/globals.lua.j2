@@ -25,6 +25,10 @@ vim.g.indentLine_fileTypeExclude = {
   "",
 }
 
+vim.g.symbols = {
+{% for symbol in nvim.symbols %}  {{ symbol }} = "{{ nvim.symbols[symbol] }}",
+{% endfor %}}
+
 vim.g.colorscheme = {
   name = "{{ nvim_theme.colorscheme }}",
   theme = "{{ nvim_theme.theme }}",

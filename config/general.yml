@@ -45,6 +45,9 @@ tmux:
       style: "bold"
 
 nvim:
+  symbols:
+    expand: ""
+    collapse: ""
   statusline:
     laststatus: 3
   goto_preview:

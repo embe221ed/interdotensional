@@ -1,34 +1,6 @@
 theme: "catppuccin-frappe"
 
-font:
-  family: "JetBrains Mono"
-  style: "Light"
-  italic: "Light Italic"
-  postscript_name: "JetBrainsMono"
-  symbol_font: false
-  kitty:
-    features: "+calt +zero"
-    bold: "auto"
-    bold_italic: "auto"
-    size: 15
-    cell:
-      height: "+14px"
-      width: "96%"
-    underline:
-      position: "11px"
-      thickness: "100%"
-    strikethrough:
-      position: "8px"
-  ghostty:
-    features: "calt,zero"
-    bold: "default"
-    bold_italic: "default"
-    size: 15.5
-    cell:
-      height: "42%"
-      width: "-8%"
-    underline:
-      position: "12"
+font: "maple-mono"
 
 ui:
   border: "none"

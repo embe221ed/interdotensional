@@ -8,6 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 
 DIR = os.path.dirname(__file__)
 THEMES_DIR = 'themes'
+FONTS_DIR = 'fonts'
 CONFIG_DIR = 'config'
 OUTPUT_DIR = 'output'
 TEMPLATES_DIR = 'templates'
@@ -55,6 +56,14 @@ else:
 assert(not theme_config.get('colors'))
 theme_config['colors'] = load_yaml(os.path.join(DIR, COLORSCHEMES_DIR, f'{theme_name}.yml'))
 data['theme'] = theme_config
+
+font_name = data.get('font')
+if isinstance(font_name, str):
+    font_file = os.path.join(CONFIG_PATH, FONTS_DIR, f'{font_name}.yml')
+    if os.path.exists(font_file):
+        data['font'] = load_yaml(font_file)
+    else:
+        raise FileNotFoundError(f"Font file '{font_file}' not found.")
 
 data = substitute_tokens(data, flatten_dict(data['theme']['colors']))
 

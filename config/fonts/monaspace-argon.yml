@@ -1,0 +1,29 @@
+family: "Monaspace Argon"
+style: "Light"
+italic: "Light Italic"
+# TODO: not sure if that's correct
+postscript_name: "MonaspaceArgon"
+symbol_font: false
+kitty:
+  features: "+calt +liga"
+  bold: "auto"
+  bold_italic: "auto"
+  size: 15
+  cell:
+    height: "+14px"
+    width: "96%"
+  underline:
+    position: "11px"
+    thickness: "100%"
+  strikethrough:
+    position: "8px"
+ghostty:
+  features: "calt,liga,ss01,ss02,ss03,ss04,ss05,ss06,ss07,ss08,ss09,ss10"
+  bold: "default"
+  bold_italic: "default"
+  size: 15.5
+  cell:
+    height: "42%"
+    width: "-8%"
+  underline:
+    position: "12"

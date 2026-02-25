@@ -23,10 +23,10 @@ ghostty:
   bold_italic: "default"
   size: 15.5
   cell:
-    height: "60%"
+    height: "56%"
     width: "-8%"
   underline:
     position: "14"
   padding:
     x: "4"
-    y: "8,0"
+    y: "0"

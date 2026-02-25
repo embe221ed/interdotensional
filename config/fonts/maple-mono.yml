@@ -27,3 +27,6 @@ ghostty:
     width: "-8%"
   underline:
     position: "14"
+  padding:
+    x: "4"
+    y: "8,0"

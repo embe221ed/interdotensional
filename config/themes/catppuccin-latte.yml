@@ -94,4 +94,5 @@ tools:
       sky: "sky"
       accent: "pink"
       dark_bg: "crust"
+      light_bg: "surface0"
       none: "NONE"

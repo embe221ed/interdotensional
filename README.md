@@ -1,97 +1,105 @@
 # interd•tensional
 
-interdotensional is a Python-powered tool for managing and generating your dotfiles and configuration files. It uses a centralized YAML configuration and Jinja2 templating to ensure a unified theme across tools like Neovim, Kitty, Tmux, Zsh, and more.
+A Python-powered dotfile generator that maintains a unified theme across development tools. Uses centralized YAML configuration and Jinja2 templating to produce config files for Neovim, Kitty, Ghostty, Tmux, Zsh, Zellij, IPython, and colorls.
 
-## Features
+## How it works
 
-- **Centralized Theme Management:** define your global settings and themes in YAML
-- **Modular Configuration:** organize your settings into multiple YAML files for scalability
-- **Token Substitution:** use tokens (e.g., `$blue$`) in your templates that get dynamically replaced
-- **Tool-Specific Customizations:** override global settings on a per-tool basis
-- **Extensible Templating:** leverage Jinja2 to generate config files for various applications
+1. Pick a theme and font in `config/general.yml`
+2. Run `python generate.py`
+3. Symlink or copy from `output/` to your dotfile locations
 
-## Project Structure
+Each theme is defined by two files:
+- **Colorscheme** (`colorschemes/{name}.yml`) — the raw color palette (hex values)
+- **Theme config** (`config/themes/{name}.yml`) — tool-specific settings that reference palette colors via `$token$` substitution
+
+Token substitution (`$red$`, `$bg_primary$`, etc.) happens before Jinja2 rendering, so templates receive fully resolved hex values.
+
+## Project structure
 
 ```
 interdotensional/
-├── colorschemes/            # color scheme YAML files (e.g., x.yml, y.yml)
-├── README.md                # project overview and instructions
+├── colorschemes/              # color palettes (hex values)
+│   ├── catppuccin-frappe.yml
+│   ├── catppuccin-latte.yml
+│   ├── gruvbox-material-dark.yml
+│   ├── nord.yml
+│   ├── onedarkpro-onedark.yml
+│   ├── tokyonight-day.yml
+│   └── tokyonight-storm.yml
 ├── config/
-│   └── general.yml          # global settings and selected theme
-├── themes/                  # theme-specific YAML files (e.g., x.yml, y.yml)
-├── generate.py              # Python script to render Jinja2 templates using YAML data
-├── requirements.txt         # Python dependencies (e.g., PyYAML, Jinja2)
-├── templates/               # Jinja2 template files for each tool's configuration
+│   ├── general.yml            # active theme, font, UI settings
+│   ├── themes/                # per-theme tool configurations
+│   │   └── {name}.yml
+│   └── fonts/                 # font configurations
+│       ├── jetbrains-mono.yml
+│       ├── maple-mono.yml
+│       └── monaspace-argon.yml
+├── templates/                 # Jinja2 templates
+│   ├── colorls/
+│   ├── ghostty/
+│   ├── ipython/
 │   ├── kitty/
-│   │   └── kitty.conf.j2
-│   ├── tmux.conf.j2
-│   ├── nvim_init.lua.j2
-│   ├── zshrc.j2
-│   └── ...                  # additional templates as needed
-└── output/                  # generated configuration files (ready to deploy)
+│   ├── nvim/
+│   ├── tmux/
+│   ├── zellij/
+│   └── zsh/
+├── output/                    # generated config files
+├── docs/                      # theme documentation
+├── lib/                       # token substitution utilities
+├── generate.py                # main generation script
+└── requirements.txt           # jinja2, pyyaml
 ```
+
+## Themes
+
+| Theme | Type | Status |
+|-------|------|--------|
+| catppuccin-frappe | Dark | Complete — reference theme |
+| catppuccin-latte | Light | Complete |
+| gruvbox-material-dark | Dark | Complete — custom gruvbox + Claude palette |
+| nord | Dark | Base support |
+| onedarkpro-onedark | Dark | Base support |
+| tokyonight-storm | Dark | Base support |
+| tokyonight-day | Light | Base support |
+
+## Supported tools
+
+| Tool | Template | Notes |
+|------|----------|-------|
+| Neovim | `nvim/globals.lua.j2`, `nvim/colors.lua.j2` | Colorscheme config + semantic color mapping |
+| Ghostty | `ghostty/config.j2` | Terminal theme selection, font settings |
+| Kitty | `kitty/kitty.conf.j2` | Full terminal config |
+| Tmux | `tmux/tmux.conf.j2`, `tmux/theme.sh.j2` | Config + powerline theme |
+| Zsh | `zsh/theme.zsh-theme.j2` | Prompt theme (ANSI 256 colors) |
+| Zellij | `zellij/config.kdl.j2` | Terminal multiplexer config |
+| IPython | `ipython/ipython_config.py.j2` | REPL configuration |
+| colorls | `colorls/dark_colors.yaml.j2` | File listing colors (hex or CSS names) |
 
 ## Installation
 
-1. **Clone the Repository:**
-
-   ```bash
-   git clone https://github.com/embe221ed/interdotensional.git
-   cd interdotensional
-   ```
-
-2. **Set Up a Virtual Environment (Optional):**
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
-
-3. **Install Dependencies:**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+git clone https://github.com/embe221ed/interdotensional.git
+cd interdotensional
+pip install -r requirements.txt
+```
 
 ## Usage
 
-1. **Configure Settings:**
-   - update `general.yml` with your global options and choose your desired theme.
-   - edit or add theme YAML files in the `themes/` directory.
-   - customize the Jinja2 templates in the `templates/` folder for each tool.
+```bash
+# edit config/general.yml to select theme and font
+python generate.py
+# deploy: symlink output files to their target locations
+```
 
-2. **Generate Configuration Files:**
+## Adding a new theme
 
-   ```bash
-   python generate.py
-   ```
+1. Create `colorschemes/{name}.yml` with your color palette
+2. Create `config/themes/{name}.yml` with tool-specific settings using `$token$` references
+3. Set `theme: "{name}"` in `config/general.yml`
+4. Run `python generate.py`
 
-   this will render the templates with your configuration data and output the final files into the `output/` directory.
-
-3. **Deploy Your Dotfiles:**
-   - copy or symlink the generated configuration files from the `output/` directory to their appropriate locations on your system.
-
-## Customization
-
-- **Token Substitution:**  
-  use tokens like `$blue$` in your templates. The tool will replace these tokens with values defined in your theme YAML files.
-
-- **Nested Tokens:**  
-  organize your YAML files to support nested tokens (e.g., `$git.add$`) by flattening the structure during processing.
-
-- **Adding New Templates:**  
-  simply add new Jinja2 template files to the `templates/` directory and update the generation script accordingly.
+See `docs/gruvbox-material-dark.md` for a detailed example of building a custom theme.
 
 ## License
 
-This project is licensed under the MIT License.
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
-
-## Disclaimer
-
-This tool is provided as-is and is intended to serve as a starting point for managing your dotfiles. Customize it to fit your personal workflow.
-
-Happy configuring with interdotensional!
+MIT

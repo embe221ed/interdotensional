@@ -27,6 +27,24 @@ def substitute_tokens(data, tokens):
         # For other data types, return as is
         return data
 
+def find_unresolved_tokens(data, path=''):
+    """
+    Recursively find any remaining $TOKEN$ patterns in the data structure
+    after substitution. Returns a list of (path, token) tuples.
+    """
+    unresolved = []
+    pattern = re.compile(r'\$([a-zA-Z0-9_.]+)\$')
+    if isinstance(data, str):
+        for match in pattern.finditer(data):
+            unresolved.append((path, match.group(0)))
+    elif isinstance(data, dict):
+        for k, v in data.items():
+            unresolved.extend(find_unresolved_tokens(v, f'{path}.{k}' if path else k))
+    elif isinstance(data, list):
+        for i, item in enumerate(data):
+            unresolved.extend(find_unresolved_tokens(item, f'{path}[{i}]'))
+    return unresolved
+
 def flatten_dict(d, parent_key='', sep='.'):
     """
     Recursively flattens a nested dictionary.

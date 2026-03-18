@@ -2,7 +2,7 @@ import os
 import yaml
 import logging
 
-from lib import substitute_tokens, flatten_dict
+from lib import substitute_tokens, flatten_dict, find_unresolved_tokens
 from jinja2 import Environment, FileSystemLoader
 
 
@@ -67,6 +67,11 @@ if isinstance(font_name, str):
 
 data = substitute_tokens(data, flatten_dict(data['theme']['colors']))
 
+# Warn about unresolved tokens
+unresolved = find_unresolved_tokens(data)
+for path, token in unresolved:
+    logger.warning(f"Unresolved token {token} at {path}")
+
 # Set up Jinja2 environment
 template_loader = FileSystemLoader(searchpath=os.path.join(DIR, TEMPLATES_DIR))
 env = Environment(loader=template_loader)
@@ -85,6 +90,7 @@ configs = {
     "zellij/config.kdl.j2": "zellij/config.kdl",
     "ghostty/config.j2": "ghostty/config",
     "colorls/dark_colors.yaml.j2": "colorls/dark_colors.yaml",
+    "colorls/light_colors.yaml.j2": "colorls/light_colors.yaml",
 }
 
 # Render each template and write to file

@@ -1,9 +1,9 @@
-name: "gruvbox-material-dark"
+name: "gruvbox-material-light"
 
 tools:
 
   tmux:
-    clock: 180
+    clock: 172
     colors:
       dim: "$fg_dim$"
       pink: "$pink$"
@@ -20,18 +20,18 @@ tools:
         blue: "$blue$"
 
   ghostty:
-    name: "Gruvbox Material Dark"
+    name: "Gruvbox Material Light"
 
   kitty:
 
   zsh:
     colors:
-      red: 210
-      cyan: 151
-      blue: 109
-      green: 150
-      yellow: 180
-      magenta: 181
+      red: 167
+      cyan: 241
+      blue: 66
+      green: 101
+      yellow: 172
+      magenta: 139
 
   colorls:
     unrecognized_file: "$blue$"
@@ -69,9 +69,9 @@ tools:
   nvim:
     colorscheme: "catppuccin"
     scheme: "gruvbox-material"
-    theme: "mocha"
+    theme: "latte"
     vanilla: false
-    winblend: 0
+    winblend: 15
     plugin: |
       { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
     catppuccin_overrides:

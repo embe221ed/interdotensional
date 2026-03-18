@@ -22,6 +22,9 @@ tools:
     shared_icon: "★"
     test: "#ff00ff"
 
+  ipython:
+    pygments_style: "one-dark"
+
   zsh:
     colors:
       red: 203

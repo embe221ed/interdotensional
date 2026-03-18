@@ -19,6 +19,9 @@ tools:
         eggplant: "$pink$"
         blue: "$blue$"
 
+  ipython:
+    pygments_style: "monokai"
+
   ghostty:
     name: "Catppuccin Frappe"
 

@@ -444,16 +444,19 @@ c = get_config()  # noqa
 #  Default: True
 # c.InteractiveShell.color_info = True
 
-from IPython.utils.PyColorize import linux_theme, theme_table
-from copy import deepcopy
+{% set ipython = theme.tools.ipython %}
+try:
+    from IPython.utils.PyColorize import linux_theme, theme_table
+    from copy import deepcopy
 
-theme = deepcopy(linux_theme)
-theme.base = "{{ theme.name }}"
-theme_table["{{ theme.name }}"] = theme
+    theme = deepcopy(linux_theme)
+    theme.base = "{{ ipython.pygments_style }}"
+    theme_table["{{ theme.name }}"] = theme
 
-## Set the color scheme (nocolor, neutral, linux, lightbg).
-#  Default: 'neutral'
-c.InteractiveShell.colors = "{{ theme.name }}"
+    ## Set the color scheme (nocolor, neutral, linux, lightbg).
+    c.InteractiveShell.colors = "{{ theme.name }}"
+except Exception:
+    c.InteractiveShell.colors = "linux"
 
 #  Default: False
 # c.InteractiveShell.debug = False

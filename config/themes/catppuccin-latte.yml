@@ -25,6 +25,9 @@ tools:
     shared_icon: "★"
     test: "#ff00ff"
 
+  ipython:
+    pygments_style: "friendly"
+
   ghostty:
     name: "Catppuccin Latte"
 

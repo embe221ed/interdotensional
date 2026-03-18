@@ -19,6 +19,9 @@ tools:
         eggplant: "$pink$"
         blue: "$blue$"
 
+  ipython:
+    pygments_style: "gruvbox-light"
+
   ghostty:
     name: "Gruvbox Material Light"
 

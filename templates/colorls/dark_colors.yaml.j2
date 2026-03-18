@@ -1,0 +1,47 @@
+{% set cl = theme.tools.colorls %}
+# Main Colors
+unrecognized_file: "{{ cl.unrecognized_file }}"
+recognized_file:   "{{ cl.recognized_file }}"
+executable_file:   "{{ cl.executable_file }}"
+dir:               "{{ cl.dir }}"
+
+# Link
+dead_link: "{{ cl.dead_link }}"
+link:      "{{ cl.link }}"
+
+# special files
+socket:    "{{ cl.socket }}"
+blockdev:  "{{ cl.blockdev }}"
+chardev:   "{{ cl.chardev }}"
+
+# Access Modes
+write:     "{{ cl.write }}"
+read:      "{{ cl.read }}"
+exec:      "{{ cl.exec }}"
+no_access: "{{ cl.no_access }}"
+
+# Age
+day_old:     "{{ cl.day_old }}"
+hour_old:    "{{ cl.hour_old }}"
+no_modifier: "{{ cl.no_modifier }}"
+
+# File Size
+file_large:  "{{ cl.file_large }}"
+file_medium: "{{ cl.file_medium }}"
+file_small:  "{{ cl.file_small }}"
+
+# Random
+report: "{{ cl.report }}"
+user:   "{{ cl.user }}"
+tree:   "{{ cl.tree }}"
+empty:  "{{ cl.empty }}"
+error:  "{{ cl.error }}"
+normal: "{{ cl.normal }}"
+inode:  "{{ cl.inode }}"
+
+# Git
+addition:     "{{ cl.addition }}"
+modification: "{{ cl.modification }}"
+deletion:     "{{ cl.deletion }}"
+untracked:    "{{ cl.untracked }}"
+unchanged:    "{{ cl.unchanged }}"

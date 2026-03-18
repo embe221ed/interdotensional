@@ -84,6 +84,7 @@ configs = {
     "nvim/colors.lua.j2": "nvim/colors.lua",
     "zellij/config.kdl.j2": "zellij/config.kdl",
     "ghostty/config.j2": "ghostty/config",
+    "colorls/dark_colors.yaml.j2": "colorls/dark_colors.yaml",
 }
 
 # Render each template and write to file

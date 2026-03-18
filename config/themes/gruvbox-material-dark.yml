@@ -1,0 +1,122 @@
+name: "gruvbox-material-dark"
+
+tools:
+
+  tmux:
+    clock: 219
+    colors:
+      dim: "$fg_dim$"
+      pink: "$pink$"
+      selected:
+        fg: "$orange$"
+        bg: "$panel_inset$"
+    powerline:
+      colors:
+        bg: "$panel_inset$"
+        tint_bg0: "$border$"
+        tint_bg1: "$fg_primary$"
+        selected: "$peach$"
+        eggplant: "$pink$"
+        blue: "$blue$"
+
+  ghostty:
+    name: "Gruvbox Material Dark"
+
+  kitty:
+
+  zsh:
+    colors:
+      red: 210
+      cyan: 151
+      blue: 109
+      green: 150
+      yellow: 180
+      magenta: 181
+
+  colorls:
+    unrecognized_file: "$blue$"
+    recognized_file: "$aqua$"
+    executable_file: "$green$"
+    dir: "$orange$"
+    dead_link: "$red$"
+    link: "$aqua$"
+    socket: "$green$"
+    blockdev: "$green$"
+    chardev: "$green$"
+    write: "$blue$"
+    read: "$purple$"
+    exec: "$pink$"
+    no_access: "$fg_dim$"
+    day_old: "$purple$"
+    hour_old: "$peach$"
+    no_modifier: "$fg_faint$"
+    file_large: "$orange$"
+    file_medium: "$yellow$"
+    file_small: "$fg_muted$"
+    report: "$fg_primary$"
+    user: "$blue$"
+    tree: "$fg_faint$"
+    empty: "$yellow$"
+    error: "$red$"
+    normal: "$fg_secondary$"
+    inode: "$blue$"
+    addition: "$green$"
+    modification: "$yellow$"
+    deletion: "$red$"
+    untracked: "$orange$"
+    unchanged: "$aqua$"
+
+  nvim:
+    colorscheme: "catppuccin"
+    scheme: "gruvbox-material"
+    theme: "mocha"
+    vanilla: false
+    winblend: 0
+    plugin: |
+      { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+    catppuccin_overrides:
+      rosewater: "$fg_muted$"
+      flamingo: "$peach$"
+      pink: "$pink$"
+      mauve: "$purple$"
+      red: "$red$"
+      maroon: "$terracotta$"
+      peach: "$orange$"
+      yellow: "$yellow$"
+      green: "$green$"
+      teal: "$aqua$"
+      sky: "$aqua$"
+      sapphire: "$blue$"
+      blue: "$blue$"
+      lavender: "$grey2$"
+      text: "$fg_primary$"
+      subtext1: "$fg_secondary$"
+      subtext0: "$fg_muted$"
+      overlay2: "$fg_dim$"
+      overlay1: "$fg_faint$"
+      overlay0: "$border$"
+      surface2: "$panel_raised$"
+      surface1: "$panel$"
+      surface0: "$panel_inset$"
+      base: "$bg_primary$"
+      mantle: "$bg_deep$"
+      crust: "$bg_abyss$"
+    fields:
+      bg: "base"
+      fg: "text"
+      alt_bg: "mantle"
+      alt_fg: "surface2"
+      comment: "overlay0"
+      yellow: "yellow"
+      green: "green"
+      orange: "peach"
+      blue: "blue"
+      red: "red"
+      mauve: "mauve"
+      pink: "pink"
+      teal: "teal"
+      sky: "sky"
+      accent: "pink"
+      dark_bg: "crust"
+      light_bg: "surface0"
+      none: "NONE"

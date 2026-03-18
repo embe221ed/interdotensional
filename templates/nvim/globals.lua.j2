@@ -31,6 +31,7 @@ vim.g.symbols = {
 
 vim.g.colorscheme = {
   name = "{{ nvim_theme.colorscheme }}",
+  scheme = "{{ nvim_theme.scheme | default(nvim_theme.colorscheme) }}",
   theme = "{{ nvim_theme.theme }}",
   vanilla = {{ nvim_theme.vanilla | lower }},
   plugin = function()
@@ -38,6 +39,12 @@ vim.g.colorscheme = {
     return _cfg
   end
 }
+
+{% if nvim_theme.catppuccin_overrides is defined %}
+vim.g.catppuccin_overrides = {
+{% for key, value in nvim_theme.catppuccin_overrides.items() %}  {{ key }} = "{{ value }}",
+{% endfor %}}
+{% endif %}
 
 vim.g.lsp = {
   doc = {

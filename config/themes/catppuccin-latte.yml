@@ -37,6 +37,39 @@ tools:
       yellow: 179
       magenta: 176
 
+  colorls:
+    unrecognized_file: blue
+    recognized_file: darkcyan
+    executable_file: red
+    dir: fuchsia
+    dead_link: red
+    link: cyan
+    socket: darkgray
+    blockdev: darkgray
+    chardev: darkgray
+    write: royalblue
+    read: magenta
+    exec: deeppink
+    no_access: dimgray
+    day_old: red
+    hour_old: coral
+    no_modifier: darkviolet
+    file_large: red
+    file_medium: coral
+    file_small: darkgray
+    report: darkviolet
+    user: darkblue
+    tree: cyan
+    empty: yellow
+    error: red
+    normal: darkgray
+    inode: violet
+    addition: chartreuse
+    modification: darkkhaki
+    deletion: darkred
+    untracked: darkorange
+    unchanged: darkgreen
+
   nvim:
     colorscheme: "catppuccin"
     theme: "latte"

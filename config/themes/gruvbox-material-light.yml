@@ -74,7 +74,7 @@ tools:
     scheme: "gruvbox-material"
     theme: "latte"
     vanilla: false
-    winblend: 15
+    winblend: 0
     plugin: |
       { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
     catppuccin_overrides:

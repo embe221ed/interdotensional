@@ -19,6 +19,31 @@ tools:
         eggplant: "$pink$"
         blue: "$blue$"
 
+  fzf:
+    fg: "$fg_primary$"
+    bg: "$bg_primary$"
+    hl: "$orange$"
+    selected_fg: "$fg_primary$"
+    selected_bg: "$panel_inset$"
+    selected_hl: "$orange$"
+    info: "$blue$"
+    border: "$border$"
+    prompt: "$green$"
+    pointer: "$terracotta$"
+    marker: "$yellow$"
+    spinner: "$purple$"
+    header: "$fg_dim$"
+    preview_fg: "$fg_primary$"
+    preview_bg: "$bg_deep$"
+    gutter: "$panel_inset$"
+    separator: "$border$"
+    label: "$fg_secondary$"
+    query: "$fg_primary$"
+    disabled: "$fg_dim$"
+    scrollbar: "$border$"
+    preview_border: "$border$"
+    preview_label: "$fg_secondary$"
+
   ipython:
     pygments_style: "gruvbox-dark"
 

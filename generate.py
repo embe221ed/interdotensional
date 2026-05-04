@@ -91,6 +91,7 @@ configs = {
     "ghostty/config.j2": "ghostty/config",
     "colorls/dark_colors.yaml.j2": "colorls/dark_colors.yaml",
     "colorls/light_colors.yaml.j2": "colorls/light_colors.yaml",
+    "fzf/fzf-colors.sh.j2": "fzf/fzf-colors.sh",
 }
 
 # Render each template and write to file

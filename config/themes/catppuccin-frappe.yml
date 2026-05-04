@@ -19,6 +19,31 @@ tools:
         eggplant: "$pink$"
         blue: "$blue$"
 
+  fzf:
+    fg: "$text$"
+    bg: "$base$"
+    hl: "$peach$"
+    selected_fg: "$text$"
+    selected_bg: "$surface0$"
+    selected_hl: "$peach$"
+    info: "$blue$"
+    border: "$overlay0$"
+    prompt: "$green$"
+    pointer: "$red$"
+    marker: "$yellow$"
+    spinner: "$mauve$"
+    header: "$overlay1$"
+    preview_fg: "$text$"
+    preview_bg: "$mantle$"
+    gutter: "$surface0$"
+    separator: "$overlay0$"
+    label: "$subtext1$"
+    query: "$text$"
+    disabled: "$overlay1$"
+    scrollbar: "$overlay0$"
+    preview_border: "$overlay0$"
+    preview_label: "$subtext1$"
+
   ipython:
     pygments_style: "monokai"
 

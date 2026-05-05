@@ -23,9 +23,7 @@ tools:
     fg: "$text$"
     bg: "-1"
     hl: "$peach$"
-    selected_fg: "$text$"
     selected_bg: "$surface1$"
-    selected_hl: "$peach$"
     info: "$blue$"
     border: "$pink$"
     prompt: "$green$"
@@ -33,16 +31,8 @@ tools:
     marker: "$yellow$"
     spinner: "$mauve$"
     header: "$overlay1$"
-    preview_fg: "$text$"
-    preview_bg: "-1"
-    gutter: "-1"
     separator: "$overlay0$"
     label: "$subtext1$"
-    query: "$text$"
-    disabled: "$overlay1$"
-    scrollbar: "$overlay0$"
-    preview_border: "$pink$"
-    preview_label: "$subtext1$"
 
   ipython:
     pygments_style: "monokai"
@@ -68,9 +58,7 @@ tools:
     dir: fuchsia
     dead_link: red
     link: cyan
-    socket: green
-    blockdev: green
-    chardev: green
+    device: green
     write: royalblue
     read: magenta
     exec: deeppink

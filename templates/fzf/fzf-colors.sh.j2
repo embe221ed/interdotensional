@@ -6,12 +6,12 @@
 # Source this file from your shell rc to apply fzf theme colors.
 ################################################################################
 {% set fzf = theme.tools.fzf %}
-export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS:-} \
+export FZF_DEFAULT_OPTS="\
 --color=fg:{{ fzf.fg }},bg:{{ fzf.bg }},hl:{{ fzf.hl }} \
---color=fg+:{{ fzf.selected_fg }},bg+:{{ fzf.selected_bg }},hl+:{{ fzf.selected_hl }} \
+--color=fg+:{{ fzf.fg }},bg+:{{ fzf.selected_bg }},hl+:{{ fzf.hl }} \
 --color=info:{{ fzf.info }},border:{{ fzf.border }},prompt:{{ fzf.prompt }} \
 --color=pointer:{{ fzf.pointer }},marker:{{ fzf.marker }},spinner:{{ fzf.spinner }},header:{{ fzf.header }} \
---color=preview-fg:{{ fzf.preview_fg }},preview-bg:{{ fzf.preview_bg }} \
---color=gutter:{{ fzf.gutter }},separator:{{ fzf.separator }},label:{{ fzf.label }} \
---color=query:{{ fzf.query }},disabled:{{ fzf.disabled }} \
---color=scrollbar:{{ fzf.scrollbar }},preview-border:{{ fzf.preview_border }},preview-label:{{ fzf.preview_label }}"
+--color=preview-fg:{{ fzf.fg }},preview-bg:{{ fzf.bg }} \
+--color=gutter:{{ fzf.bg }},separator:{{ fzf.separator }},label:{{ fzf.label }} \
+--color=query:{{ fzf.fg }},disabled:{{ fzf.header }} \
+--color=scrollbar:{{ fzf.separator }},preview-border:{{ fzf.border }},preview-label:{{ fzf.label }}"

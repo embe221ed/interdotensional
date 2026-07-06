@@ -17,6 +17,15 @@ tmux:
     border:
       style: "bold"
 
+# Run after a generate that changed at least one file (skip with --no-hooks):
+# hooks:
+#   - "tmux source-file ~/.tmux.conf"
+
+# Symlink dotfile locations to generated output, applied by `interdot link`:
+# links:
+#   ~/.tmux.conf: tmux/.tmux.conf
+#   ~/.config/kitty/kitty.conf: kitty/kitty.conf
+
 nvim:
   symbols:
     expand: ""

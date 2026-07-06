@@ -1,15 +1,16 @@
 name: "nord"
+polarity: "dark"
 
 tools:
 
   tmux:
-    clock: 219
+    clock: 110
     colors:
       dim: "$brighter$"
       pink: "$purple$"
       selected:
-        fg: "$pink$"
-        bg: "$surface0$"
+        fg: "$purple$"
+        bg: "$bright$"
     powerline:
       colors:
         bg: "$brightest$"
@@ -19,12 +20,20 @@ tools:
         eggplant: "$purple$"
         blue: "$ice$"
 
-  kitty:
-    name: "Nord"
-    border_color: "#ff0000"
-    prompt_color: "#00ff00"
-    shared_icon: "★"
-    test: "#ff00ff"
+  fzf:
+    fg: "$snow$"
+    bg: "-1"
+    hl: "$orange$"
+    selected_bg: "$brighter$"
+    info: "$ice$"
+    border: "$purple$"
+    prompt: "$green$"
+    pointer: "$red$"
+    marker: "$yellow$"
+    spinner: "$polar_water$"
+    header: "$light$"
+    separator: "$brightest$"
+    label: "$snow$"
 
   ipython:
     pygments_style: "nord"
@@ -32,17 +41,52 @@ tools:
   ghostty:
     name: "Nord"
 
+  kitty:
+    name: "Nord"
+
   zsh:
     colors:
-      red: 203
-      cyan: 117
+      red: 131
+      cyan: 116
       blue: 110
-      green: 149
-      yellow: 179
-      magenta: 176
+      green: 108
+      yellow: 222
+      magenta: 139
+
+  colorls:
+    unrecognized_file: "$artic_water$"
+    recognized_file: "$polar_water$"
+    executable_file: "$green$"
+    dir: "$orange$"
+    dead_link: "$red$"
+    link: "$polar_water$"
+    device: "$green$"
+    write: "$artic_water$"
+    read: "$purple$"
+    exec: "$purple$"
+    no_access: "$light$"
+    day_old: "$purple$"
+    hour_old: "$orange$"
+    no_modifier: "$brightest$"
+    file_large: "$orange$"
+    file_medium: "$yellow$"
+    file_small: "$light$"
+    report: "$snow$"
+    user: "$artic_water$"
+    tree: "$brightest$"
+    empty: "$yellow$"
+    error: "$red$"
+    normal: "$snow$"
+    inode: "$artic_water$"
+    addition: "$green$"
+    modification: "$yellow$"
+    deletion: "$red$"
+    untracked: "$orange$"
+    unchanged: "$polar_water$"
 
   nvim:
     colorscheme: "nord"
+    scheme: "nord"
     theme: "polar_night"
     vanilla: false
     winblend: 8
@@ -54,7 +98,7 @@ tools:
           }
     fields:
       bg: "polar_night.origin"
-      fg: "polar_night.light"
+      fg: "snow_storm.origin"
       alt_bg: "polar_night.bright"
       alt_fg: "polar_night.brightest"
       comment: "polar_night.light"
@@ -65,8 +109,9 @@ tools:
       red: "aurora.red"
       mauve: "aurora.purple"
       pink: "aurora.purple"
-      teal: "frost.artic_water"
+      teal: "frost.polar_water"
       sky: "frost.ice"
       accent: "frost.artic_ocean"
       dark_bg: "polar_night.brighter"
+      light_bg: "polar_night.brightest"
       none: "NONE"

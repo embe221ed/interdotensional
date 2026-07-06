@@ -1,43 +1,94 @@
 name: "onedarkpro-onedark"
+polarity: "dark"
 
 tools:
 
   tmux:
-    clock: 219
+    clock: 170
     colors:
-      dim: "$overlay2$"
-      pink: "$pink$"
+      dim: "$comment$"
+      pink: "$purple$"
+      selected:
+        fg: "$purple$"
+        bg: "$cursorline$"
     powerline:
       colors:
-        bg: "$surface0$"
-        tint_bg0: "$overlay0$"
-        tint_bg1: "$text$"
-        selected: "$peach$"
-        eggplant: "$pink$"
+        bg: "$cursorline$"
+        tint_bg0: "$gray$"
+        tint_bg1: "$fg$"
+        selected: "$orange$"
+        eggplant: "$purple$"
         blue: "$blue$"
 
-  kitty:
-    border_color: "#ff0000"
-    prompt_color: "#00ff00"
-    shared_icon: "★"
-    test: "#ff00ff"
+  fzf:
+    fg: "$fg$"
+    bg: "-1"
+    hl: "$orange$"
+    selected_bg: "$selection$"
+    info: "$blue$"
+    border: "$purple$"
+    prompt: "$green$"
+    pointer: "$red$"
+    marker: "$yellow$"
+    spinner: "$purple$"
+    header: "$comment$"
+    separator: "$gray$"
+    label: "$fg$"
 
   ipython:
     pygments_style: "one-dark"
 
+  ghostty:
+    name: "Atom One Dark"
+
+  kitty:
+
   zsh:
     colors:
-      red: 203
-      cyan: 117
-      blue: 110
-      green: 149
-      yellow: 179
-      magenta: 176
+      red: 204
+      cyan: 38
+      blue: 39
+      green: 114
+      yellow: 180
+      magenta: 170
+
+  colorls:
+    unrecognized_file: "$blue$"
+    recognized_file: "$cyan$"
+    executable_file: "$green$"
+    dir: "$orange$"
+    dead_link: "$red$"
+    link: "$cyan$"
+    device: "$green$"
+    write: "$blue$"
+    read: "$purple$"
+    exec: "$red$"
+    no_access: "$comment$"
+    day_old: "$purple$"
+    hour_old: "$orange$"
+    no_modifier: "$gray$"
+    file_large: "$orange$"
+    file_medium: "$yellow$"
+    file_small: "$comment$"
+    report: "$fg$"
+    user: "$blue$"
+    tree: "$gray$"
+    empty: "$yellow$"
+    error: "$red$"
+    normal: "$white$"
+    inode: "$blue$"
+    addition: "$green$"
+    modification: "$yellow$"
+    deletion: "$red$"
+    untracked: "$orange$"
+    unchanged: "$cyan$"
 
   nvim:
     colorscheme: "onedark"
+    scheme: "onedark"
     theme: "onedark"
     vanilla: true
+    winblend: 0
     plugin: |
       {
         "olimorris/onedarkpro.nvim",
@@ -46,8 +97,8 @@ tools:
     fields:
       bg: "bg"
       fg: "fg"
-      alt_bg: "mantle"
-      alt_fg: "black"
+      alt_bg: "bg_statusline"
+      alt_fg: "gray"
       comment: "comment"
       yellow: "yellow"
       green: "green"
@@ -59,6 +110,6 @@ tools:
       teal: "cyan"
       sky: "blue"
       accent: "purple"
-      dark_bg: "black"
+      dark_bg: "float_bg"
+      light_bg: "selection"
       none: "NONE"
-

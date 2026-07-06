@@ -1,4 +1,6 @@
 name: "gruvbox-material-dark"
+polarity: "dark"
+pair: "gruvbox-material-light"
 
 tools:
 

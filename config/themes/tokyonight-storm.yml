@@ -1,6 +1,6 @@
 name: "tokyonight-storm"
-foreground: "#ffffff"
-background: "#000000"
+polarity: "dark"
+pair: "tokyonight-day"
 
 tools:
 
@@ -9,6 +9,9 @@ tools:
     colors:
       dim: "$dark3$"
       pink: "$magenta2$"
+      selected:
+        fg: "$orange$"
+        bg: "$bg_highlight$"
     powerline:
       colors:
         bg: "$fg_gutter$"
@@ -18,29 +21,75 @@ tools:
         eggplant: "$magenta2$"
         blue: "$blue$"
 
-  kitty:
-    name: "tokyonight_storm"
-    border_color: "#ff0000"
-    prompt_color: "#00ff00"
-    shared_icon: "★"
-    test: "#ff00ff"
+  fzf:
+    fg: "$fg$"
+    bg: "-1"
+    hl: "$orange$"
+    selected_bg: "$bg_highlight$"
+    info: "$blue$"
+    border: "$magenta$"
+    prompt: "$green$"
+    pointer: "$red$"
+    marker: "$yellow$"
+    spinner: "$purple$"
+    header: "$dark5$"
+    separator: "$fg_gutter$"
+    label: "$fg_dark$"
 
   ipython:
     pygments_style: "native"
 
+  ghostty:
+    name: "TokyoNight Storm"
+
+  kitty:
+    name: "tokyonight_storm"
+
   zsh:
     colors:
-      red: 196
-      cyan: 51
-      blue: 75
-      green: 40
-      yellow: 214
-      magenta: 198
+      red: 210
+      cyan: 117
+      blue: 111
+      green: 149
+      yellow: 179
+      magenta: 141
+
+  colorls:
+    unrecognized_file: "$blue$"
+    recognized_file: "$cyan$"
+    executable_file: "$green$"
+    dir: "$orange$"
+    dead_link: "$red$"
+    link: "$cyan$"
+    device: "$green$"
+    write: "$blue$"
+    read: "$purple$"
+    exec: "$magenta2$"
+    no_access: "$dark3$"
+    day_old: "$purple$"
+    hour_old: "$orange$"
+    no_modifier: "$dark5$"
+    file_large: "$orange$"
+    file_medium: "$yellow$"
+    file_small: "$fg_dark$"
+    report: "$fg$"
+    user: "$blue$"
+    tree: "$dark5$"
+    empty: "$yellow$"
+    error: "$red$"
+    normal: "$fg_dark$"
+    inode: "$blue$"
+    addition: "$green$"
+    modification: "$yellow$"
+    deletion: "$red$"
+    untracked: "$orange$"
+    unchanged: "$green1$"
 
   nvim:
     colorscheme: "tokyonight"
     theme: "storm"
     vanilla: false
+    winblend: 0
     plugin: |
       {
             "folke/tokyonight.nvim",
@@ -64,4 +113,6 @@ tools:
       teal: "blue1"
       sky: "blue5"
       accent: "magenta2"
+      dark_bg: "bg_dark1"
+      light_bg: "bg_highlight"
       none: "NONE"

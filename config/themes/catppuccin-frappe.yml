@@ -1,4 +1,6 @@
 name: "catppuccin-frappe"
+polarity: "dark"
+pair: "catppuccin-latte"
 
 tools:
 

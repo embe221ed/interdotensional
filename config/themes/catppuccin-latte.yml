@@ -1,4 +1,6 @@
 name: "catppuccin-latte"
+polarity: "light"
+pair: "catppuccin-frappe"
 
 tools:
 
@@ -20,10 +22,6 @@ tools:
         blue: "$sky$"
 
   kitty:
-    border_color: "#ff0000"
-    prompt_color: "#00ff00"
-    shared_icon: "★"
-    test: "#ff00ff"
 
   fzf:
     fg: "$text$"

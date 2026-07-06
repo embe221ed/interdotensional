@@ -1,5 +1,5 @@
 # theme: "catppuccin-frappe"
-theme: "gruvbox-material-light"
+theme: "gruvbox-material-dark"
 
 font: "maple-mono"
 
@@ -18,8 +18,10 @@ tmux:
       style: "bold"
 
 # Run after a generate that changed at least one file (skip with --no-hooks):
-# hooks:
-#   - "tmux source-file ~/.tmux.conf"
+hooks:
+  # Reload tmux only when a server is running, so the hook can't fail the
+  # generate when tmux is not up.
+  - "tmux ls >/dev/null 2>&1 && tmux source-file ~/.tmux.conf || true"
 
 # Symlink dotfile locations to generated output, applied by `interdot link`:
 # links:

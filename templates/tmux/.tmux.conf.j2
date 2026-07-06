@@ -102,6 +102,13 @@ set-option -g @fzf-links-use-colors on
 # set-option -g @fzf-links-ls-colors-filename "~/.cache/tmux-fzf-links/cached_ls_colors.txt"
 set-option -g @fzf-links-hide-bottom-bar off
 
+# === interdimux ===
+{% if theme.tools.interdimux is defined and theme.tools.interdimux %}
+{% for key, value in theme.tools.interdimux.items() %}
+set-option -g @interdimux-color-{{ key | replace('_', '-') }} "{{ value }}"
+{%- endfor %}
+{% endif %}
+
 # TPM
 ## List of plugins
 set-option -g @plugin 'alberti42/tmux-fzf-links'

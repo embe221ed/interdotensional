@@ -40,3 +40,19 @@ def test_rendered_output_carries_palette_colors(repo_project):
     fg = context.data["theme"]["tools"]["fzf"]["fg"]
     assert fg in fzf.content
     assert fg in palette.values()
+
+
+def test_interdimux_colors_reach_tmux_conf(repo_project):
+    """A theme's interdimux palette must render into the tmux config as
+    @interdimux-color-* options, with underscore keys hyphenated."""
+    from interdotensional.config import load_context
+    from interdotensional.generate import render_all
+
+    context = load_context(repo_project, theme="gruvbox-material-dark")
+    interdimux = context.data["theme"]["tools"]["interdimux"]
+    tmux = next(
+        r for r in render_all(repo_project, context)
+        if r.rel_output == "tmux/.tmux.conf"
+    )
+    assert f'@interdimux-color-accent "{interdimux["accent"]}"' in tmux.content
+    assert f'@interdimux-color-current-bg "{interdimux["current_bg"]}"' in tmux.content

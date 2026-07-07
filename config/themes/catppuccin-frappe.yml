@@ -9,17 +9,10 @@ tools:
     colors:
       dim: "$overlay2$"
       pink: "$pink$"
+      yellow: "$yellow$"
       selected:
         fg: "$pink$"
         bg: "$surface0$"
-    powerline:
-      colors:
-        bg: "$surface0$"
-        tint_bg0: "$overlay0$"
-        tint_bg1: "$text$"
-        selected: "$peach$"
-        eggplant: "$pink$"
-        blue: "$blue$"
 
   fzf:
     fg: "$text$"

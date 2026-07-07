@@ -8,17 +8,10 @@ tools:
     colors:
       dim: "$brighter$"
       pink: "$purple$"
+      yellow: "$yellow$"
       selected:
         fg: "$purple$"
         bg: "$bright$"
-    powerline:
-      colors:
-        bg: "$brightest$"
-        tint_bg0: "$bright$"
-        tint_bg1: "$light$"
-        selected: "$orange$"
-        eggplant: "$purple$"
-        blue: "$ice$"
 
   fzf:
     fg: "$snow$"

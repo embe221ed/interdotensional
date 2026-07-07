@@ -9,17 +9,10 @@ tools:
     colors:
       dim: "$dark3$"
       pink: "$magenta2$"
+      yellow: "$yellow$"
       selected:
         fg: "$orange$"
         bg: "$bg_highlight$"
-    powerline:
-      colors:
-        bg: "$fg_gutter$"
-        tint_bg0: "$bg_dark$"
-        tint_bg1: "$fg$"
-        selected: "$neon_blue$"
-        eggplant: "$magenta2$"
-        blue: "$blue$"
 
   fzf:
     fg: "$fg$"

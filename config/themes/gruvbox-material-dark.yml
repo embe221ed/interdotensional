@@ -9,17 +9,10 @@ tools:
     colors:
       dim: "$fg_dim$"
       pink: "$pink$"
+      yellow: "$yellow$"
       selected:
         fg: "$orange$"
         bg: "$panel_inset$"
-    powerline:
-      colors:
-        bg: "$panel_inset$"
-        tint_bg0: "$border$"
-        tint_bg1: "$fg_primary$"
-        selected: "$peach$"
-        eggplant: "$pink$"
-        blue: "$blue$"
 
   fzf:
     fg: "$fg_primary$"

@@ -8,17 +8,10 @@ tools:
     colors:
       dim: "$comment$"
       pink: "$purple$"
+      yellow: "$yellow$"
       selected:
         fg: "$purple$"
         bg: "$cursorline$"
-    powerline:
-      colors:
-        bg: "$cursorline$"
-        tint_bg0: "$gray$"
-        tint_bg1: "$fg$"
-        selected: "$orange$"
-        eggplant: "$purple$"
-        blue: "$blue$"
 
   fzf:
     fg: "$fg$"

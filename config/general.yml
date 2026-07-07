@@ -11,11 +11,10 @@ tmux:
   display_time: 3000
   pane:
     border:
-      style: "bold"
-      lines: "heavy"
+      lines: "single"
       format: " #{user}@#{host_short}:#{s|#(echo $HOME)|~|:pane_current_path} "
       status: "top"
-      indicators: "arrows"
+      indicators: "off"
   popup:
     border:
       style: "bold"

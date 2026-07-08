@@ -11,6 +11,9 @@ set -g mouse on
 set-option -g clock-mode-colour colour{{ tmux_theme.clock }}
 
 set-option -g menu-selected-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }},bold"
+set-option -g menu-style "bg={{ tmux_theme.colors.selected.bg }}"
+set-option -g menu-border-style "fg={{ tmux_theme.colors.pink }}"
+set-option -g menu-border-lines "rounded"
 set-option -g mode-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }},bold"
 set-option -g message-style "fg={{ tmux_theme.colors.selected.fg }},bg={{ tmux_theme.colors.selected.bg }},fill={{ tmux_theme.colors.selected.bg }}"
 set-option -g prompt-cursor-colour "{{ tmux_theme.colors.pink }}"
@@ -108,13 +111,23 @@ set-option -g copy-mode-current-line-number-style "fg={{ tmux_theme.colors.pink 
 set-option -g status on
 set-option -g status-interval 2
 set-option -g status-style "bg=default,fg={{ tmux_theme.colors.dim }}"
-set-option -g status-left " "
-set-option -g status-right "#{?client_prefix,#[fg=yellow]● ,}#{?pane_in_mode,#[fg={{ tmux_theme.colors.pink }}]▲ ,}#{?pane_synchronized,#[fg=red]⇋ ,}#[fg=default]#S "
 
-# status (windows)
-set -g window-status-format "● "
-set -g window-status-current-format "● "
-set -g window-status-current-style "#{?window_zoomed_flag,fg=yellow,fg={{ tmux_theme.colors.pink }}}"
+# left: a quiet session sigil (the session name lives here now, not on the right rail)
+set-option -g status-left "#[fg={{ tmux_theme.colors.dim }}] #S #[fg={{ tmux_theme.colors.dim }}]❘ "
+set-option -g status-left-length 30
+
+# right: context + transient flags only — remote host (SSH only), key-table / nested off-mode, prefix, copy-mode, sync
+set-option -g status-right-length 70
+set-option -g status-right "#{?SSH_CONNECTION,#[fg={{ tmux_theme.colors.pink }}] #{host_short} ,}#{?#{==:#{client_key_table},off},#[fg={{ tmux_theme.colors.dim }}] outer ,}#{?#{||:#{||:#{==:#{client_key_table},root},#{==:#{client_key_table},prefix}},#{==:#{client_key_table},off}},,#[fg={{ tmux_theme.colors.pink }}]#{client_key_table} }#{?client_prefix,#[fg={{ tmux_theme.colors.yellow }}]● ,}#{?pane_in_mode,#[fg={{ tmux_theme.colors.pink }}]▲ ,}#{?pane_synchronized,#[fg=red]⇋ ,}#[fg=default]"
+
+# windows: left-aligned index:name list with the ❘ bufferline separator, plus a state palette
+set-option -g status-justify left
+set -g window-status-separator "#[fg={{ tmux_theme.colors.dim }}]❘ "
+set -g window-status-format "#I:#W "
+set -g window-status-current-format "#I:#W "
+set -g window-status-current-style "#{?window_zoomed_flag,fg={{ tmux_theme.colors.yellow }},fg={{ tmux_theme.colors.pink }}},bold"
+set -g window-status-style "fg={{ tmux_theme.colors.dim }}"
+set -g window-status-activity-style "fg={{ tmux_theme.colors.yellow }},nobold"
 set -g window-status-bell-style "fg=red,nobold"
 
 # popup!
@@ -126,6 +139,57 @@ bind-key -n M-p if-shell -F '#{==:#{session_name},scratch}' {
 
 # floating pane (prefix + *): non-modal, themed borders, opens in the current path
 bind-key * new-pane -c '#{pane_current_path}' -S "fg={{ tmux_theme.colors.pink }}" -R "fg={{ tmux_theme.colors.dim }}"
+
+# === pane-mode: a persistent modal table for move/resize/zoom ===
+# prefix + Enter enters it; h/j/k/l move, H/J/K/L resize, z zoom, q/Esc (or any unbound key) exits.
+# Each move/resize re-enters the table so it stays modal without swallowing the next keystroke.
+bind-key Enter switch-client -T pane-mode
+bind-key -T pane-mode h { select-pane -L ; switch-client -T pane-mode }
+bind-key -T pane-mode j { select-pane -D ; switch-client -T pane-mode }
+bind-key -T pane-mode k { select-pane -U ; switch-client -T pane-mode }
+bind-key -T pane-mode l { select-pane -R ; switch-client -T pane-mode }
+bind-key -T pane-mode H { resize-pane -L 2 ; switch-client -T pane-mode }
+bind-key -T pane-mode J { resize-pane -D 2 ; switch-client -T pane-mode }
+bind-key -T pane-mode K { resize-pane -U 2 ; switch-client -T pane-mode }
+bind-key -T pane-mode L { resize-pane -R 2 ; switch-client -T pane-mode }
+bind-key -T pane-mode z { resize-pane -Z ; switch-client -T pane-mode }
+bind-key -T pane-mode q switch-client -T root
+bind-key -T pane-mode Escape switch-client -T root
+
+# === nested tmux: F12 mutes the OUTER server so keys reach an inner tmux (e.g. over SSH) ===
+bind-key -T root F12 {
+  set key-table off
+  set status-style "bg=default,fg={{ tmux_theme.colors.dim }}"
+  refresh-client -S
+}
+bind-key -T off F12 {
+  set -u key-table
+  set -u status-style
+  refresh-client -S
+}
+
+# === action menu (prefix + a): launches real pane actions; mnemonics match the direct keys ===
+# inherits the themed menu chrome (menu-style / menu-border-*) set above
+bind-key a display-menu -T "#[align=centre] actions " -x C -y C \
+  "Split right"     "|" "split-window -h -c '#{pane_current_path}'" \
+  "Split below"     "-" "split-window -v -c '#{pane_current_path}'" \
+  "Floating pane"   "*" "new-pane -c '#{pane_current_path}' -S 'fg={{ tmux_theme.colors.pink }}' -R 'fg={{ tmux_theme.colors.dim }}'" \
+  "Scratch popup"   "p" "display-popup -w70% -h70% -E 'tmux new-session -A -s scratch -c ~'" \
+  "" \
+  "New window"      "c" "new-window -c '#{pane_current_path}'" \
+  "Rename window"   "," "command-prompt -I '#W' 'rename-window -- %%'" \
+  "Break to window" "!" "break-pane" \
+  "Window tree"     "w" "choose-tree -Zw" \
+  "" \
+  "Toggle sync"     "s" "set-window-option synchronize-panes" \
+  "Zoom pane"       "z" "resize-pane -Z" \
+  "Pane mode"       "m" "switch-client -T pane-mode" \
+  "Copy mode"       "[" "copy-mode" \
+  "Swap pane →"  "o" "swap-pane -D" \
+  "Respawn pane"    "R" "respawn-pane -k" \
+  "" \
+  "Kill pane"       "x" "confirm-before -p 'kill pane #P? (y/n)' kill-pane" \
+  "Kill window"     "X" "confirm-before -p 'kill window #W? (y/n)' kill-window"
 
 # === tmux-fzf-links ===
 set-option -g @fzf-links-key C-p

@@ -118,7 +118,7 @@ set-option -g status-left-length 30
 
 # right: context + transient flags only — remote host (SSH only), key-table / nested off-mode, prefix, copy-mode, sync
 set-option -g status-right-length 70
-set-option -g status-right "#{?SSH_CONNECTION,#[fg={{ tmux_theme.colors.pink }}] #{host_short} ,}#{?#{==:#{client_key_table},off},#[fg={{ tmux_theme.colors.pink }},bold]  ,}#{?#{||:#{||:#{==:#{client_key_table},root},#{==:#{client_key_table},prefix}},#{==:#{client_key_table},off}},,#[fg={{ tmux_theme.colors.pink }}]#{client_key_table} }#{?client_prefix,#[fg={{ tmux_theme.colors.yellow }}]● ,}#{?pane_in_mode,#[fg={{ tmux_theme.colors.pink }}]▲ ,}#{?pane_synchronized,#[fg=red]⇋ ,}#[fg=default]"
+set-option -g status-right "#{?SSH_CONNECTION,#[fg={{ tmux_theme.colors.pink }}] #{host_short} ,}#{?#{==:#{client_key_table},off},#[fg={{ tmux_theme.colors.pink }}]󰌾 ,}#{?#{||:#{||:#{==:#{client_key_table},root},#{==:#{client_key_table},prefix}},#{==:#{client_key_table},off}},,#[fg={{ tmux_theme.colors.pink }}]#{client_key_table} }#{?client_prefix,#[fg={{ tmux_theme.colors.yellow }}]● ,}#{?pane_in_mode,#[fg={{ tmux_theme.colors.pink }}]▲ ,}#{?pane_synchronized,#[fg=red]⇋ ,}#[fg=default]"
 
 # windows: left-aligned index:name list with the ❘ bufferline separator, plus a state palette
 set-option -g status-justify left

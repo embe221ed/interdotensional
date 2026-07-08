@@ -134,7 +134,9 @@ set -g window-status-bell-style "fg=red,nobold"
 bind-key -n M-p if-shell -F '#{==:#{session_name},scratch}' {
   detach-client
 } {
-  display-popup -w70% -h70% -E "tmux new-session -A -s scratch -c ~"
+  # scratch gets detach-on-destroy on (global is off) so exiting it closes the
+  # popup instead of falling back onto the next session
+  display-popup -w70% -h70% -E "tmux has-session -t scratch 2>/dev/null || tmux new-session -d -s scratch -c ~; tmux set-option -t scratch detach-on-destroy on; tmux attach -t scratch"
 }
 
 # floating pane (prefix + *): non-modal, themed borders, opens in the current path
@@ -176,7 +178,7 @@ bind-key a display-menu -T "#[align=centre] actions " -x C -y C \
   "Split right"     "|" "split-window -h -c '#{pane_current_path}'" \
   "Split below"     "-" "split-window -v -c '#{pane_current_path}'" \
   "Floating pane"   "*" "new-pane -c '#{pane_current_path}' -S 'fg={{ tmux_theme.colors.pink }}' -R 'fg={{ tmux_theme.colors.dim }}'" \
-  "Scratch popup"   "p" "display-popup -w70% -h70% -E 'tmux new-session -A -s scratch -c ~'" \
+  "Scratch popup"   "p" "display-popup -w70% -h70% -E 'tmux has-session -t scratch 2>/dev/null || tmux new-session -d -s scratch -c ~; tmux set-option -t scratch detach-on-destroy on; tmux attach -t scratch'" \
   "" \
   "New window"      "c" "new-window -c '#{pane_current_path}'" \
   "Rename window"   "," "command-prompt -I '#W' 'rename-window -- %%'" \

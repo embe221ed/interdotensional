@@ -65,6 +65,11 @@ zstyle ':fzf-tab:*' show-group brief
 bindkey '^k' autosuggest-accept   # accept the whole autosuggestion
 bindkey '^l' forward-word         # step over one word (Ctrl-Right also does this)
 
+# edit the current command line in $EDITOR — vicmd v (R3)
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'v' edit-command-line
+
 # substring history search (plugin: history-substring-search), guarded so the
 # fragment is harmless if the plugin is ever absent.
 if (( ${+widgets[history-substring-search-up]} )); then

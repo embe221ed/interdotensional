@@ -45,6 +45,7 @@ tools:
       green: 149
       yellow: 179
       magenta: 176
+      comment: "$overlay0$"
 
   colorls:
     unrecognized_file: cadetblue

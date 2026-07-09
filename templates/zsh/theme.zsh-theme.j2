@@ -12,9 +12,14 @@ yellow="%F{{ '{' }}{{ colors.yellow }}{{ '}' }}"
 magenta="%F{{ '{' }}{{ colors.magenta }}{{ '}' }}"
 reset="%f%k%F{default}%K{default}%b%u"
 
+{% if zsh.prompt.lines == 2 %}
+# two-line (PROMPT-7): info on line 1, a bare success/fail ❯ input line on line 2
+PROMPT=$'$(virtualenv_prompt_info)%{$cyan%}%c%{$reset%} $(git_prompt_info)\n%(?:%{$green%}:%{$red%})%B❯%b%{$reset%} '
+{% else %}
 PROMPT='$(virtualenv_prompt_info)'
 PROMPT+="%(?:%{$green%}:%{$red%})%B%1{➜%}  %{$cyan%}%c%{$reset%}"
 PROMPT+=' $(git_prompt_info)'
+{% endif %}
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%B%{$blue%}git:(%{$magenta%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset%} "
@@ -23,3 +28,43 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$blue%})"
 
 ZSH_THEME_VIRTUALENV_PREFIX="%{$yellow%}‹%{$blue%}"
 ZSH_THEME_VIRTUALENV_SUFFIX="%{$yellow%}› %{$reset%}"
+
+# === vi-mode indicator (PROMPT-2): a themed glyph in NORMAL, nothing in INSERT ==
+# The theme is sourced after the vi-mode plugin, so this overrides its red <<< default.
+MODE_INDICATOR="%B%{$yellow%}❮%{$reset%}"
+INSERT_MODE_INDICATOR=""
+
+# === right prompt (PROMPT-3): exit code · background jobs · slow-command timer ==
+# Single-cell glyphs only (vi-editing safe); the vi indicator stays first.
+zmodload zsh/datetime
+autoload -Uz add-zsh-hook
+
+_prompt_timer_start() { _prompt_t=$EPOCHREALTIME }
+_prompt_timer_stop() {
+  if [[ -n $_prompt_t ]]; then
+    local elapsed=$(( EPOCHREALTIME - _prompt_t ))
+    (( elapsed >= 3 )) && cmd_time=" %{$yellow%}${elapsed%.*}s%f" || cmd_time=
+  else
+    cmd_time=
+  fi
+  _prompt_t=
+}
+add-zsh-hook preexec _prompt_timer_start
+add-zsh-hook precmd  _prompt_timer_stop
+
+ZLE_RPROMPT_INDENT=0
+# cmd_time is pre-formatted (colour + spacing) in _prompt_timer_stop so RPS1 can
+# reference it as a plain $cmd_time — nesting %{$yellow%} inside ${cmd_time:+…}
+# breaks brace-matching because $yellow expands to %F{…} (a literal brace).
+RPS1='$(vi_mode_prompt_info)%(?.. %{$red%}✘ %?%f)%(1j. %{$blue%}⚙%j%f.)$cmd_time'
+
+# === transient prompt (PROMPT-4): collapse each finished prompt to a lone ❯ =====
+# Static green glyph — do NOT color by %(?..): at line-finish %? is the PREVIOUS exit.
+autoload -Uz add-zle-hook-widget
+_transient_full=$PROMPT
+_transient_rfull=$RPS1
+_transient() { PROMPT="%{$green%}❯%{$reset%} "; RPS1=''; zle .reset-prompt }
+zle -N _transient
+add-zle-hook-widget line-finish _transient
+_transient_restore() { PROMPT=$_transient_full; RPS1=$_transient_rfull }
+add-zsh-hook precmd _transient_restore

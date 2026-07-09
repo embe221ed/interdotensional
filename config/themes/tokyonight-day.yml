@@ -46,6 +46,7 @@ tools:
       green: 65
       yellow: 94
       magenta: 98
+      comment: "$comment$"
 
   colorls:
     unrecognized_file: "$blue$"

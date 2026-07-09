@@ -56,12 +56,15 @@ tools:
 
   zsh:
     colors:
-      red: 210
-      cyan: 151
-      blue: 109
-      green: 150
-      yellow: 180
-      magenta: 181
+      # truecolor from the gruvbox palette (PROMPT-1). Roles, not literal names:
+      # a quieter map — muted-grey git structure, soft terracotta branch (matches tmux).
+      red:     "$red$"      # error: failed ❯, RPS1 ✘
+      cyan:    "$aqua$"     # path: cwd
+      blue:    "$grey1$"    # muted structure: git:( ) punctuation, venv name, jobs ⚙
+      green:   "$green$"    # ok: prompt ❯ (success) + transient glyph
+      yellow:  "$yellow$"   # accents: dirty ✗, venv ‹ ›, vi ❮, command timer
+      magenta: "$pink$"     # branch (soft terracotta #d4967e — echoes the tmux accent)
+      comment: "$fg_faint$" # syntax-highlight comments
 
   colorls:
     unrecognized_file: "$blue$"

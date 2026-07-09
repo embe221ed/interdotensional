@@ -1,5 +1,5 @@
 # theme: "catppuccin-frappe"
-theme: "gruvbox-material-dark"
+theme: "gruvbox-material-light"
 
 font: "maple-mono"
 
@@ -19,6 +19,15 @@ tmux:
     border:
       style: "bold"
 
+zsh:
+  # 1 = single-line ➜ prompt; 2 = two-line prompt with a bare ❯ input line (PROMPT-7).
+  prompt:
+    lines: 2
+  # Which highlighter's style array the comment color is themed into (CFG-4/UX-5):
+  # "fast" = fast-syntax-highlighting (FAST_HIGHLIGHT_STYLES), "std" = zsh-syntax-highlighting.
+  # Keep in sync with the plugin listed in ~/.zshrc's plugins=() array.
+  highlighter: "fast"
+
 # Run after a generate that changed at least one file (skip with --no-hooks):
 hooks:
   # Reload tmux only when a server is running, so the hook can't fail the
@@ -26,7 +35,11 @@ hooks:
   - "tmux ls >/dev/null 2>&1 && tmux source-file ~/.tmux.conf || true"
 
 # Symlink dotfile locations to generated output, applied by `interdot link`:
-# links:
+links:
+  # zsh: the generated omz custom fragment + prompt theme, auto-sourced by oh-my-zsh
+  # from $ZSH_CUSTOM/*.zsh and $ZSH_CUSTOM/themes/ respectively.
+  ~/.oh-my-zsh/custom/interdot.zsh: zsh/interdot.zsh
+  ~/.oh-my-zsh/custom/themes/theme.zsh-theme: zsh/theme.zsh-theme
 #   ~/.tmux.conf: tmux/.tmux.conf
 #   ~/.config/kitty/kitty.conf: kitty/kitty.conf
 

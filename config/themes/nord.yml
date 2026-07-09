@@ -45,6 +45,7 @@ tools:
       green: 108
       yellow: 222
       magenta: 139
+      comment: "$light$"
 
   colorls:
     unrecognized_file: "$artic_water$"

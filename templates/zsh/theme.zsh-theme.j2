@@ -14,7 +14,7 @@ reset="%f%k%F{default}%K{default}%b%u"
 
 {% if zsh.prompt.lines == 2 %}
 # two-line (PROMPT-7): info on line 1, a bare success/fail ❯ input line on line 2
-PROMPT=$'$(virtualenv_prompt_info)%{$cyan%}%c%{$reset%} $(git_prompt_info)\n%(?:%{$green%}:%{$red%})%B❯%b%{$reset%} '
+PROMPT=$'$(virtualenv_prompt_info)%{$cyan%}%B%c%{$reset%} $(git_prompt_info)\n%(?:%{$green%}:%{$red%})%B❯%b%{$reset%} '
 {% else %}
 PROMPT='$(virtualenv_prompt_info)'
 PROMPT+="%(?:%{$green%}:%{$red%})%B%1{➜%}  %{$cyan%}%c%{$reset%}"

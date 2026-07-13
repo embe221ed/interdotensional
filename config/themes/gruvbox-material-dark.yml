@@ -49,6 +49,30 @@ tools:
   ipython:
     pygments_style: "gruvbox-dark"
 
+  leaf:
+    base: "ocean"                # built-in preset backing any key the theme doesn't set
+    syntax: "base16-ocean.dark"  # syntect theme for fenced code blocks
+    colors:
+      # surfaces
+      bg:        "$bg_primary$"  # content background
+      bg_deep:   "$bg_deep$"     # chrome: TOC + status bar background
+      panel:     "$panel$"       # chips: filename/search badges, inline code, active TOC row
+      border:    "$border$"      # hard lines: rules, heading underline, table separators
+      faint:     "$fg_faint$"    # soft lines: code frame/gutter, table borders, inactive TOC index
+      # text ladder (fg0 = body, fg1 = emphasis — holds in both polarities)
+      fg:        "$fg0$"         # body text
+      fg_strong: "$fg1$"         # bold text, active TOC entry, marked text
+      muted:     "$fg_muted$"    # de-emphasized: inactive TOC entries
+      dim:       "$grey1$"       # chrome text: separators, shortcuts, code labels, blockquote bar
+      # accents (mirrors the original leaf gruvbox: yellow brand, orange secondary)
+      accent:    "$yellow$"      # brand: status badge, search, H1, table headers, scrollbar
+      accent2:   "$orange$"      # TOC marker, inline code, H5+, mermaid keywords
+      success:   "$green$"       # watch/reload badges, tips, checked tasks, H2
+      info:      "$blue$"        # links, notes, H3
+      special:   "$purple$"      # LaTeX, H4, important alerts
+      warning:   "$yellow$"      # warning status + alerts
+      danger:    "$red$"         # errors, caution alerts
+
   ghostty:
     name: "Gruvbox Material Dark"
 

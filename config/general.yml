@@ -1,5 +1,5 @@
 # theme: "catppuccin-frappe"
-theme: "gruvbox-material-light"
+theme: "gruvbox-material-dark"
 
 font: "maple-mono"
 
@@ -42,6 +42,9 @@ links:
   ~/.oh-my-zsh/custom/themes/theme.zsh-theme: zsh/theme.zsh-theme
 #   ~/.tmux.conf: tmux/.tmux.conf
 #   ~/.config/kitty/kitty.conf: kitty/kitty.conf
+  # leaf's config.toml points straight at output/leaf/theme.toml; enable this
+  # link instead (with `theme = "theme.toml"`) to avoid the absolute path.
+#   ~/.config/leaf/theme.toml: leaf/theme.toml
 
 nvim:
   symbols:

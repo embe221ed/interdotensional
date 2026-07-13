@@ -31,6 +31,30 @@ tools:
   ipython:
     pygments_style: "nord"
 
+  leaf:
+    base: "ocean"                # built-in preset backing any key the theme doesn't set
+    syntax: "base16-ocean.dark"  # syntect theme for fenced code blocks
+    colors:
+      # surfaces (polar night steps: origin content, nord1 chrome, nord2 chips)
+      bg:        "$origin$"      # content background
+      bg_deep:   "$bright$"      # chrome: TOC + status bar background
+      panel:     "$brighter$"    # chips: filename/search badges, inline code, active TOC row
+      border:    "$brightest$"   # hard lines: rules, heading underline, table separators
+      faint:     "$light$"       # soft lines: code frame/gutter, table borders, inactive TOC index ($brighter$ is invisible on the nord1 chrome)
+      # text ladder (snow storm body, stepping down into polar night greys)
+      fg:        "$snow$"        # body text
+      fg_strong: "$snow_brightest$" # bold text, active TOC entry, marked text
+      muted:     "$snow$"        # de-emphasized: inactive TOC entries (no step exists between nord3.5 and nord4; $light$ is unreadable at 2:1)
+      dim:       "$light$"       # chrome text: separators, shortcuts, code labels, blockquote bar (nord3.5, the palette's designated dim-text shade)
+      # accents (frost ice brand, aurora orange secondary — echoes fzf hl)
+      accent:    "$ice$"         # brand: status badge, search, H1, table headers, scrollbar
+      accent2:   "$orange$"      # TOC marker, inline code, H5+, mermaid keywords
+      success:   "$green$"       # watch/reload badges, tips, checked tasks, H2
+      info:      "$artic_ocean$" # links, notes, H3 (nord10; $artic_water$ is near-identical to the ice H1)
+      special:   "$purple$"      # LaTeX, H4, important alerts
+      warning:   "$yellow$"      # warning status + alerts
+      danger:    "$red$"         # errors, caution alerts
+
   ghostty:
     name: "Nord"
 

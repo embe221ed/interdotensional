@@ -131,3 +131,4 @@ Closest ANSI 256 matches for the gruvbox accent colors:
 - `output/colorls/dark_colors.yaml` — file listing colors (hex values)
 - `output/tmux/theme.sh` — powerline colors
 - `output/zsh/theme.zsh-theme` — prompt colors (ANSI 256)
+- `output/leaf/theme.toml` — leaf markdown reader theme (role-driven via `tools.leaf`)

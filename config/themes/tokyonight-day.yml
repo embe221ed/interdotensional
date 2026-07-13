@@ -35,6 +35,35 @@ tools:
   ipython:
     pygments_style: "friendly"
 
+  leaf:
+    base: "ocean"                 # built-in preset backing any key the theme doesn't set
+    syntax: "base16-ocean.light"  # syntect theme for fenced code blocks
+    # Day's mid-lightness blues can't carry text on the grey chips; darken
+    # them for text roles, keep raw brand colors for surfaces.
+    text_darken:
+      accent: 8  # blue -> #176ade-ish (3.2:1 on the panel chip)
+      strong: 9  # fg -> #2d4e9b (4.7:1 on the panel chip; fg is day's darkest neutral)
+    colors:
+      # surfaces
+      bg:        "$bg$"            # content background
+      bg_deep:   "$bg_dark$"       # chrome: TOC + status bar background
+      panel:     "$bg_highlight$"  # chips: filename/search badges, inline code, active TOC row
+      border:    "$blue0$"         # hard lines: rules, heading underline, table separators (periwinkle border_highlight)
+      faint:     "$fg_gutter$"     # soft lines: code frame/gutter, table borders, inactive TOC index
+      # text ladder (day's fg is the darkest neutral, so bold reuses it — weight carries emphasis)
+      fg:        "$fg$"            # body text
+      fg_strong: "$fg$"            # bold text, active TOC entry, marked text
+      muted:     "$dark5$"         # de-emphasized: inactive TOC entries
+      dim:       "$comment$"       # chrome text: separators, shortcuts, code labels, blockquote bar
+      # accents (tokyonight idiom: blue brand, magenta keywords, teal for links)
+      accent:    "$blue$"          # brand: status badge, search, H1, table headers, scrollbar
+      accent2:   "$magenta2$"      # TOC marker, inline code, H5+, mermaid keywords (day's own fzf/tmux/nvim accent; magenta is too light for chip text)
+      success:   "$green$"         # watch/reload badges, tips, checked tasks, H2
+      info:      "$blue1$"         # links, notes, H3 (teal keeps H3 distinct from the blue H1)
+      special:   "$purple$"        # LaTeX, H4, important alerts
+      warning:   "$yellow$"        # warning status + alerts
+      danger:    "$red1$"          # errors, caution alerts (print-red; $red$ washes out on the tinted badge)
+
   ghostty:
     name: "TokyoNight Day"
 

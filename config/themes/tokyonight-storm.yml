@@ -32,6 +32,30 @@ tools:
   ipython:
     pygments_style: "native"
 
+  leaf:
+    base: "ocean"                # built-in preset backing any key the theme doesn't set
+    syntax: "base16-ocean.dark"  # syntect theme for fenced code blocks
+    colors:
+      # surfaces
+      bg:        "$bg$"            # content background
+      bg_deep:   "$bg_dark$"       # chrome: TOC + status bar background
+      panel:     "$bg_highlight$"  # chips: filename/search badges, inline code, active TOC row
+      border:    "$blue0$"         # hard lines: rules, heading underline, table separators (upstream border_highlight navy)
+      faint:     "$fg_gutter$"     # soft lines: code frame/gutter, table borders, inactive TOC index
+      # text ladder (terminal idiom: fg_dark body, fg bold — tokyonight's white vs bright-white)
+      fg:        "$fg_dark$"       # body text
+      fg_strong: "$fg$"            # bold text, active TOC entry, marked text
+      muted:     "$dark5$"         # de-emphasized: inactive TOC entries
+      dim:       "$comment$"       # chrome text: separators, shortcuts, code labels, blockquote bar
+      # accents (tokyonight idiom: blue brand, magenta keywords, teal for links)
+      accent:    "$blue$"          # brand: status badge, search, H1, table headers, scrollbar
+      accent2:   "$magenta$"       # TOC marker, inline code, H5+, mermaid keywords
+      success:   "$green$"         # watch/reload badges, tips, checked tasks, H2
+      info:      "$blue1$"         # links, notes, H3 (teal keeps H3 distinct from the blue H1)
+      special:   "$purple$"        # LaTeX, H4, important alerts
+      warning:   "$yellow$"        # warning status + alerts
+      danger:    "$red$"           # errors, caution alerts
+
   ghostty:
     name: "TokyoNight Storm"
 

@@ -3,7 +3,7 @@
 One palette, every tool. A Python-powered dotfile generator that maintains a
 unified theme across development tools: pick a theme and font once, and
 generate consistent configs for Neovim, Kitty, Ghostty, Tmux, Zsh, Zellij,
-IPython, fzf, and colorls.
+IPython, fzf, colorls, and leaf.
 
 ## Quickstart
 

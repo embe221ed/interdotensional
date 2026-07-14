@@ -14,13 +14,18 @@
 # fpath) stays hand-owned in ~/.zshrc — never generated.
 {% set zc = theme.tools.zsh.colors %}
 # --- light/dark: interdot is the single source of truth (theme.polarity) -----
-# Drives ~/.zshrc's BAT_THEME / colorls gate; sourced here, before that gate runs.
+# Loaded before ~/.zshrc's alias section at startup (which reads DISPLAY_MODE to
+# pick BAT_THEME and the colorls flags), and never re-sourced into a live shell:
+# a theme flip is applied by starting a fresh shell (`exec zsh`), so nothing in
+# here has to be idempotent.
 export DISPLAY_MODE="{{ 'Light' if theme.polarity == 'light' else 'Dark' }}"
 
 # --- syntax-highlighting: theme the comment color from the palette (CFG-4) ----
 # (was a hand-hardcoded fg=#6f6f6f in ~/.zshrc that drifted across all themes)
 {% if zsh.highlighter == 'fast' -%}
-FAST_HIGHLIGHT_STYLES[comment]='fg={{ zc.comment }}'
+# Guarded: assigning into the assoc when the plugin is absent is a fatal
+# "invalid subscript" that would abort the rest of this file.
+(( $+FAST_HIGHLIGHT_STYLES )) && FAST_HIGHLIGHT_STYLES[comment]='fg={{ zc.comment }}'
 {%- else -%}
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg={{ zc.comment }}'

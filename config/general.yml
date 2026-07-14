@@ -33,6 +33,11 @@ hooks:
   # Reload tmux only when a server is running, so the hook can't fail the
   # generate when tmux is not up.
   - "tmux ls >/dev/null 2>&1 && tmux source-file ~/.tmux.conf || true"
+  # Push the new fzf colors into tmux's global env, so popups that launch fzf
+  # from the server environment (rather than through a zsh) are themed too.
+  # Lives here, not in display_mode.sh, so a bare `interdot toggle` themes them
+  # as well — and because nothing can run after that script's `exec zsh`.
+  - 'tmux ls >/dev/null 2>&1 && tmux setenv -g FZF_DEFAULT_OPTS "$(. output/fzf/fzf-colors.sh && printf %s "$FZF_DEFAULT_OPTS")" || true'
 
 # Symlink dotfile locations to generated output, applied by `interdot link`:
 links:

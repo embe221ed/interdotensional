@@ -56,3 +56,30 @@ def test_interdimux_colors_reach_tmux_conf(repo_project):
     )
     assert f'@interdimux-color-accent "{interdimux["accent"]}"' in tmux.content
     assert f'@interdimux-color-current-bg "{interdimux["current_bg"]}"' in tmux.content
+
+
+def test_tmux_renders_single_output_no_partial_leak(repo_project):
+    """tmux is the only multi-file tool: its config is assembled from partials
+    under templates/tmux/parts/ that are `{% include %}`d, not discovered. Those
+    partials MUST NOT end in .j2, or discover_templates() would emit each as its
+    own junk output under output/tmux/parts/ (which is the live symlinked config
+    dir). Rendering must yield exactly one tmux/* output — the assembled conf —
+    and that conf must still end on the TPM bootstrap line, which tmux requires
+    to run last (it sources every plugin's @-options inline)."""
+    from interdotensional.config import load_context
+    from interdotensional.generate import discover_templates, render_all
+
+    templates = discover_templates(repo_project)
+    assert not any(t.startswith("tmux/parts/") for t in templates), (
+        f"a tmux partial leaked into discovery (rename it off .j2): {templates}"
+    )
+
+    context = load_context(repo_project, theme="gruvbox-material-dark")
+    tmux_outputs = [
+        r for r in render_all(repo_project, context)
+        if r.rel_output.startswith("tmux/")
+    ]
+    assert [r.rel_output for r in tmux_outputs] == ["tmux/.tmux.conf"]
+    assert tmux_outputs[0].content.rstrip().endswith(
+        "run '~/.tmux/plugins/tpm/tpm'"
+    )

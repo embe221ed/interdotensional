@@ -36,7 +36,8 @@ The scheme file dispatch uses a `scheme` field in `vim.g.colorscheme` to decoupl
 | purple | `#d3869b` | gruvbox | Numbers, preprocessor, mauve |
 | pink | `#d4967e` | Claude | Warm accent, cursor, rosewater, symlinks |
 | peach | `#cc785c` | Claude | Mid terracotta, interactive elements |
-| terracotta | `#c96442` | Claude | Brand primary, special files, maroon |
+| terracotta | `#c96442` | Claude | Brand primary, special files, flamingo |
+| maroon | `#d6928a` | Claude | Soft rose-clay, function parameters (maroon) |
 
 ### Foreground scale
 
@@ -80,7 +81,7 @@ flamingo        →  terracotta         →  #c96442
 pink            →  pink               →  #d4967e
 mauve           →  purple             →  #d3869b
 red             →  red                →  #ea6962
-maroon          →  terracotta         →  #c96442
+maroon          →  maroon             →  #d6928a
 peach           →  orange             →  #e78a4e
 yellow          →  yellow             →  #d8a657
 green           →  green              →  #a9b665

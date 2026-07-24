@@ -140,7 +140,7 @@ tools:
       pink: "$pink$"
       mauve: "$purple$"
       red: "$red$"
-      maroon: "$terracotta$"
+      maroon: "$maroon$"
       peach: "$orange$"
       yellow: "$yellow$"
       green: "$green$"

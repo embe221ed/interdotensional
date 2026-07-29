@@ -49,6 +49,21 @@ tools:
   ipython:
     pygments_style: "gruvbox-light"
 
+  web:
+    # The web is stricter than the terminal: WCAG AA wants 4.5:1 for body text,
+    # and leaf's gentler text_darken only gets accent to 3.78:1. These are the
+    # minimum darken() points (HLS lightness) that clear 4.5:1 on BOTH the page
+    # background (bg, #fbf1c7) and the code-block background (bg_deep, #f4e8be).
+    # The dark counterpart already passes everywhere and needs no map.
+    text_darken:
+      accent: 7
+      accent2: 6
+      success: 3
+      info: 1
+      special: 3
+      warning: 7
+      danger: 5
+
   leaf:
     base: "ocean"                 # built-in preset backing any key the theme doesn't set
     syntax: "base16-ocean.light"  # syntect theme for fenced code blocks

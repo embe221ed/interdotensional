@@ -138,6 +138,29 @@ def load_colorscheme(project: Project, name: str) -> dict:
     return colors
 
 
+def load_theme(project: Project, name: str) -> dict:
+    """Load one theme config and attach its palette under ``colors``.
+
+    Tokens are left unsubstituted; the caller decides which palette to
+    resolve them against.
+    """
+    path = project.themes_dir / f"{name}.yml"
+    if not path.is_file():
+        raise unknown_choice("theme", name, available_themes(project))
+    config = load_yaml(path)
+    if not isinstance(config, dict):
+        raise ConfigError(f"Theme config {path} must be a YAML mapping.")
+    if config.get("colors"):
+        raise ConfigError(
+            f"Theme config {path} must not define `colors:` directly; "
+            "palettes live in colorschemes/."
+        )
+    # A theme may point at a shared palette via `colorscheme:`;
+    # by default the palette file matches the theme name.
+    config["colors"] = load_colorscheme(project, config.get("colorscheme", name))
+    return config
+
+
 def load_context(
     project: Project,
     theme: str | None = None,
@@ -158,23 +181,7 @@ def load_context(
             f"No theme selected. Set `theme:` in {project.general_path} "
             "or pass --theme."
         )
-    theme_path = project.themes_dir / f"{theme_name}.yml"
-    if not theme_path.is_file():
-        raise unknown_choice("theme", theme_name, available_themes(project))
-    theme_config = load_yaml(theme_path)
-    if not isinstance(theme_config, dict):
-        raise ConfigError(f"Theme config {theme_path} must be a YAML mapping.")
-    if theme_config.get("colors"):
-        raise ConfigError(
-            f"Theme config {theme_path} must not define `colors:` directly; "
-            "palettes live in colorschemes/."
-        )
-
-    # A theme may point at a shared palette via `colorscheme:`;
-    # by default the palette file matches the theme name.
-    colorscheme_name = theme_config.get("colorscheme", theme_name)
-    theme_config["colors"] = load_colorscheme(project, colorscheme_name)
-    data["theme"] = theme_config
+    data["theme"] = load_theme(project, theme_name)
 
     font_name = font or data.get("font")
     if not isinstance(font_name, str) or not font_name:
@@ -188,6 +195,22 @@ def load_context(
     data["font"] = load_yaml(font_path)
 
     data = substitute_tokens(data, flatten_dict(data["theme"]["colors"]))
+
+    # The counterpart polarity, resolved against ITS OWN palette and exposed as
+    # a second `pair` root. `theme.pair` alone is just a name, which is enough
+    # for `interdot toggle` but not for a target that must carry both polarities
+    # in one artifact - a website stylesheet whose visitors flip light/dark
+    # without running interdot. `pair` is None when the theme has no
+    # counterpart; the pair's own `pair:` is deliberately not followed.
+    pair_name = data["theme"].get("pair")
+    if pair_name:
+        pair_config = load_theme(project, pair_name)
+        data["pair"] = substitute_tokens(
+            pair_config, flatten_dict(pair_config["colors"])
+        )
+    else:
+        data["pair"] = None
+
     unresolved = find_unresolved_tokens(data)
 
     return Context(

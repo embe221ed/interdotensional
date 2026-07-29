@@ -63,6 +63,9 @@ tools:
       special: 3
       warning: 7
       danger: 5
+      # pane_active doubles as pane-title text, so it needs 4.5:1 rather than
+      # the 3:1 a border line would settle for.
+      pane_active: 6
 
   leaf:
     base: "ocean"                 # built-in preset backing any key the theme doesn't set

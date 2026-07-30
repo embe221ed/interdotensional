@@ -49,6 +49,9 @@ tools:
   ipython:
     pygments_style: "gruvbox-dark"
 
+  web:
+    prompt_dir: "$aqua$"          # zsh `%c`; no text_darken — dark accents already clear AA
+
   leaf:
     base: "ocean"                # built-in preset backing any key the theme doesn't set
     syntax: "base16-ocean.dark"  # syntect theme for fenced code blocks

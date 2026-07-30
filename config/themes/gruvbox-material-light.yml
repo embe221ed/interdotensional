@@ -50,6 +50,7 @@ tools:
     pygments_style: "gruvbox-light"
 
   web:
+    prompt_dir: "$aqua$"          # zsh `%c`; tools.zsh.colors.cyan is an index, not a hex
     # The web is stricter than the terminal: WCAG AA wants 4.5:1 for body text,
     # and leaf's gentler text_darken only gets accent to 3.78:1. These are the
     # minimum darken() points (HLS lightness) that clear 4.5:1 on BOTH the page
@@ -66,6 +67,8 @@ tools:
       # pane_active doubles as pane-title text, so it needs 4.5:1 rather than
       # the 3:1 a border line would settle for.
       pane_active: 6
+      prompt_dir: 3                # aqua as bold cwd text: 4.42 -> 4.93 on bg
+      select_fg: 8                 # orange on panel_inset: 3.24 -> 4.67
 
   leaf:
     base: "ocean"                 # built-in preset backing any key the theme doesn't set

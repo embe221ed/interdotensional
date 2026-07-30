@@ -63,6 +63,11 @@ WEB_ROLES = (
     "bg", "bg_deep", "panel", "border", "faint",
     "fg", "fg_strong", "muted", "dim",
     "accent", "accent2", "success", "info", "special", "warning", "danger",
+    # Not from leaf: pane chrome and selection come from tools.tmux.colors, and
+    # prompt_dir is an opt-in tools.web key that falls back to leaf's `info`.
+    # All five must still resolve for every theme, because a visitor cannot run
+    # interdot to fix a missing one.
+    "pane_active", "pane_border", "select_fg", "select_bg", "prompt_dir",
 )
 
 

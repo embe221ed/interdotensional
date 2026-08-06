@@ -45,8 +45,43 @@ links:
   # from $ZSH_CUSTOM/*.zsh and $ZSH_CUSTOM/themes/ respectively.
   ~/.oh-my-zsh/custom/interdot.zsh: zsh/interdot.zsh
   ~/.oh-my-zsh/custom/themes/theme.zsh-theme: zsh/theme.zsh-theme
-#   ~/.tmux.conf: tmux/.tmux.conf
-#   ~/.config/kitty/kitty.conf: kitty/kitty.conf
+  # nvim: the generated halves of two COMMITTED shims. nvim/lua/globals.lua and
+  # nvim/lua/ui/colors.lua pcall-load these siblings and work without them.
+  # Targeted at ~/.config/nvim/... and NOT at $DOTFILES/..., so this entry is
+  # correct both before and after the scripts->dotfiles split and needs no
+  # per-machine variant. ~/.config/nvim must already be a SYMLINK when this
+  # runs — `interdot link` mkdir -p's the parent, so it would otherwise create
+  # a real directory. install.sh always runs first.
+  ~/.config/nvim/lua/globals.generated.lua: nvim/globals.lua
+  ~/.config/nvim/lua/ui/colors.generated.lua: nvim/colors.lua
+  # kitty: DORMANT. kitty is installed on NEITHER machine (0.5.1), so this
+  # writes into a plain $HOME directory that no repo claims — inert clutter,
+  # kept because the entry is right the day kitty comes back. It must stay a
+  # path INSIDE the config directory: kitty resolves `include` relative to the
+  # file holding kitty.conf and finds its OS-appearance themes by filename
+  # there. Same $HOME targeting, same before-and-after reason as the nvim pair.
+  ~/.config/kitty/kitty.conf: kitty/kitty.conf
+  # ghostty: 100% interdotensional-owned. The dotfiles repo ships nothing for
+  # ghostty at all (the shaders were deleted and `config` was this same
+  # generated symlink), so this writes into a plain $HOME directory that no
+  # repository claims, and install.sh has no ghostty row.
+  ~/.config/ghostty/config: ghostty/config
+  # zellij: identical shape to ghostty, and added for the identical reason.
+  # configs/zellij/ held ONLY this generated symlink, so 2.3 deletes the whole
+  # directory and the dotfiles repo ships nothing for zellij either. zellij IS
+  # installed on the Mac (~/.cargo/bin/zellij) and reached its config through
+  # the old ~/.config/zellij -> configs/zellij DIRECTORY symlink; without this
+  # entry nothing owns it after 2.3 and the main machine loses it silently.
+  ~/.config/zellij/config.kdl: zellij/config.kdl
+  # tmux + colorls: previously hand-made links with NO owner — they existed on
+  # the host and devContainer.dockerfile:442-443 recreated them by hand. Given
+  # an owner here because they point straight at this generator's output and
+  # nothing else. Phase 7 deletes those two Dockerfile lines.
+  # colorls is a DIRECTORY link (output/colorls holds dark_colors.yaml,
+  # light_colors.yaml and the tracked files.yaml asset from 2.2); links.py
+  # only does `source.exists()` + `symlink_to`, so a directory source is fine.
+  ~/.tmux.conf: tmux/.tmux.conf
+  ~/.config/colorls: colorls
   # leaf's config.toml points straight at output/leaf/theme.toml; enable this
   # link instead (with `theme = "theme.toml"`) to avoid the absolute path.
 #   ~/.config/leaf/theme.toml: leaf/theme.toml

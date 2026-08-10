@@ -38,12 +38,18 @@ VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 # --- reset the cursor shape on exit so the vi bar doesn't leak upward (CFG-10) --
 # vi-mode's line-finish reset misses the Ctrl-D/EOF path; cover it on shell exit.
 autoload -Uz add-zsh-hook
-_reset_cursor() { print -rn -- '\e[0 q'; }
+# $'…' (ANSI-C quoting) is required: `print -r` does NOT interpret escapes, so a
+# plain '\e[0 q' prints the six literal characters instead of the ESC sequence.
+_reset_cursor() { print -rn -- $'\e[0 q'; }
 add-zsh-hook zshexit _reset_cursor
 
 # --- globbing & bell hygiene --------------------------------------------------
 setopt EXTENDED_GLOB       # ^neg  ~except  (#i)case-glob  **/  qualifiers
 setopt NUMERIC_GLOB_SORT   # file2 before file10 in *  (version/log files)
+# EXTENDED_GLOB makes ^ a glob operator, so `git show HEAD^` would die as an
+# unmatched pattern before git ever runs. Unmatched globs now pass through
+# literally (bash behaviour) instead of being a hard error.
+setopt NO_NOMATCH
 setopt NO_BEEP             # silence the ZLE/completion bell (rings locally over SSH)
 
 # --- history: match SAVEHIST to HISTSIZE, tighten dedup/blanks ----------------
@@ -67,12 +73,21 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' show-group brief
 
 # --- keybindings --------------------------------------------------------------
+# Esc is a prefix of many viins bindings (^[[A, ^[OA, ^[f, …), so ZLE waits
+# KEYTIMEOUT tenths of a second before it can conclude the byte was a lone Esc.
+# At the default 40 the cursor shape and mode indicator lag ~400 ms behind Esc.
+KEYTIMEOUT=10
+
 bindkey '^k' autosuggest-accept   # accept the whole autosuggestion
 bindkey '^l' forward-word         # step over one word (Ctrl-Right also does this)
 
 # edit the current command line in $EDITOR — vicmd v (R3)
 autoload -Uz edit-command-line
 zle -N edit-command-line
+# vi-mode binds `vv` to the same widget. Leaving it makes `v` a PREFIX of a
+# longer binding, so ZLE stalls for KEYTIMEOUT before dispatching the one-key
+# form. Note this also replaces vicmd `v` = visual-mode.
+bindkey -M vicmd -r 'vv'
 bindkey -M vicmd 'v' edit-command-line
 
 # substring history search (plugin: history-substring-search), guarded so the

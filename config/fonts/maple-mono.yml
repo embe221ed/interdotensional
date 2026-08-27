@@ -21,7 +21,7 @@ ghostty:
   features: "calt,zero"
   bold: "default"
   bold_italic: "default"
-  size: 15.5
+  size: 16
   cell:
     height: "56%"
     width: "-8%"

@@ -5,111 +5,150 @@ pair: "tokyonight-storm"
 tools:
 
   tmux:
-    clock: 213
+    clock: 94                     # colour94 #875f00: the nearest index to orange #984f00
     colors:
-      dim: "$dark3$"
-      pink: "$magenta2$"
+      dim: "$fg_dim$"
+      pink: "$pink$"              # magenta2 #d20065, the theme's identity: 4.13:1 on bg (floor 3.9), 3.21:1 under the copy-mode match text (floor 3.37)
       yellow: "$yellow$"
       selected:
-        fg: "$magenta2$"
-        bg: "$bg_dark$"
-
-  kitty:
-    name: "Tokyonight-Day"
+        fg: "$orange$"
+        bg: "$panel_inset$"
 
   fzf:
-    fg: "$fg$"
+    fg: "$fg_primary$"
     bg: "-1"
     hl: "$orange$"
-    selected_bg: "$bg_highlight$"
+    selected_bg: "$panel$"
     info: "$blue$"
-    border: "$magenta2$"
-    prompt: "$green$"
-    pointer: "$red$"
+    border: "$pink$"
+    prompt: "$orange$"
+    pointer: "$terracotta$"
     marker: "$yellow$"
-    spinner: "$magenta$"
-    header: "$dark3$"
-    separator: "$fg_gutter$"
-    label: "$fg_dark$"
+    spinner: "$purple$"
+    header: "$fg_dim$"
+    separator: "$border$"
+    label: "$fg_secondary$"
+
+  interdimux:
+    accent:        "$orange$"
+    path:          "$yellow$"
+    git:           "$purple$"
+    ssh:           "$blue$"
+    editor:        "$green$"
+    success:       "$green$"
+    danger:        "$red$"
+    tree:          "$fg_faint$"
+    separator:     "$border$"
+    query:         "$fg_primary$"
+    match_current: "$orange$"
+    current_bg:    "$panel_inset$"
+    header:        "$fg_dim$"
+    border:        "$border$"
+    menu_sel_fg:   "$bg_primary$"
 
   ipython:
-    pygments_style: "friendly"
+    pygments_style: "friendly"    # no tokyonight style is installed; friendly is light, its navy functions and blue strings sit in day's ink-blue family and read on the grey page
+
+  web:
+    prompt_dir: "$aqua$"          # zsh `%c`; the same $aqua$ as tools.zsh.colors.cyan, darkened for the web below
+    # The web is stricter than the terminal: WCAG AA wants 4.5:1 for body text,
+    # and leaf's gentler text_darken only gets accent to 3.43:1 on the chip. These
+    # are the minimum darken() points (HLS lightness) that clear 4.5:1 on BOTH the
+    # page background (bg, #e1e2e7) and the code-block background (bg_deep, #d0d5e3).
+    # The text ladder and purple already pass on both and need no point.
+    # The dark counterpart carries no map (a dark theme never darkens; storm's
+    # magenta2 pane title sits at 3.84:1 and is kept as the identity).
+    text_darken:
+      accent: 4
+      success: 3
+      info: 2
+      warning: 7
+      danger: 4
+      # pane_active doubles as pane-title text, so it needs 4.5:1 rather than
+      # the 3:1 a border line would settle for.
+      pane_active: 6               # magenta2 as pane-title text: 4.13 -> 5.32 on bg, 4.69 on bg_deep (3 cleared bg only)
+      prompt_dir: 2                # aqua as cwd text: 4.22 -> 4.73 on bg_deep (4.79 -> 5.37 on bg)
+      select_fg: 5                 # orange on panel_inset: 3.66 -> 4.73
 
   leaf:
     base: "ocean"                 # built-in preset backing any key the theme doesn't set
     syntax: "base16-ocean.light"  # syntect theme for fenced code blocks
-    # Day's mid-lightness blues can't carry text on the grey chips; darken
-    # them for text roles, keep raw brand colors for surfaces.
+    # Barely-visible extra depth so the blue brand clears the panel chip
+    # (search chip 3.06:1 -> 3.43:1); the other roles already sit at their floors.
     text_darken:
-      accent: 8  # blue -> #176ade-ish (3.2:1 on the panel chip)
-      strong: 9  # fg -> #2d4e9b (4.7:1 on the panel chip; fg is day's darkest neutral)
+      accent: 3   # blue -> #145abc for text roles
     colors:
       # surfaces
-      bg:        "$bg$"            # content background
-      bg_deep:   "$bg_dark$"       # chrome: TOC + status bar background
-      panel:     "$bg_highlight$"  # chips: filename/search badges, inline code, active TOC row
-      border:    "$blue0$"         # hard lines: rules, heading underline, table separators (periwinkle border_highlight)
-      faint:     "$fg_gutter$"     # soft lines: code frame/gutter, table borders, inactive TOC index
-      # text ladder (day's fg is the darkest neutral, so bold reuses it — weight carries emphasis)
-      fg:        "$fg$"            # body text
-      fg_strong: "$fg$"            # bold text, active TOC entry, marked text
-      muted:     "$dark5$"         # de-emphasized: inactive TOC entries
-      dim:       "$comment$"       # chrome text: separators, shortcuts, code labels, blockquote bar
-      # accents (tokyonight idiom: blue brand, magenta keywords, teal for links)
-      accent:    "$blue$"          # brand: status badge, search, H1, table headers, scrollbar
-      accent2:   "$magenta2$"      # TOC marker, inline code, H5+, mermaid keywords (day's own fzf/tmux/nvim accent; magenta is too light for chip text)
-      success:   "$green$"         # watch/reload badges, tips, checked tasks, H2
-      info:      "$blue1$"         # links, notes, H3 (teal keeps H3 distinct from the blue H1)
-      special:   "$purple$"        # LaTeX, H4, important alerts
-      warning:   "$yellow$"        # warning status + alerts
-      danger:    "$red1$"          # errors, caution alerts (print-red; $red$ washes out on the tinted badge)
+      bg:        "$bg_primary$"  # content background
+      bg_deep:   "$bg_deep$"     # chrome: TOC + status bar background
+      panel:     "$panel$"       # chips: filename/search badges, inline code, active TOC row
+      border:    "$border$"      # hard lines: rules, heading underline, table separators
+      faint:     "$fg_faint$"    # soft lines: code frame/gutter, table borders, inactive TOC index
+      # text ladder (fg0 = body, fg1 = emphasis — holds in both polarities)
+      fg:        "$fg0$"         # body text
+      fg_strong: "$fg1$"         # bold text, active TOC entry, marked text
+      muted:     "$fg_muted$"    # de-emphasized: inactive TOC entries
+      dim:       "$grey1$"       # chrome text: separators, shortcuts, code labels, blockquote bar
+      # accents (tokyonight idiom: blue brand, magenta secondary — the contract's purple IS tokyonight's magenta)
+      accent:    "$blue$"        # brand: status badge, search, H1, table headers, scrollbar
+      accent2:   "$purple$"      # TOC marker, inline code, H5+, mermaid keywords
+      success:   "$green$"       # watch/reload badges, tips, checked tasks, H2
+      info:      "$aqua$"        # links, notes, H3 (teal keeps H3 distinct from the blue H1)
+      special:   "$purple$"      # LaTeX, H4, important alerts
+      warning:   "$yellow$"      # warning status + alerts
+      danger:    "$red$"         # errors, caution alerts
 
   ghostty:
     name: "TokyoNight Day"
 
+  kitty:
+
   zsh:
     colors:
-      red: 197
-      cyan: 31
-      blue: 68
-      green: 65
-      yellow: 94
-      magenta: 98
-      comment: "$comment$"
+      # truecolor from the tokyonight palette (PROMPT-1). Roles, not literal names:
+      # a quieter map — muted-grey git structure, hot-magenta branch (matches tmux).
+      red:     "$red$"      # error: failed ❯, RPS1 ✘
+      cyan:    "$aqua$"     # path: cwd
+      blue:    "$grey1$"    # muted structure: git:( ) punctuation, venv name, jobs ⚙
+      green:   "$green$"    # ok: prompt ❯ (success) + transient glyph
+      yellow:  "$yellow$"   # accents: dirty ✗, venv ‹ ›, vi ❮, command timer
+      magenta: "$pink$"     # branch (hot magenta #d20065 — echoes the tmux accent; 4.13:1, kept as the theme's identity)
+      comment: "$fg_faint$" # syntax-highlight comments (dark3, 2.42:1 — the floor is 2.21)
 
   colorls:
     unrecognized_file: "$blue$"
-    recognized_file: "$cyan$"
+    recognized_file: "$aqua$"
     executable_file: "$green$"
     dir: "$orange$"
     dead_link: "$red$"
-    link: "$cyan$"
+    link: "$aqua$"
     device: "$green$"
     write: "$blue$"
     read: "$purple$"
-    exec: "$magenta2$"
-    no_access: "$dark3$"
+    exec: "$pink$"
+    no_access: "$fg_dim$"
     day_old: "$purple$"
-    hour_old: "$orange$"
-    no_modifier: "$comment$"
+    hour_old: "$peach$"
+    no_modifier: "$fg_faint$"
     file_large: "$orange$"
     file_medium: "$yellow$"
-    file_small: "$fg_dark$"
-    report: "$fg$"
+    file_small: "$fg_muted$"
+    report: "$fg_primary$"
     user: "$blue$"
-    tree: "$comment$"
+    tree: "$fg_faint$"
     empty: "$yellow$"
     error: "$red$"
-    normal: "$fg_dark$"
+    normal: "$fg_secondary$"
     inode: "$blue$"
     addition: "$green$"
     modification: "$yellow$"
     deletion: "$red$"
     untracked: "$orange$"
-    unchanged: "$cyan$"
+    unchanged: "$aqua$"
 
   nvim:
     colorscheme: "tokyonight"
+    scheme: "tokyonight"          # = colorscheme (the template's default), spelled out so the block has gruvbox's shape
     theme: "day"
     vanilla: false
     winblend: 0

@@ -1,35 +1,72 @@
-bg: "#24283b"
-bg_dark: "#1f2335"
-bg_dark1: "#1b1e2d"
-bg_highlight: "#292e42"
-blue: "#7aa2f7"
+# tokyonight storm. Upstream hexes verbatim (folke/tokyonight.nvim colors/storm.lua);
+# the gruvbox-contract tokens below alias them (the one colliding name, purple, keeps
+# its hex as purple1), so each colour is written once, and
+# every synthesised value says how it was made and which floor it was made for
+# (roles and reasons in docs/tokyonight.md). Neovim runs the native tokyonight.nvim
+# engine and never reads this file, so the upstream names only feed the terminal.
+# --- upstream palette (the names that are not contract tokens) ---
+bg: &bg "#24283b"                        # == the ghostty "TokyoNight Storm" background
+bg_dark: &bg_dark "#1f2335"
+bg_dark1: &bg_dark1 "#1b1e2d"
+bg_highlight: &bg_highlight "#292e42"
 blue0: "#3d59a1"
-blue1: "#2ac3de"
+blue1: &blue1 "#2ac3de"
 blue2: "#0db9d7"
 blue5: "#89ddff"
 blue6: "#b4f9f8"
 blue7: "#394b70"
-comment: "#565f89"
+comment: "#565f89"                       # tokyonight's comment grey: 2.35:1 on bg, too dark for any contract role (see fg_faint)
 cyan: "#7dcfff"
-dark3: "#545c7e"
-dark5: "#737aa2"
-fg: "#c0caf5"
-fg_dark: "#a9b1d6"
-fg_gutter: "#3b4261"
-green: "#9ece6a"
+dark3: &dark3 "#545c7e"
+dark5: &dark5 "#737aa2"
+fg: &fg "#c0caf5"
+fg_dark: &fg_dark "#a9b1d6"
+fg_gutter: &fg_gutter "#3b4261"
 green1: "#73daca"
 green2: "#41a6b5"
-magenta: "#bb9af7"
-magenta2: "#ff007c"
-orange: "#ff9e64"
-purple: "#9d7cd8"
-red: "#f7768e"
-red1: "#db4b4b"
+magenta: &magenta "#bb9af7"
+magenta2: &magenta2 "#ff007c"
+purple1: "#9d7cd8"                       # upstream purple, kept: 4.38:1 on bg and 3.46:1 on the chip (floors 4.5 / 4.23) — the contract purple is magenta, see below
+red1: "#db4b4b"                          # print red: 3.55:1 on bg, under fzf's pointer floor (3.78)
 teal: "#1abc9c"
-terminal_black: "#414868"
-yellow: "#e0af68"
+terminal_black: &terminal_black "#414868"
 neon_blue: "#18ffde"
 git:
   add: "#449dab"
   change: "#6183bb"
   delete: "#914c54"
+
+# --- gruvbox contract ---
+# accents (every upstream accent already clears its dark floor; only purple needed a decision)
+red: &red "#f7768e"                      # upstream: errors/danger (5.51:1)
+orange: &orange "#ff9e64"                # upstream: the warm secondary — folders, tmux menu text, fzf match, interdimux accent (7.16:1)
+yellow: "#e0af68"                        # upstream: tmux prefix/zoom, fzf marker, zsh accents, colorls sizes (7.28:1)
+green: "#9ece6a"                         # upstream: strings/success, the zsh ❯ (7.97:1)
+aqua: *blue1                             # blue1 (6.91:1): cwd, prompt_dir, colorls links, leaf H3/links — teal (#1abc9c) is greener and only 6.05:1
+blue: "#7aa2f7"                          # upstream: info, fzf info, interdimux ssh, the leaf brand (5.78:1)
+purple: *magenta                         # magenta = tokyonight's keyword colour (catppuccin's mauve role), 6.30:1; upstream purple #9d7cd8 (kept as purple1) is 4.38:1 on bg and 3.46:1 on the chip
+pink: *magenta2                          # THE UI accent: today's tools.tmux.colors.pink, kept as the theme's identity at 3.84:1 on bg (floor 4.5) — see docs/tokyonight.md
+peach: *orange                           # colorls hour_old (today's value): tokyonight's only other warm is the salmon red
+terracotta: *red                         # brand warm: fzf's pointer today (5.51:1); red1 is under the 3.78 floor
+maroon: *red                             # soft rose for nvim parameters: red IS tokyonight's salmon (unused by the native engine)
+# text ladder (fg = bright white, fg_dark = white: the terminal idiom leaf already used)
+fg_primary: *fg                          # fg (9.02:1): fzf fg/query, interdimux query, colorls report
+fg_secondary: *fg_dark                   # fg_dark (6.90:1): leaf body, colorls normal, fzf label
+fg_muted: &fg_muted "#8e96bc"            # synthesised: mix(dark5, fg_dark, 50), 5.02:1 on bg / 5.36:1 on bg_deep — dark5 is 3.49:1 (floor 4.5)
+fg_dim: *dark5                           # dark5 (3.49:1): tmux status text + pane borders, fzf header, interdimux header, colorls no_access
+fg_faint: *dark3                         # dark3 (2.23:1): tree glyphs, soft lines, zsh comments (floor 2.59 — see docs); leaf's body text reads 3.10:1 over it as the search highlight
+# surfaces (dark: bg_abyss < bg_deep < bg_primary < panel_inset < panel < panel_raised < border)
+border: *terminal_black                  # terminal_black (1.63:1 on bg): hard lines — fzf separator, interdimux border, leaf rules
+panel_raised: *fg_gutter                 # fg_gutter (1.48:1): the raised step (nvim surface2 role; unused by the native engine)
+panel: "#323852"                         # synthesised: mix(bg_highlight, fg_gutter, 50), 1.26:1 on bg — the chip surface tokyonight lacks (fg_gutter as the chip drops inline code to 4.25:1)
+panel_inset: *bg_highlight               # bg_highlight (1.08:1 on bg): the selection surface — tmux menus/mode/message, interdimux current row
+bg_primary: *bg                          # == the ghostty "TokyoNight Storm" background
+bg_deep: *bg_dark                        # bg_dark (1.07:1 below bg): chrome — leaf TOC + status bar
+bg_abyss: *bg_dark1                      # bg_dark1 (1.06:1 below bg_deep): deepest
+# greys (tokyonight's blue-grey line: the three quiet neutrals the config draws with, dark -> light)
+grey0: *dark3                            # = fg_faint
+grey1: "#8088af"                         # synthesised: mix(dark5, fg_dark, 25), 4.20:1 — leaf dim, zsh git punctuation (floor 4.02; dark5 is 3.49:1)
+grey2: *fg_muted                         # = fg_muted
+# leaf ladder aliases (fg1 = emphasis must out-contrast fg0 = body)
+fg0: *fg_dark                            # = fg_secondary
+fg1: *fg                                 # = fg_primary

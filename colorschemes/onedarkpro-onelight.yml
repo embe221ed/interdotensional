@@ -1,0 +1,50 @@
+# One Light (light), the pair of onedarkpro-onedark. Identity: onedarkpro.nvim's
+# `onelight` palette (its neutrals below, verbatim) with One Half Light — ghostty's
+# "One Half Light", background #fafafa == onelight bg — for the terminal side.
+# Every onelight / One Half Light accent except One Half Light's magenta is too pale
+# to carry text on #fafafa at the gruvbox-light floors, so each contract accent is
+# the One Half Light hue (onelight's for orange, which One Half Light lacks) stepped
+# down with the repo's own darken() to the first value that clears every consumer;
+# every line names the step. Surfaces are bg darkened by onedarkpro's own
+# generated-shade amounts (cursorline 2.5, float 4.5, selection 6.5, gutter 9.7,
+# line-number 18). Ratios are on bg #fafafa unless stated.
+bg:        &bg        "#fafafa"  # == ghostty "One Half Light" background
+fg:        &fg        "#6a6a6a"  # onelight's body fg, 5.18:1 — too light to lead a ladder, kept as fg_muted
+white:     *bg
+black:     *fg
+gray:      &gray      "#bebebe"  # onelight gray, 1.78:1 (vocabulary: too pale even for tree lines at the 2.21 floor)
+highlight: "#e2be7d"             # onelight search highlight (unused by the theme config)
+comment:   &comment   "#9b9fa6"  # onelight's comment grey, 2.55:1
+# accents: One Half Light's ANSI hue darkened to the first step that clears its floors
+red:        &red    "#da3020"  # darken(One Half Light red #e45649, 10): 4.55:1 (floor 4.5: fzf pointer via terracotta)
+orange:     &orange "#bd6b0f"  # darken(onelight orange #ee9025, 14): 3.82:1 (floor 3.76: fzf hl/prompt, interdimux accent, colorls dir)
+yellow:     &yellow "#b27a01"  # darken(One Half Light yellow #c18401, 3): 3.54:1 (floor 3.49: tmux prefix flag, zsh accents, fzf marker)
+green:      &green  "#428642"  # darken(One Half Light green #50a14f, 8): 4.26:1 (floor 4.24: zsh prompt, interdimux editor, colorls exec)
+aqua:       &aqua   "#087e96"  # darken(One Half Light cyan #0997b3, 6): 4.54:1 (floor 4.36: zsh cwd, colorls links)
+blue:       &blue   "#0179ad"  # darken(One Half Light blue #0184bc, 3): 4.64:1 (floor 4.5: fzf info, interdimux ssh, leaf H3)
+purple:     &purple "#a626a4"  # One Half Light magenta as it is: 5.86:1 (onelight's #9a77cf reads 3.40:1)
+pink:       *purple            # THE UI accent: the light counterpart of onedark's purple
+peach:      &peach  "#c34b17"  # darken(mix(orange, red, 50), 2): 4.64:1 (floor 4.5: colorls hour_old; the raw mix is 4.31:1)
+terracotta: *red               # brand warm: fzf pointer, nvim flamingo (as in the dark pair)
+maroon:     *red               # nvim parameters: red, as in the dark pair (One Dark paints @variable.parameter red)
+# text ladder (light: fg_secondary is the darker, emphasis step)
+fg_primary:   &fg_primary "#383a42"  # One Half Light foreground (= Atom One Light's editor fg), 10.86:1
+fg_secondary: &fg_strong  "#2c2e34"  # synthesised: darken(fg_primary, 5), 13.0:1 — One Light has no neutral below its fg
+fg_muted:     *fg                    # onelight fg, 5.18:1 (4.92:1 on bg_deep): leaf inactive TOC, colorls file_small
+fg_dim:       "#7f848e"              # One Dark's comment grey, 3.60:1 (3.09:1 on the selection) — the same hex the dark pair uses, like gruvbox
+fg_faint:     *comment               # onelight comment, 2.55:1 (body text reads 4.27:1 on the search highlight)
+# surfaces (light ordering: bg_primary lightest; chrome and raised sides step down)
+border:       "#cccccc"  # darken(bg, 18): onedarkpro's line_number shade, 1.54:1 — hard lines; nvim overlay0 (NonText, fold column, `vim.g.colors.comment` UI roles — comments are overlay2 = fg_dim)
+panel_raised: "#d9d9d9"  # darken(bg, 13): synthesised step between the gutter and line-number shades, 1.35:1
+panel:        "#e1e1e1"  # darken(bg, 9.7): onedarkpro's fg_gutter shade, 1.25:1 — fzf selected row, leaf chips
+panel_inset:  "#e9e9e9"  # darken(bg, 6.5): onedarkpro's selection shade, 1.16:1 — tmux menus, interdimux current row
+bg_primary:   *bg
+bg_deep:      "#f4f4f4"  # darken(bg, 2.5): onedarkpro's cursorline/statusline shade, 1.05:1 (the contract minimum) — leaf chrome, nvim mantle. The next onedarkpro shade (#efefef, 1.10) would drop leaf dim-on-chrome to 2.98 (floor 2.99) and the status warning to 3.22 (floor 3.23) and cost every web role one more darken point
+bg_abyss:     "#efefef"  # darken(bg, 4.5): onedarkpro's float_bg shade, 1.10:1 (1.045:1 on bg_deep, within the contract's "~1.05"; nvim crust is its only consumer) — nvim crust
+# greys (the same triple as onedarkpro-onedark, like gruvbox's)
+grey0:        "#5c6370"  # One Dark's gray
+grey1:        "#868b94"  # synthesised: mix(One Dark comment #7f848e, onelight comment, 25), 3.28:1 (floor 3.24: zsh git punctuation)
+grey2:        *comment   # onelight's comment grey
+# leaf ladder aliases (fg1 = emphasis must out-contrast fg0 = body)
+fg0:          *fg_primary
+fg1:          *fg_strong

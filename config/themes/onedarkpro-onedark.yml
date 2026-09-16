@@ -1,133 +1,188 @@
 name: "onedarkpro-onedark"
 polarity: "dark"
+pair: "onedarkpro-onelight"
 
+# Contrast note. Two upstream One Dark hexes are kept although they miss a gruvbox
+# floor: red #e06c75 is 4.38:1 on bg #282c34 (0.1 short of AA), and purple #c678dd,
+# the UI accent, is 4.75:1 on bg but no chip lighter than the cursorline can carry
+# it at 4.5. The third exception is fg_faint #575e6a (One Dark's gray darkened two
+# points so leaf body text reads 3.0:1 on the search highlight): 2.14:1 as the
+# zsh comment/tree grey (gruvbox's is 2.59). Every consumer line below that misses
+# its floor because of one of them says so inline; the reasoning lives in
+# docs/onedarkpro.md.
 tools:
 
   tmux:
-    clock: 170
+    clock: 173                     # nearest xterm-256 index to $orange$ (#d19a66 — the warm accent, as gruvbox's 180 sits on its yellow)
     colors:
-      dim: "$comment$"
-      pink: "$purple$"
+      dim: "$fg_dim$"
+      pink: "$pink$"               # One Dark purple: copy-mode current match (cursorline text on it) 4.42:1, floor 4.5
       yellow: "$yellow$"
       selected:
-        fg: "$purple$"
-        bg: "$cursorline$"
+        fg: "$orange$"
+        bg: "$panel_inset$"
 
   fzf:
-    fg: "$fg$"
+    fg: "$fg_primary$"
     bg: "-1"
     hl: "$orange$"
-    selected_bg: "$selection$"
+    selected_bg: "$panel$"
     info: "$blue$"
-    border: "$purple$"
-    prompt: "$green$"
-    pointer: "$red$"
+    border: "$pink$"
+    prompt: "$orange$"
+    pointer: "$terracotta$"
     marker: "$yellow$"
     spinner: "$purple$"
-    header: "$comment$"
-    separator: "$gray$"
-    label: "$fg$"
+    header: "$fg_dim$"
+    separator: "$border$"
+    label: "$fg_secondary$"
+
+  interdimux:
+    accent:        "$orange$"
+    path:          "$yellow$"
+    git:           "$purple$"
+    ssh:           "$blue$"
+    editor:        "$green$"
+    success:       "$green$"
+    danger:        "$red$"         # One Dark red: 4.38:1 (floor 4.5)
+    tree:          "$fg_faint$"
+    separator:     "$border$"
+    query:         "$fg_primary$"
+    match_current: "$orange$"
+    current_bg:    "$panel_inset$"
+    header:        "$fg_dim$"
+    border:        "$border$"
+    menu_sel_fg:   "$bg_primary$"
 
   ipython:
     pygments_style: "one-dark"
+
+  web:
+    prompt_dir: "$aqua$"          # zsh `%c`; no text_darken — a dark theme has no map (danger = One Dark red reads 4.38:1 on bg, 4.82:1 on bg_deep; everything else clears AA)
 
   leaf:
     base: "ocean"                # built-in preset backing any key the theme doesn't set
     syntax: "base16-ocean.dark"  # syntect theme for fenced code blocks
     colors:
-      # surfaces (onedarkpro has no deeper-than-bg token; cursorline is the nearest chrome shade)
-      bg:        "$bg$"          # content background
-      bg_deep:   "$cursorline$"  # chrome: TOC + status bar background
-      panel:     "$selection$"   # chips: filename/search badges, inline code, active TOC row
-      border:    "$selection$"   # hard lines: rules, heading underline, table separators (quieter than the $gray$ soft lines, like the gruvbox reference)
-      faint:     "$gray$"        # soft lines: code frame/gutter, table borders, inactive TOC index ($selection$ vanishes against the cursorline chrome)
-      # text ladder (fg is the palette's brightest neutral — white is the same hex — so bold reuses it)
-      fg:        "$fg$"          # body text
-      fg_strong: "$fg$"          # bold text, active TOC entry, marked text
-      muted:     "$comment$"     # de-emphasized: inactive TOC entries
-      dim:       "$comment$"     # chrome text: separators, shortcuts, code labels, blockquote bar (onedark's comment grey; $gray$ reads at 2.1:1)
-      # accents (orange brand echoes fzf's match highlight; purple = this config's signature accent)
+      # surfaces
+      bg:        "$bg_primary$"  # content background
+      bg_deep:   "$bg_deep$"     # chrome: TOC + status bar background (Atom's sidebar grey)
+      panel:     "$panel$"       # chips: filename/search badges, inline code, active TOC row
+      border:    "$border$"      # hard lines: rules, heading underline, table separators
+      faint:     "$fg_faint$"    # soft lines: code frame/gutter, table borders, inactive TOC index (gray darkened 2 points: body text reads 3.06:1 on the search highlight, floor 3.0)
+      # text ladder (fg0 = body, fg1 = emphasis — holds in both polarities)
+      fg:        "$fg0$"         # body text
+      fg_strong: "$fg1$"         # bold text, active TOC entry, marked text
+      muted:     "$fg_muted$"    # de-emphasized: inactive TOC entries
+      dim:       "$grey1$"       # chrome text: separators, shortcuts, code labels, blockquote bar
+      # accents (keeps the leaf onedark identity: orange brand, purple secondary)
       accent:    "$orange$"      # brand: status badge, search, H1, table headers, scrollbar
-      accent2:   "$purple$"      # TOC marker, inline code, H5+, mermaid keywords
+      accent2:   "$purple$"      # TOC marker, inline code, H5+, mermaid keywords (inline code on the chip: 3.83:1, floor 4.5 — 4.75:1 on bg, and no chip lighter than the cursorline carries it at 4.5)
       success:   "$green$"       # watch/reload badges, tips, checked tasks, H2
       info:      "$blue$"        # links, notes, H3
-      special:   "$purple$"      # LaTeX, H4, important alerts
+      special:   "$purple$"      # LaTeX, H4, important alerts (inline LaTeX on the chip: 3.83:1, floor 4.23)
       warning:   "$yellow$"      # warning status + alerts
-      danger:    "$red$"         # errors, caution alerts
+      danger:    "$red$"         # errors, caution alerts (One Dark red: 4.38:1 on bg, 3.91:1 on the tinted error badge; floors 4.5 / 4.26)
 
   ghostty:
-    name: "Atom One Dark"
+    name: "One Half Dark"
 
   kitty:
 
   zsh:
     colors:
-      red: 204
-      cyan: 38
-      blue: 39
-      green: 114
-      yellow: 180
-      magenta: 170
-      comment: "$comment$"
+      # truecolor from the One Dark palette (PROMPT-1). Roles, not literal names:
+      # a quieter map — muted-grey git structure, purple branch (matches tmux).
+      red:     "$red$"      # error: failed ❯, RPS1 ✘ (One Dark red: 4.38:1, floor 4.5)
+      cyan:    "$aqua$"     # path: cwd
+      blue:    "$grey1$"    # muted structure: git:( ) punctuation, venv name, jobs ⚙
+      green:   "$green$"    # ok: prompt ❯ (success) + transient glyph
+      yellow:  "$yellow$"   # accents: dirty ✗, venv ‹ ›, vi ❮, command timer
+      magenta: "$pink$"     # branch (One Dark purple #c678dd — echoes the tmux accent)
+      comment: "$fg_faint$" # syntax-highlight comments (gray darkened 2 points, #575e6a: 2.14:1, floor 2.59)
 
   colorls:
     unrecognized_file: "$blue$"
-    recognized_file: "$cyan$"
+    recognized_file: "$aqua$"
     executable_file: "$green$"
     dir: "$orange$"
-    dead_link: "$red$"
-    link: "$cyan$"
+    dead_link: "$red$"             # One Dark red: 4.38:1 (floor 4.5)
+    link: "$aqua$"
     device: "$green$"
     write: "$blue$"
     read: "$purple$"
-    exec: "$red$"
-    no_access: "$comment$"
+    exec: "$pink$"
+    no_access: "$fg_dim$"
     day_old: "$purple$"
-    hour_old: "$orange$"
-    no_modifier: "$gray$"
+    hour_old: "$peach$"
+    no_modifier: "$fg_faint$"      # gray darkened 2 points, #575e6a: 2.14:1 (floor 2.59)
     file_large: "$orange$"
     file_medium: "$yellow$"
-    file_small: "$comment$"
-    report: "$fg$"
+    file_small: "$fg_muted$"
+    report: "$fg_primary$"
     user: "$blue$"
-    tree: "$gray$"
+    tree: "$fg_faint$"             # gray darkened 2 points, #575e6a: 2.14:1 (floor 2.59)
     empty: "$yellow$"
-    error: "$red$"
-    normal: "$white$"
+    error: "$red$"                 # One Dark red: 4.38:1 (floor 4.5)
+    normal: "$fg_secondary$"
     inode: "$blue$"
     addition: "$green$"
     modification: "$yellow$"
-    deletion: "$red$"
+    deletion: "$red$"              # One Dark red: 4.38:1 (floor 4.5)
     untracked: "$orange$"
-    unchanged: "$cyan$"
+    unchanged: "$aqua$"
 
   nvim:
-    colorscheme: "onedark"
-    scheme: "onedark"
-    theme: "onedark"
-    vanilla: true
+    colorscheme: "catppuccin"
+    scheme: "gruvbox-material"
+    theme: "mocha"
+    vanilla: false
     winblend: 0
     plugin: |
-      {
-        "olimorris/onedarkpro.nvim",
-        priority = 1000, -- Ensure it loads first
-      }
+      { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+    catppuccin_overrides:
+      rosewater: "$pink$"
+      flamingo: "$terracotta$"
+      pink: "$pink$"
+      mauve: "$purple$"
+      red: "$red$"
+      maroon: "$maroon$"
+      peach: "$orange$"
+      yellow: "$yellow$"
+      green: "$green$"
+      teal: "$aqua$"
+      sky: "$blue$"
+      sapphire: "$aqua$"
+      blue: "$blue$"
+      lavender: "$fg_secondary$"
+      text: "$fg_primary$"
+      subtext1: "$fg_secondary$"
+      subtext0: "$grey1$"
+      overlay2: "$fg_dim$"
+      overlay1: "$fg_faint$"
+      overlay0: "$border$"
+      surface2: "$panel_raised$"
+      surface1: "$panel$"
+      surface0: "$panel_inset$"
+      base: "$bg_primary$"
+      mantle: "$bg_deep$"
+      crust: "$bg_abyss$"
     fields:
-      bg: "bg"
-      fg: "fg"
-      alt_bg: "bg_statusline"
-      alt_fg: "gray"
-      comment: "comment"
+      bg: "base"
+      fg: "text"
+      alt_bg: "mantle"
+      alt_fg: "surface2"
+      comment: "overlay0"
       yellow: "yellow"
       green: "green"
-      orange: "orange"
+      orange: "peach"
       blue: "blue"
       red: "red"
-      mauve: "purple"
-      pink: "purple"
-      teal: "cyan"
-      sky: "blue"
-      accent: "purple"
-      dark_bg: "float_bg"
-      light_bg: "selection"
+      mauve: "mauve"
+      pink: "pink"
+      teal: "teal"
+      sky: "sky"
+      accent: "pink"
+      dark_bg: "crust"
+      light_bg: "surface0"
       none: "NONE"

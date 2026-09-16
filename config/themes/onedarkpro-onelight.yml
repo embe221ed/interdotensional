@@ -1,0 +1,208 @@
+name: "onedarkpro-onelight"
+polarity: "light"
+pair: "onedarkpro-onedark"
+
+# Contrast note. Every pair the templates draw clears its gruvbox-light floor:
+# the accents are One Half Light's hues darkened to the first readable step (see
+# colorschemes/onedarkpro-onelight.yml), so this file carries no exception. The
+# reasoning lives in docs/onedarkpro.md.
+tools:
+
+  tmux:
+    clock: 130                     # nearest xterm-256 index to $orange$ (#bd6b0f — the warm accent)
+    colors:
+      dim: "$fg_dim$"
+      pink: "$pink$"
+      yellow: "$yellow$"
+      selected:
+        fg: "$orange$"
+        bg: "$panel_inset$"
+
+  fzf:
+    fg: "$fg_primary$"
+    bg: "-1"
+    hl: "$orange$"
+    selected_bg: "$panel$"
+    info: "$blue$"
+    border: "$pink$"
+    prompt: "$orange$"
+    pointer: "$terracotta$"
+    marker: "$yellow$"
+    spinner: "$purple$"
+    header: "$fg_dim$"
+    separator: "$border$"
+    label: "$fg_secondary$"
+
+  interdimux:
+    accent:        "$orange$"
+    path:          "$yellow$"
+    git:           "$purple$"
+    ssh:           "$blue$"
+    editor:        "$green$"
+    success:       "$green$"
+    danger:        "$red$"
+    tree:          "$fg_faint$"
+    separator:     "$border$"
+    query:         "$fg_primary$"
+    match_current: "$orange$"
+    current_bg:    "$panel_inset$"
+    header:        "$fg_dim$"
+    border:        "$border$"
+    menu_sel_fg:   "$bg_primary$"
+
+  ipython:
+    pygments_style: "paraiso-light"
+
+  web:
+    prompt_dir: "$aqua$"          # zsh `%c` (the same $aqua$ as tools.zsh.colors.cyan); text_darken below keeps every web role at 4.5:1 on bg and bg_deep
+    # The web is stricter than the terminal: WCAG AA wants 4.5:1 for body text,
+    # and leaf's gentler text_darken only gets accent to 4.35:1 on the chrome. These
+    # are the minimum darken() points (HLS lightness) that clear 4.5:1 on BOTH the
+    # page background (bg, #fafafa) and the code-block background (bg_deep, #f4f4f4);
+    # 0 marks a role that already clears it raw (purple #a626a4 is 5.86:1 / 5.56:1).
+    # The dark counterpart has no map (a dark theme never darkens).
+    text_darken:
+      accent: 5
+      accent2: 0
+      success: 3
+      info: 1
+      special: 0
+      warning: 6
+      danger: 2
+      # pane_active doubles as pane-title text, so it needs 4.5:1 rather than
+      # the 3:1 a border line would settle for.
+      pane_active: 0
+      prompt_dir: 1                # aqua as bold cwd text: 4.54 -> 4.79 on bg, 4.30 -> 4.54 on bg_deep
+      select_fg: 7                 # orange on panel_inset: 3.28 -> 4.53
+
+  leaf:
+    base: "ocean"                 # built-in preset backing any key the theme doesn't set
+    syntax: "base16-ocean.light"  # syntect theme for fenced code blocks
+    # Barely-visible extra depth so the orange brand clears the panel chips
+    # (search chip 3.05:1 -> 3.66:1, H1 3.82:1 -> 4.58:1). Purple needs none.
+    text_darken:
+      accent: 4   # orange -> #aa600d for text roles
+      accent2: 0  # purple already reads 4.68:1 on the chip
+    colors:
+      # surfaces
+      bg:        "$bg_primary$"  # content background
+      bg_deep:   "$bg_deep$"     # chrome: TOC + status bar background (onedarkpro's cursorline shade)
+      panel:     "$panel$"       # chips: filename/search badges, inline code, active TOC row
+      border:    "$border$"      # hard lines: rules, heading underline, table separators
+      faint:     "$fg_faint$"    # soft lines: code frame/gutter, table borders, inactive TOC index (onelight's comment grey)
+      # text ladder (fg0 = body, fg1 = emphasis — holds in both polarities)
+      fg:        "$fg0$"         # body text
+      fg_strong: "$fg1$"         # bold text, active TOC entry, marked text
+      muted:     "$fg_muted$"    # de-emphasized: inactive TOC entries
+      dim:       "$grey1$"       # chrome text: separators, shortcuts, code labels, blockquote bar
+      # accents (keeps the leaf onedark identity: orange brand, purple secondary)
+      accent:    "$orange$"      # brand: status badge, search, H1, table headers, scrollbar
+      accent2:   "$purple$"      # TOC marker, inline code, H5+, mermaid keywords
+      success:   "$green$"       # watch/reload badges, tips, checked tasks, H2
+      info:      "$blue$"        # links, notes, H3
+      special:   "$purple$"      # LaTeX, H4, important alerts
+      warning:   "$yellow$"      # warning status + alerts
+      danger:    "$red$"         # errors, caution alerts
+
+  ghostty:
+    name: "One Half Light"
+
+  kitty:
+
+  zsh:
+    colors:
+      # truecolor from the One Dark palette (PROMPT-1). Roles, not literal names:
+      # a quieter map — muted-grey git structure, purple branch (matches tmux).
+      red:     "$red$"      # error: failed ❯, RPS1 ✘
+      cyan:    "$aqua$"     # path: cwd
+      blue:    "$grey1$"    # muted structure: git:( ) punctuation, venv name, jobs ⚙
+      green:   "$green$"    # ok: prompt ❯ (success) + transient glyph
+      yellow:  "$yellow$"   # accents: dirty ✗, venv ‹ ›, vi ❮, command timer
+      magenta: "$pink$"     # branch (One Half Light magenta #a626a4 — echoes the tmux accent)
+      comment: "$fg_faint$" # syntax-highlight comments
+
+  colorls:
+    unrecognized_file: "$blue$"
+    recognized_file: "$aqua$"
+    executable_file: "$green$"
+    dir: "$orange$"
+    dead_link: "$red$"
+    link: "$aqua$"
+    device: "$green$"
+    write: "$blue$"
+    read: "$purple$"
+    exec: "$pink$"
+    no_access: "$fg_dim$"
+    day_old: "$purple$"
+    hour_old: "$peach$"
+    no_modifier: "$fg_faint$"
+    file_large: "$orange$"
+    file_medium: "$yellow$"
+    file_small: "$fg_muted$"
+    report: "$fg_primary$"
+    user: "$blue$"
+    tree: "$fg_faint$"
+    empty: "$yellow$"
+    error: "$red$"
+    normal: "$fg_secondary$"
+    inode: "$blue$"
+    addition: "$green$"
+    modification: "$yellow$"
+    deletion: "$red$"
+    untracked: "$orange$"
+    unchanged: "$aqua$"
+
+  nvim:
+    colorscheme: "catppuccin"
+    scheme: "gruvbox-material"
+    theme: "latte"
+    vanilla: false
+    winblend: 0
+    plugin: |
+      { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+    catppuccin_overrides:
+      rosewater: "$pink$"
+      flamingo: "$terracotta$"
+      pink: "$pink$"
+      mauve: "$purple$"
+      red: "$red$"
+      maroon: "$maroon$"
+      peach: "$orange$"
+      yellow: "$yellow$"
+      green: "$green$"
+      teal: "$aqua$"
+      sky: "$blue$"
+      sapphire: "$aqua$"
+      blue: "$blue$"
+      lavender: "$fg_secondary$"
+      text: "$fg_primary$"
+      subtext1: "$fg_secondary$"
+      subtext0: "$grey1$"
+      overlay2: "$fg_dim$"
+      overlay1: "$fg_faint$"
+      overlay0: "$border$"
+      surface2: "$panel_raised$"
+      surface1: "$panel$"
+      surface0: "$panel_inset$"
+      base: "$bg_primary$"
+      mantle: "$bg_deep$"
+      crust: "$bg_abyss$"
+    fields:
+      bg: "base"
+      fg: "text"
+      alt_bg: "mantle"
+      alt_fg: "surface2"
+      comment: "overlay0"
+      yellow: "yellow"
+      green: "green"
+      orange: "peach"
+      blue: "blue"
+      red: "red"
+      mauve: "mauve"
+      pink: "pink"
+      teal: "teal"
+      sky: "sky"
+      accent: "pink"
+      dark_bg: "crust"
+      light_bg: "surface0"
+      none: "NONE"

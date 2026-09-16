@@ -1,16 +1,53 @@
-bg: "#282c34"
-fg: "#abb2bf"
-red: "#e06c75"
-orange: "#d19a66"
-yellow: "#e5c07b"
-green: "#98c379"
-cyan: "#56b6c2"
-blue: "#61afef"
-purple: "#c678dd"
-white: "#abb2bf"
-black: "#282c34"
-gray: "#5c6370"
-highlight: "#e2be7d"
-comment: "#7f848e"
-cursorline: "#2d313b"
-selection: "#414858"
+# One Dark (dark). Upstream hexes unchanged: onedarkpro.nvim's `onedark` palette
+# (the 16 tokens below, every value byte-identical to before), plus two One Dark
+# UI greys and the One Half Dark terminal foreground that the contract needs.
+# The contract tokens anchor to them; every synthesised step says how it was
+# made with the repo's own darken()/mix() filters, so each is reproducible.
+# Ratios are on bg #282c34 unless stated.
+bg:         &bg         "#282c34"  # editor + terminal background (== ghostty "One Half Dark")
+fg:         &fg         "#abb2bf"  # body text, 6.57:1
+red:        &red        "#e06c75"  # 4.38:1 — 0.1 short of AA, kept: it is the palette's red (see docs/onedarkpro.md)
+orange:     &orange     "#d19a66"  # 5.68:1
+yellow:     &yellow     "#e5c07b"  # 8.10:1
+green:      &green      "#98c379"  # 6.94:1
+cyan:       &cyan       "#56b6c2"  # 5.91:1
+blue:       &blue       "#61afef"  # 5.92:1
+purple:     &purple     "#c678dd"  # 4.75:1 — THE UI accent (today's tools.tmux.colors.pink)
+white:      *fg                    # One Dark's white is its fg
+black:      *bg
+gray:       &gray       "#5c6370"  # Atom One Dark's comment/gutter grey, 2.32:1 (grey0; fg_faint sits two darken steps below it, see there)
+highlight:  "#e2be7d"              # search highlight (unused by the theme config)
+comment:    &comment    "#7f848e"  # onedarkpro's comment grey, 3.73:1
+cursorline: &cursorline "#2d313b"  # 1.08:1 — the contract prose asks >= 1.1 for panel_inset; waived: it is the pinned One Dark cursorline and today's tmux selection surface (see docs)
+selection:  &selection  "#414858"  # 1.53:1
+# One Dark UI greys and the One Half Dark foreground (new tokens, all upstream values)
+sidebar:    &sidebar    "#21252b"  # Atom One Dark's sidebar/tab-bar grey (== ghostty "Atom One Dark" background), 1.10:1
+gutter:     &gutter     "#4b5263"  # Atom One Dark's gutter (line-number) grey, 1.79:1
+fg_bright:  &fg_bright  "#dcdfe4"  # One Half Dark's terminal foreground / ANSI white, 10.48:1
+# accents (contract order; the One Dark names above already fill red..purple)
+aqua:       *cyan                  # cwd, colorls links, nvim teal/sapphire
+pink:       *purple                # THE UI accent: today's tools.tmux.colors.pink
+peach:      &peach      "#d8836e"  # synthesised: mix(orange, red, 50) — the mid warm between One Dark's two warms, 4.93:1
+terracotta: *red                   # brand warm: today's fzf pointer; nvim flamingo
+maroon:     *red                   # nvim parameters: One Dark paints @variable.parameter red, so this aliases red instead of the contract's soft rose (nvim is its only consumer)
+# text ladder (One Dark has fg and white only — the same hex — so three steps are synthesised)
+fg_primary:   *fg                  # 6.57:1: fzf fg, interdimux query, colorls report, nvim text
+fg_secondary: "#9fa7b6"            # synthesised: darken(fg, 4), 5.78:1 — fzf label, colorls normal, nvim subtext1/lavender
+fg_muted:     "#959ba6"            # synthesised: mix(fg, comment, 50), 5.01:1 (5.51:1 on bg_deep) — leaf inactive TOC, colorls file_small
+fg_dim:       *comment             # 3.73:1: tmux status text (today's dim), fzf/interdimux headers, nvim overlay2
+fg_faint:     "#575e6a"            # synthesised: darken(gray, 2) — body text reads 3.06:1 on the search highlight (floor 3.0); 2.14:1 on bg for zsh comments/tree lines (floor 2.59, an accepted exception — gray itself, 2.32:1, put body text at 2.84)
+# surfaces (dark ordering: bg_abyss < bg_deep < bg_primary < panel_inset < panel < panel_raised < border)
+border:       *gutter              # hard lines; nvim overlay0 (NonText, fold column, `vim.g.colors.comment` UI roles — comments are overlay2 = fg_dim), 1.79:1
+panel_raised: *selection           # nvim surface2, 1.53:1
+panel:        "#353b45"            # synthesised: the step between cursorline and selection, 1.24:1 — fzf selected row, leaf chips
+panel_inset:  *cursorline          # the selection surface: tmux menus/mode/message, interdimux current row
+bg_primary:   *bg
+bg_deep:      *sidebar             # chrome: leaf TOC/status bar, nvim mantle
+bg_abyss:     "#1a1e22"            # synthesised: darken(bg_deep, 3), 1.09:1 on bg_deep — nvim crust
+# greys (the same triple as onedarkpro-onelight, like gruvbox's)
+grey0:        *gray                # One Dark's gray
+grey1:        "#868b94"            # synthesised: mix(comment, onelight comment #9b9fa6, 25) — 4.09:1 here, 3.28:1 on #fafafa; leaf dim, zsh blue, nvim subtext0
+grey2:        "#9b9fa6"            # onelight's comment grey
+# leaf ladder aliases (fg1 = emphasis must out-contrast fg0 = body)
+fg0:          *fg                  # = fg_primary: leaf body is the same text nvim and the terminal use
+fg1:          *fg_bright           # leaf emphasis: the brighter step above fg (mark text reads 5.03:1 on the orange mark)

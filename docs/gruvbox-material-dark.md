@@ -104,18 +104,9 @@ mantle          →  bg_deep            →  #1d2021
 crust           →  bg_abyss           →  #141413
 ```
 
-## ZSH ANSI 256 colors
+## ZSH colors
 
-Closest ANSI 256 matches for the gruvbox accent colors:
-
-| Color | ANSI index | Target hex | Approx hex |
-|-------|-----------|------------|------------|
-| red | 210 | `#ea6962` | `#ff6666` |
-| cyan (aqua) | 151 | `#89b482` | `#99cc99` |
-| blue | 109 | `#7daea3` | `#669999` |
-| green | 150 | `#a9b665` | `#99cc66` |
-| yellow | 180 | `#d8a657` | `#cc9966` |
-| magenta (purple) | 181 | `#d3869b` | `#cc9999` |
+Since the zsh pipeline (PROMPT-1) the prompt uses truecolor hex roles straight from the palette — `red $red$`, `cyan $aqua$` (cwd), `blue $grey1$` (git punctuation), `green $green$` (prompt ❯), `yellow $yellow$`, `magenta $pink$` (branch), `comment $fg_faint$` — no 256-colour approximations. The same roles are the contract every other theme follows (`docs/theme-contract.md`); `gruvbox-material-light` mirrors this file with the light palette (fg ladder inverted, `tools.leaf.text_darken` / `tools.web.text_darken` maps for the pastel-on-light chips).
 
 ## Files
 
@@ -129,7 +120,10 @@ Closest ANSI 256 matches for the gruvbox accent colors:
 ### Generated
 - `output/nvim/globals.lua` — includes `vim.g.catppuccin_overrides` table
 - `output/nvim/colors.lua` — semantic color mapper
-- `output/colorls/dark_colors.yaml` — file listing colors (hex values)
-- `output/tmux/theme.sh` — powerline colors
-- `output/zsh/theme.zsh-theme` — prompt colors (ANSI 256)
+- `output/colorls/dark_colors.yaml` / `light_colors.yaml` — file listing colors (hex values)
+- `output/tmux/.tmux.conf` — theme, status, copy-mode and interdimux colors
+- `output/zsh/theme.zsh-theme`, `output/zsh/interdot.zsh` — prompt colors (truecolor hex), comment highlight
+- `output/fzf/fzf-colors.sh` — fzf palette
 - `output/leaf/theme.toml` — leaf markdown reader theme (role-driven via `tools.leaf`)
+- `output/web/interdot-theme.css` — both polarities, switched in the browser
+- `output/ghostty/config`, `output/kitty/kitty.conf`, `output/zellij/config.kdl`, `output/ipython/ipython_config.py` — theme names

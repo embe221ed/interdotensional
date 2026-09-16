@@ -41,8 +41,9 @@ Colors respect `NO_COLOR` and `--color=auto|always|never`.
 
 Each theme is defined by two files:
 
-- **Colorscheme** (`colorschemes/{name}.yml`) — the raw palette: flat map of
-  token name → hex value. The single source of truth for colors.
+- **Colorscheme** (`colorschemes/{name}.yml`) — the raw palette: a map of
+  token name → hex value (optionally nested, e.g. catppuccin's `ctp:`). The
+  single source of truth for colors.
 - **Theme config** (`config/themes/{name}.yml`) — per-tool settings that
   reference palette colors via `$token$` substitution (`$red$`,
   `$bg_primary$`, …).
@@ -128,20 +129,38 @@ interdotensional/
 | catppuccin-latte | light | catppuccin-frappe |
 | gruvbox-material-dark | dark | gruvbox-material-light |
 | gruvbox-material-light | light | gruvbox-material-dark |
-| nord | dark | – |
-| onedarkpro-onedark | dark | – |
+| nord | dark | nord-light |
+| nord-light | light | nord |
+| onedarkpro-onedark | dark | onedarkpro-onelight |
+| onedarkpro-onelight | light | onedarkpro-onedark |
 | tokyonight-storm | dark | tokyonight-day |
 | tokyonight-day | light | tokyonight-storm |
+
+Every theme fills the same 28-token palette vocabulary and carries the same
+tool sections as the gruvbox pair, the reference themes — see
+[`docs/theme-contract.md`](docs/theme-contract.md) (enforced by
+`tests/test_contract.py`; its "Outside this repo" section lists what zellij,
+bat, kitty and the nvim config still need by hand). Family walkthroughs with the full token tables,
+the light-theme derivations and the accepted contrast exceptions:
+[`docs/gruvbox-material-dark.md`](docs/gruvbox-material-dark.md),
+[`docs/catppuccin.md`](docs/catppuccin.md), [`docs/nord.md`](docs/nord.md),
+[`docs/onedarkpro.md`](docs/onedarkpro.md),
+[`docs/tokyonight.md`](docs/tokyonight.md).
 
 Fonts: `jetbrains-mono`, `maple-mono`, `monaspace-argon`.
 
 ## Adding a new theme
 
-1. Create `colorschemes/{name}.yml` with your palette
-2. Create `config/themes/{name}.yml` with per-tool settings using `$token$`
-   references (copy a complete theme like `catppuccin-frappe` as a start)
+1. Create `colorschemes/{name}.yml` with your palette: the 28 contract
+   tokens from `docs/theme-contract.md`, plus any upstream names you want to
+   keep (YAML anchors keep one hex per colour)
+2. Create `config/themes/{name}.yml` by copying the gruvbox config of the same
+   polarity and changing only the lines the contract lists as per-theme
+   (`clock`, `pygments_style`, `ghostty.name`, the leaf accents, the
+   `text_darken` maps, the nvim flavour, the `pair:`)
 3. Run `uv run interdot check -t {name}` — it renders the theme against every
-   font and reports every missing token or section at once
+   font and reports every missing token or section at once; `uv run pytest -q`
+   adds the contract checks (tokens, sections, pairing, hex-only terminal colours)
 4. `uv run interdot preview {name}` to eyeball the palette
 5. `uv run interdot switch {name}`
 
@@ -153,6 +172,7 @@ See `docs/gruvbox-material-dark.md` for a detailed walkthrough.
 uv sync                  # installs the package + dev deps (pytest)
 uv run pytest -q         # full suite, ~2s, no network
 uv run interdot check    # the same validation the matrix test enforces
+uv run python scripts/audit.py [theme]   # WCAG ratios for every pair a theme draws, vs the gruvbox floor
 ```
 
 The test suite covers the token/substitution utilities, config loading and

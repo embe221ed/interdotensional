@@ -5,123 +5,198 @@ pair: "catppuccin-frappe"
 tools:
 
   tmux:
-    clock: 13
+    clock: 166                   # nearest xterm-256 index to orange #c64a10 (colour166 = #d75f00)
     colors:
-      dim: "$overlay0$"
+      dim: "$fg_dim$"
       pink: "$pink$"
       yellow: "$yellow$"
       selected:
-        fg: "$pink$"
-        bg: "$surface0$"
-
-  kitty:
+        fg: "$orange$"
+        bg: "$panel_inset$"
 
   fzf:
-    fg: "$text$"
+    fg: "$fg_primary$"
     bg: "-1"
-    hl: "$peach$"
-    selected_bg: "$surface1$"
+    hl: "$orange$"
+    selected_bg: "$panel$"
     info: "$blue$"
     border: "$pink$"
-    prompt: "$green$"
-    pointer: "$red$"
+    prompt: "$orange$"
+    pointer: "$terracotta$"
     marker: "$yellow$"
-    spinner: "$mauve$"
-    header: "$overlay1$"
-    separator: "$overlay0$"
-    label: "$subtext1$"
+    spinner: "$purple$"
+    header: "$fg_dim$"
+    separator: "$border$"
+    label: "$fg_secondary$"
+
+  interdimux:
+    accent:        "$orange$"
+    path:          "$yellow$"
+    git:           "$purple$"
+    ssh:           "$blue$"
+    editor:        "$green$"
+    success:       "$green$"
+    danger:        "$red$"
+    tree:          "$fg_faint$"
+    separator:     "$border$"
+    query:         "$fg_primary$"
+    match_current: "$orange$"
+    current_bg:    "$panel_inset$"
+    header:        "$fg_dim$"
+    border:        "$border$"
+    menu_sel_fg:   "$bg_primary$"
 
   ipython:
-    pygments_style: "friendly"
+    pygments_style: "paraiso-light"  # no catppuccin style is installed; the closest light one in hue (mauve keywords, teal strings, peach numbers)
+
+  web:
+    prompt_dir: "$aqua$"          # zsh `%c`; the ink teal, darkened two more points below for the code-block ground
+    # The web is stricter than the terminal: WCAG AA wants 4.5:1 for body text,
+    # and leaf's gentler text_darken only gets accent to 4.22:1 on bg_deep. These
+    # are the minimum darken() points (HLS lightness) that clear 4.5:1 on BOTH
+    # the page background (bg, #eff1f5) and the code-block background (bg_deep,
+    # #e6e9ef); the text ladder (fg, fg_strong, muted, dim) already clears it and
+    # needs no key. The dark counterpart carries no map (a dark theme never darkens).
+    text_darken:
+      accent: 5                    # ink pink #d421a4: 4.08 -> 4.89 on bg, 4.55 on bg_deep
+      accent2: 2                   # ink teal: 4.57 -> 5.16 on bg, 4.80 on bg_deep
+      success: 3                   # 4.37 -> 5.11 on bg, 4.75 on bg_deep (2 sits at 4.50 on bg_deep)
+      info: 2                      # 4.66 -> 5.00 on bg, 4.65 on bg_deep
+      special: 1                   # mauve sits at 4.45 on bg_deep raw
+      warning: 7                   # amber #b27117: 3.53 -> 4.89 on bg, 4.55 on bg_deep
+      danger: 1                    # crimson sits at 4.46 on bg_deep raw
+      # pane_active doubles as pane-title text, so it needs 4.5:1 rather than
+      # the 3:1 a border line would settle for.
+      pane_active: 5               # the same ink pink as accent: 4.55 on bg_deep
+      prompt_dir: 2                # aqua as bold cwd text: 4.57 -> 5.16 on bg, 4.80 on bg_deep
+      select_fg: 6                 # orange on panel_inset: 3.62 -> 4.63 (5 gives 4.46, under the 4.5 floor)
 
   leaf:
     base: "ocean"                 # built-in preset backing any key the theme doesn't set
     syntax: "base16-ocean.light"  # syntect theme for fenced code blocks (its bg is latte's base)
-    # Latte's pastel accents can't carry text on the light chips (pink on
-    # surface0 is 1.7:1); darken them for text roles, keep raw brand colors
-    # for surfaces (brand badge, search match, scrollbar).
+    # Barely-visible extra depth so the ink pink and teal clear the panel chips
+    # (search chip 2.99:1 -> 3.32:1, inline code 3.35:1 -> 3.53:1); the other
+    # roles are already ink (see the colorscheme) and clear their floors raw.
     text_darken:
-      accent: 22   # pink -> deep magenta-pink #d020a1 (3.1:1 on surface0, 4.2:1 on base)
-      accent2: 12  # teal -> ink teal #0f5f64 (4.8:1 on surface0)
-      warning: 12  # yellow -> amber #a96c16 (3.6:1 on mantle)
-      success: 6   # green -> #368825 (3.2:1 on the watch badge, 4:1 as H2)
+      accent: 3   # pink -> #c71f9a for text roles (4.54:1 on base)
+      accent2: 1  # teal -> #12757a for text roles
     colors:
       # surfaces
-      bg:        "$base$"      # content background
-      bg_deep:   "$mantle$"    # chrome: TOC + status bar background
-      panel:     "$surface0$"  # chips: filename/search badges, inline code, active TOC row
-      border:    "$overlay0$"  # hard lines: rules, heading underline, table separators
-      faint:     "$surface1$"  # soft lines: code frame/gutter, table borders, inactive TOC index
-      # text ladder (latte has no neutral darker than text, so bold reuses it)
-      fg:        "$text$"      # body text
-      fg_strong: "$text$"      # bold text, active TOC entry, marked text
-      muted:     "$subtext0$"  # de-emphasized: inactive TOC entries
-      dim:       "$overlay1$"  # chrome text: separators, shortcuts, code labels, blockquote bar
+      bg:        "$bg_primary$"  # content background
+      bg_deep:   "$bg_deep$"     # chrome: TOC + status bar background
+      panel:     "$panel$"       # chips: filename/search badges, inline code, active TOC row
+      border:    "$border$"      # hard lines: rules, heading underline, table separators
+      faint:     "$fg_faint$"    # soft lines: code frame/gutter, table borders, inactive TOC index
+      # text ladder (fg0 = body, fg1 = emphasis — holds in both polarities)
+      fg:        "$fg0$"         # body text
+      fg_strong: "$fg1$"         # bold text, active TOC entry, marked text
+      muted:     "$fg_muted$"    # de-emphasized: inactive TOC entries
+      dim:       "$grey1$"       # chrome text: separators, shortcuts, code labels, blockquote bar
       # accents (pink brand echoes tmux/nvim; teal secondary keeps mauve free for H4)
-      accent:    "$pink$"      # brand: status badge, search, H1, table headers, scrollbar
-      accent2:   "$teal$"      # TOC marker, inline code, H5+, mermaid keywords
-      success:   "$green$"     # watch/reload badges, tips, checked tasks, H2
-      info:      "$blue$"      # links, notes, H3
-      special:   "$mauve$"     # LaTeX, H4, important alerts
-      warning:   "$yellow$"    # warning status + alerts
-      danger:    "$red$"       # errors, caution alerts
+      accent:    "$pink$"        # brand: status badge, search, H1, table headers, scrollbar
+      accent2:   "$aqua$"        # TOC marker, inline code, H5+, mermaid keywords
+      success:   "$green$"       # watch/reload badges, tips, checked tasks, H2 (the ink green: 4.37:1 as H2 and under the reloaded badge, floor 4.24)
+      info:      "$blue$"        # links, notes, H3 (the ink blue: 4.66:1 on bg, floor 4.5)
+      special:   "$purple$"      # LaTeX, H4, important alerts
+      warning:   "$yellow$"      # warning status + alerts
+      danger:    "$red$"         # errors, caution alerts
 
   ghostty:
     name: "Catppuccin Latte"
 
+  kitty:
+
   zsh:
     colors:
-      red: 203
-      cyan: 39
-      blue: 110
-      green: 149
-      yellow: 179
-      magenta: 176
-      comment: "$overlay1$"
+      # truecolor from the catppuccin palette (PROMPT-1). Roles, not literal names:
+      # a quieter map — muted-grey git structure, pastel pink branch (matches tmux).
+      red:     "$red$"      # error: failed ❯, RPS1 ✘
+      cyan:    "$aqua$"     # path: cwd
+      blue:    "$grey1$"    # muted structure: git:( ) punctuation, venv name, jobs ⚙
+      green:   "$green$"    # ok: prompt ❯ (success) + transient glyph
+      yellow:  "$yellow$"   # accents: dirty ✗, venv ‹ ›, vi ❮, command timer
+      magenta: "$pink$"     # branch (ink pink #d421a4 — echoes the tmux accent; the editor keeps the pastel ctp.pink)
+      comment: "$fg_faint$" # syntax-highlight comments
 
   colorls:
-    unrecognized_file: blue
-    recognized_file: darkcyan
-    executable_file: red
-    dir: fuchsia
-    dead_link: red
-    link: cyan
-    device: darkgray
-    write: royalblue
-    read: magenta
-    exec: deeppink
-    no_access: dimgray
-    day_old: red
-    hour_old: coral
-    no_modifier: darkviolet
-    file_large: red
-    file_medium: coral
-    file_small: darkgray
-    report: darkviolet
-    user: darkblue
-    tree: cyan
-    empty: yellow
-    error: red
-    normal: darkgray
-    inode: violet
-    addition: chartreuse
-    modification: darkkhaki
-    deletion: darkred
-    untracked: darkorange
-    unchanged: darkgreen
+    unrecognized_file: "$blue$"
+    recognized_file: "$aqua$"
+    executable_file: "$green$"
+    dir: "$orange$"
+    dead_link: "$red$"
+    link: "$aqua$"
+    device: "$green$"
+    write: "$blue$"
+    read: "$purple$"
+    exec: "$pink$"
+    no_access: "$fg_dim$"
+    day_old: "$purple$"
+    hour_old: "$peach$"
+    no_modifier: "$fg_faint$"
+    file_large: "$orange$"
+    file_medium: "$yellow$"
+    file_small: "$fg_muted$"
+    report: "$fg_primary$"
+    user: "$blue$"
+    tree: "$fg_faint$"
+    empty: "$yellow$"
+    error: "$red$"
+    normal: "$fg_secondary$"
+    inode: "$blue$"
+    addition: "$green$"
+    modification: "$yellow$"
+    deletion: "$red$"
+    untracked: "$orange$"
+    unchanged: "$aqua$"
 
   nvim:
     colorscheme: "catppuccin"
+    scheme: "gruvbox-material"
     theme: "latte"
     vanilla: false
-    winblend: 15
+    winblend: 0
     plugin: |
       { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+    # identity: every key names its own upstream colour from the colorscheme's
+    # `ctp:` map (the two hand tweaks live there), which only this block reads;
+    # the contract tokens the terminal draws with may diverge from it (latte does).
+    # The palette is upstream; the highlight layer is the shared gruvbox-material
+    # engine, whose custom highlights differ from the retired _catppuccin.lua
+    # (NvimTreeSpecialFile peach not flamingo, parameters no longer maroon italic,
+    # NotifyTRACETitle pink not rosewater, misc italics off, TelescopeTitle and
+    # TelescopePromptCounter dropped, GitSigns blame styling added) — see docs/catppuccin.md
+    catppuccin_overrides:
+      rosewater: "$ctp.rosewater$"
+      flamingo: "$ctp.flamingo$"
+      pink: "$ctp.pink$"
+      mauve: "$ctp.mauve$"
+      red: "$ctp.red$"
+      maroon: "$ctp.maroon$"
+      peach: "$ctp.peach$"
+      yellow: "$ctp.yellow$"
+      green: "$ctp.green$"
+      teal: "$ctp.teal$"
+      sky: "$ctp.sky$"
+      sapphire: "$ctp.sapphire$"
+      blue: "$ctp.blue$"
+      lavender: "$ctp.lavender$"
+      text: "$ctp.text$"
+      subtext1: "$ctp.subtext1$"
+      subtext0: "$ctp.subtext0$"
+      overlay2: "$ctp.overlay2$"
+      overlay1: "$ctp.overlay1$"
+      overlay0: "$ctp.overlay0$"
+      surface2: "$ctp.surface2$"
+      surface1: "$ctp.surface1$"
+      surface0: "$ctp.surface0$"
+      base: "$ctp.base$"
+      mantle: "$ctp.mantle$"
+      crust: "$ctp.crust$"
     fields:
       bg: "base"
       fg: "text"
       alt_bg: "mantle"
-      alt_fg: "surface1"
+      alt_fg: "surface2"
       comment: "overlay0"
       yellow: "yellow"
       green: "green"

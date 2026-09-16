@@ -1,27 +1,67 @@
-rosewater: "#f2d5cf"
-flamingo: "#eebebe"
-pink: "#f4b8e4"
-mauve: "#ca9ee6"
-red: "#e78284"
-maroon: "#ea999c"
-peach: "#ef9f76"
-yellow: "#e5c890"
-green: "#a6d189"
-teal: "#81c8be"
-sky: "#99d1db"
-sapphire: "#85c1dc"
-blue: "#8caaee"
-lavender_bak: "#babbf1"
-lavender: "#b4b5ee"
-text: "#c6d0f5"
-subtext1: "#b5bfe2"
-subtext0: "#a5adce"
-overlay2: "#949cbb"
-overlay1: "#838ba7"
-overlay0: "#737994"
-surface2: "#626880"
-surface1: "#51576d"
-surface0: "#414559"
-base: "#303446"
-mantle: "#292c3c"
-crust: "#232634"
+# catppuccin frappe. The upstream palette (catppuccin/palette, every hex verbatim,
+# plus the user's lavender tweak) lives under `ctp:` and is referenced ONLY by
+# nvim's catppuccin_overrides ($ctp.<key>$), so the editor is identity frappe.
+# The contract tokens below alias it - every frappe accent already clears its
+# gruvbox-dark floor, so unlike latte nothing is derived - and each colour is
+# written once. The same `ctp:` shape as latte keeps the pair's nvim blocks identical.
+ctp:
+  rosewater: &rosewater "#f2d5cf"
+  flamingo: &flamingo "#eebebe"
+  pink: &pink "#f4b8e4"
+  mauve: &mauve "#ca9ee6"
+  red: &red "#e78284"
+  maroon: &maroon "#ea999c"
+  peach: &peach "#ef9f76"        # also the contract's orange and peach: catppuccin has no second mid warm
+  yellow: &yellow "#e5c890"
+  green: &green "#a6d189"
+  teal: &teal "#81c8be"
+  sky: &sky "#99d1db"
+  sapphire: &sapphire "#85c1dc"
+  blue: &blue "#8caaee"
+  lavender: &lavender "#b4b5ee"  # the user's tweak (upstream #babbf1), kept: nvim namespaces / cursorline nr
+  text: &text "#c6d0f5"
+  subtext1: &subtext1 "#b5bfe2"
+  subtext0: &subtext0 "#a5adce"
+  overlay2: &overlay2 "#949cbb"
+  overlay1: &overlay1 "#838ba7"
+  overlay0: &overlay0 "#737994"
+  surface2: &surface2 "#626880"
+  surface1: &surface1 "#51576d"
+  surface0: &surface0 "#414559"
+  base: &base "#303446"
+  mantle: &mantle "#292c3c"
+  crust: &crust "#232634"
+
+# gruvbox-contract accents (roles and reasons in docs/catppuccin.md)
+red: *red
+orange: *peach                 # catppuccin has no orange: peach is its warm secondary
+yellow: *yellow
+green: *green
+aqua: *teal
+blue: *blue
+purple: *mauve
+pink: *pink                    # THE UI accent: today's tools.tmux.colors.pink (7.52:1 on base)
+peach: *peach
+terracotta: *maroon            # the most saturated warm that is neither the peach nor the red: fzf's pointer stays distinct from its hl/prompt
+maroon: *maroon
+# text ladder
+fg_primary: *text
+fg_secondary: *subtext1
+fg_muted: *subtext0
+fg_dim: *overlay2              # overlay1 (3.65:1 on base) would also clear every fg_dim floor (nested-off status text 3.22:1 on panel_inset, floor 3.0) but drops tmux's status text below gruvbox-dark's own 4.14:1; overlay2 keeps it at 4.53:1
+fg_faint: "#6d738d"            # synthesised, overlay0 mixed 35% toward surface2: overlay0 leaves body text on leaf's search highlight at 2.81:1 (floor 3.0), surface2 leaves zsh comments at 2.23:1 (floor 2.59); this is the band that clears both (3.06 / 2.63)
+# surfaces (dark: bg_abyss < bg_deep < base < panel_inset < panel < panel_raised < border)
+border: *overlay0              # nvim's comment colour (fields.comment = overlay0, the contract's own slot for border) and the leaf rule / fzf separator colour the theme had before the contract: 2.87:1 on base. Sits above fg_faint (2.63) where gruvbox has border < faint; surface2 (2.23) would keep that relation but regress the established line colour. latte keeps surface2 (its overlay0 is fg_faint)
+panel_raised: *surface1
+panel: *surface0               # leaf's chip today; surface1 would drop inline code (teal) to 3.73:1 and fzf's hl to 3.37:1 (floor 4.5). fzf's hl on this chip is 4.45:1, 0.05 under gruvbox's 4.50 (passes within the audit's rounding) - the closest the palette offers, since peach is the only warm secondary
+panel_inset: "#383c50"         # synthesised, mix(surface0, base, 50): catppuccin has no step between base and surface0 (1.13:1 on base, 1.15:1 under surface0)
+bg_primary: *base              # == the ghostty "Catppuccin Frappe" background
+bg_deep: *mantle
+bg_abyss: *crust
+# greys
+grey0: *overlay1
+grey1: *overlay2               # zsh's git punctuation floor is gruvbox's 4.02:1; overlay1 gives 3.65
+grey2: *subtext0
+# leaf ladder aliases (fg1 = emphasis must out-contrast fg0 = body)
+fg0: *text                     # leaf body = the same text nvim and the terminal use
+fg1: *rosewater                # leaf emphasis: frappe's brightest neutral (8.91:1 on base vs text's 8.06)

@@ -1,28 +1,71 @@
-rosewater: "#dc8a78"
-flamingo: "#dd7878"
-pink: "#ea76cb"
-mauve: "#8839ef"
-red: "#d20f39"
-maroon: "#e64553"
-peach_bak: "#fe640b"
-peach: "#f28d5e"
-yellow: "#df8e1d"
-green: "#40a02b"
-teal: "#179299"
-sky: "#04a5e5"
-sapphire: "#209fb5"
-blue: "#1e66f5"
-lavender: "#7287fd"
-text_bak: "#6c6f85"
-text: "#4c4f69"
-subtext1: "#5c5f77"
-subtext0: "#6c6f85"
-overlay2: "#7c7f93"
-overlay1: "#8c8fa1"
-overlay0: "#9ca0b0"
-surface2: "#acb0be"
-surface1: "#bcc0cc"
-surface0: "#ccd0da"
-base: "#eff1f5"
-mantle: "#e6e9ef"
-crust: "#dce0e8"
+# catppuccin latte. The upstream palette (catppuccin/palette, every hex verbatim,
+# plus the user's peach tweak) lives under `ctp:` and is referenced ONLY by
+# nvim's catppuccin_overrides ($ctp.<key>$), so the editor stays identity latte.
+# The contract tokens below are what every terminal tool draws with. Latte is
+# pastel by design: the names it shares with the contract (red yellow green blue
+# pink maroon peach) would read at 2.1-4.3:1 on the page, so each one carries an
+# ink variant derived from the latte hue with the pipeline's own darken() (HLS
+# lightness points), stepped to the first value that clears every consumer's
+# gruvbox-light floor - the same treatment tokyonight-day, nord-light and
+# onelight give their terminal accents. Every derived line names its step.
+ctp:
+  rosewater: &rosewater "#dc8a78"
+  flamingo: &flamingo "#dd7878"
+  pink: &ctp_pink "#ea76cb"        # 2.34:1 on base - editor only (nvim pink, fields.accent)
+  mauve: &mauve "#8839ef"
+  red: &ctp_red "#d20f39"
+  maroon: &ctp_maroon "#e64553"
+  peach: &ctp_peach "#f28d5e"      # the user's tweak (upstream #fe640b) - editor only (nvim peach: numbers, fields.orange)
+  yellow: &ctp_yellow "#df8e1d"    # 2.31:1 on base - editor only
+  green: &ctp_green "#40a02b"      # 2.96:1 on base - editor only
+  teal: &teal "#179299"
+  sky: &sky "#04a5e5"
+  sapphire: &sapphire "#209fb5"
+  blue: &ctp_blue "#1e66f5"        # 4.34:1 on base - editor only
+  lavender: &lavender "#7287fd"
+  text: &text "#4c4f69"
+  subtext1: &subtext1 "#5c5f77"
+  subtext0: &subtext0 "#6c6f85"
+  overlay2: &overlay2 "#7c7f93"
+  overlay1: &overlay1 "#8c8fa1"
+  overlay0: &overlay0 "#9ca0b0"
+  surface2: &surface2 "#acb0be"
+  surface1: &surface1 "#bcc0cc"
+  surface0: &surface0 "#ccd0da"
+  base: &base "#eff1f5"
+  mantle: &mantle "#e6e9ef"
+  crust: &crust "#dce0e8"
+
+# gruvbox-contract accents (roles and reasons in docs/catppuccin.md). Ratios are on base unless stated.
+red: *ctp_red                  # 4.80:1 clears every red floor (4.26) raw
+orange: "#c64a10"              # darken(peach, 24): raw peach is 2.12:1; this clears fzf hl/prompt and interdimux accent (4.23:1, floor 3.76), tmux menus/copy-mode on panel_inset (3.62, floor 3.24) and fzf's hl on the chip (3.10, floor 2.93)
+yellow: "#b27117"              # darken(yellow, 10): 3.53:1 (floor 3.49: tmux prefix flag, zsh accents, fzf marker, colorls sizes); crust reads 3.01:1 on it (copy-mode match, floor 3.01)
+green: "#338022"               # darken(green, 8): 4.37:1 (floor 4.24: zsh ❯, interdimux editor/success, colorls) - the green leaf already painted for its text roles
+aqua: "#13797e"                # darken(teal, 6): raw teal is 3.31:1; zsh's cwd and colorls links need gruvbox-light's 4.36 (4.57)
+blue: "#145ff5"                # darken(blue, 2): 4.66:1 (floor 4.5: fzf info, interdimux ssh, leaf H3/links, colorls)
+purple: *mauve                 # 4.79:1 clears the 4.44 floor as it is
+pink: "#d421a4"                # darken(pink, 21): THE UI accent as ink magenta, 4.08:1 (floor 3.9: tmux active window, zsh branch, colorls exec, leaf brand); crust reads 3.49:1 on it (copy-mode current match, floor 3.37). The editor keeps the pastel ctp.pink for its accent
+terracotta: &terracotta "#b5472f"  # darken(rosewater, 22): an actual terracotta at 4.75:1 (fzf pointer, floor 4.5), distinct from the crimson red and the orange - maroon darkened to 4.5 is just another red
+peach: *terracotta             # colorls hour_old (floor 4.5): the contract lets peach alias terracotta; the pastel ctp.peach (2.12:1) is editor-only
+maroon: *ctp_maroon            # nvim parameters read ctp.maroon; no terminal consumer, so the upstream value stands
+# text ladder (light: fg_secondary is the darker, emphasis step)
+fg_primary: *text
+fg_secondary: &fg_secondary "#3b3d51"  # synthesised, darken(text, 8): latte has no neutral below text, and the light rule wants the secondary/emphasis step darker than body (9.42:1 vs 7.06)
+fg_muted: *subtext1            # subtext0 (4.06:1 on mantle) would drop leaf's inactive TOC entries below the 4.5 floor
+fg_dim: *overlay2              # overlay1 (2.83:1) is below tmux's 3.0 status-text floor
+fg_faint: *overlay0            # catppuccin's comment grey; overlay1 would leave body text on leaf's search highlight at 2.49:1 (floor 3.0)
+# surfaces (light: base is the lightest; chrome and raised sides step down)
+border: *surface2              # overlay0 (nvim's comment colour, frappe's border) is latte's fg_faint and would paint leaf's rules and code frames in one grey; surface2 keeps the hard line (1.91:1) quieter than faint (2.30), as gruvbox-light does (1.51 vs 2.21)
+panel_raised: *surface1
+panel: *surface0               # surface1 would drop body text on the chip to 4.39:1 (floor 4.5) and inline LaTeX to 2.98
+panel_inset: *crust            # crust sits at the base<->surface0 midpoint (mix() gives #dee0e8), the same near-coincidence gruvbox-light has between its panel_inset and bg_abyss
+bg_primary: *base              # == the ghostty "Catppuccin Latte" background
+bg_deep: *mantle
+bg_abyss: *crust
+# greys (the triple is ordered dark -> light per polarity, so it is frappe's overlay1/overlay2/subtext0 mirrored)
+grey0: *subtext0
+grey1: *overlay2               # zsh's git punctuation floor is gruvbox-light's 3.24:1; overlay1 gives 2.83
+grey2: *overlay1
+# leaf ladder aliases (fg1 = emphasis must out-contrast fg0 = body)
+fg0: *text                     # leaf body = the same text nvim and the terminal use
+fg1: *fg_secondary             # leaf emphasis: the darkened text above (light rule: fg1 = fg_secondary)

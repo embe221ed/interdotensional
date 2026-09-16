@@ -1,0 +1,203 @@
+name: "nord-light"
+polarity: "light"
+pair: "nord"
+
+# Contrast note. The doom-nord-light accents clear every gruvbox-light floor in
+# the terminal (green, blue and the teal aqua were darkened a few points in the
+# colorscheme to get there); only the web and one leaf chrome row need a text_darken nudge.
+tools:
+
+  tmux:
+    clock: 130                     # nearest xterm index to $orange$ (doom-nord-light #ac4426 -> #af5f00)
+    colors:
+      dim: "$fg_dim$"
+      pink: "$pink$"
+      yellow: "$yellow$"
+      selected:
+        fg: "$orange$"
+        bg: "$panel_inset$"
+
+  fzf:
+    fg: "$fg_primary$"
+    bg: "-1"
+    hl: "$orange$"
+    selected_bg: "$panel$"
+    info: "$blue$"
+    border: "$pink$"
+    prompt: "$orange$"
+    pointer: "$terracotta$"
+    marker: "$yellow$"
+    spinner: "$purple$"
+    header: "$fg_dim$"
+    separator: "$border$"
+    label: "$fg_secondary$"
+
+  interdimux:
+    accent:        "$orange$"
+    path:          "$yellow$"
+    git:           "$purple$"
+    ssh:           "$blue$"
+    editor:        "$green$"
+    success:       "$green$"
+    danger:        "$red$"
+    tree:          "$fg_faint$"
+    separator:     "$border$"
+    query:         "$fg_primary$"
+    match_current: "$orange$"
+    current_bg:    "$panel_inset$"
+    header:        "$fg_dim$"
+    border:        "$border$"
+    menu_sel_fg:   "$bg_primary$"
+
+  ipython:
+    pygments_style: "lovelace"     # no light Nord style is installed; lovelace is the cool, desaturated light one
+
+  web:
+    prompt_dir: "$aqua$"          # zsh `%c`; tools.zsh.colors.cyan is a hex here, but the web wants its own darken key
+    # The web is stricter than the terminal: WCAG AA wants 4.5:1 for body text,
+    # and the doom-nord-light accents sit at 3.2-4.3:1 on the chrome (yellow lowest). These are
+    # the minimum darken() points (HLS lightness) that clear 4.5:1 on BOTH the
+    # page background (bg, #e5e9f0) and the code-block background (bg_deep,
+    # #d8dee9). Roles absent here (special, danger, pane_active) already clear it
+    # raw. The dark counterpart carries no map.
+    text_darken:
+      accent: 3                    # ice on bg_deep: 4.11 -> 4.74
+      accent2: 2                   # orange on bg_deep: 4.31 -> 4.63
+      success: 3                   # green on bg_deep: 4.02 -> 4.61
+      info: 2                      # blue on bg_deep: 4.21 -> 4.54
+      warning: 6                   # yellow on bg_deep: 3.16 -> 4.51
+      prompt_dir: 1                # aqua as bold cwd text: 4.46 -> 4.71 on bg
+      select_fg: 3                 # orange on panel_inset: 4.16 -> 4.67
+
+  leaf:
+    base: "ocean"                 # built-in preset backing any key the theme doesn't set
+    syntax: "base16-ocean.light"  # syntect theme for fenced code blocks
+    # Barely-visible extra depth so the gold clears the nord4 chrome
+    # (status warning 3.16:1 -> 3.35:1); every other role clears its floor raw.
+    text_darken:
+      warning: 1  # yellow -> #957100 for text roles
+    colors:
+      # surfaces
+      bg:        "$bg_primary$"  # content background
+      bg_deep:   "$bg_deep$"     # chrome: TOC + status bar background (nord4, the Nord Light selection colour)
+      panel:     "$panel$"       # chips: filename/search badges, inline code, active TOC row
+      border:    "$border$"      # hard lines: rules, heading underline, table separators
+      faint:     "$fg_faint$"    # soft lines: code frame/gutter, table borders, inactive TOC index (synthesised step above nord3.5, which would swallow body text at 2:1)
+      # text ladder (fg0 = body, fg1 = emphasis — holds in both polarities)
+      fg:        "$fg0$"         # body text
+      fg_strong: "$fg1$"         # bold text, active TOC entry, marked text
+      muted:     "$fg_muted$"    # de-emphasized: inactive TOC entries (nord3)
+      dim:       "$grey1$"       # chrome text: separators, shortcuts, code labels, blockquote bar (nord3.5 lifted a step: 3.6:1 on the page, 3.2:1 on the chrome)
+      # accents (frost ice brand, aurora orange secondary — echoes fzf hl)
+      accent:    "$ice$"         # brand: status badge, search, H1, table headers, scrollbar
+      accent2:   "$orange$"      # TOC marker, inline code, H5+, mermaid keywords
+      success:   "$green$"       # watch/reload badges, tips, checked tasks, H2
+      info:      "$blue$"        # links, notes, H3 (doom-nord-light blue; its dark-blue $artic_ocean$ reads at 3.9:1)
+      special:   "$purple$"      # LaTeX, H4, important alerts
+      warning:   "$yellow$"      # warning status + alerts
+      danger:    "$red$"         # errors, caution alerts
+
+  ghostty:
+    name: "Nord Light"
+
+  kitty:
+
+  zsh:
+    colors:
+      # truecolor from the nord palette (PROMPT-1). Roles, not literal names:
+      # a quieter map — muted-grey git structure, aurora purple branch (matches tmux).
+      red:     "$red$"      # error: failed ❯, RPS1 ✘
+      cyan:    "$aqua$"     # path: cwd
+      blue:    "$grey1$"    # muted structure: git:( ) punctuation, venv name, jobs ⚙
+      green:   "$green$"    # ok: prompt ❯ (success) + transient glyph
+      yellow:  "$yellow$"   # accents: dirty ✗, venv ‹ ›, vi ❮, command timer
+      magenta: "$pink$"     # branch (doom-nord-light magenta #97365b — echoes the tmux accent)
+      comment: "$fg_faint$" # syntax-highlight comments
+
+  colorls:
+    unrecognized_file: "$blue$"
+    recognized_file: "$aqua$"
+    executable_file: "$green$"
+    dir: "$orange$"
+    dead_link: "$red$"
+    link: "$aqua$"
+    device: "$green$"
+    write: "$blue$"
+    read: "$purple$"
+    exec: "$pink$"
+    no_access: "$fg_dim$"
+    day_old: "$purple$"
+    hour_old: "$peach$"
+    no_modifier: "$fg_faint$"
+    file_large: "$orange$"
+    file_medium: "$yellow$"
+    file_small: "$fg_muted$"
+    report: "$fg_primary$"
+    user: "$blue$"
+    tree: "$fg_faint$"
+    empty: "$yellow$"
+    error: "$red$"
+    normal: "$fg_secondary$"
+    inode: "$blue$"
+    addition: "$green$"
+    modification: "$yellow$"
+    deletion: "$red$"
+    untracked: "$orange$"
+    unchanged: "$aqua$"
+
+  nvim:
+    colorscheme: "catppuccin"
+    scheme: "gruvbox-material"
+    theme: "latte"
+    vanilla: false
+    winblend: 0
+    plugin: |
+      { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+    # Nord's syntax identity through catppuccin's keys (deviations from the gruvbox
+    # template are marked; the reasons live in docs/nord.md):
+    catppuccin_overrides:
+      rosewater: "$pink$"
+      flamingo: "$terracotta$"
+      pink: "$pink$"
+      mauve: "$blue$"              # keywords/conditionals = nord9 frost, not purple
+      red: "$red$"
+      maroon: "$maroon$"
+      peach: "$orange$"            # numbers/constants = nord12 (the key also feeds fields.orange: folders, matches)
+      yellow: "$yellow$"           # types/classes = doom yellow, not Nord's nord7: the key is also catppuccin's WARNING colour (DiagnosticWarn, GitSignsChange, notify warn) and feeds fields.yellow
+      green: "$green$"
+      teal: "$aqua$"               # hints/docstrings/list markers = the teal (regex/escapes are catppuccin's pink key, not teal)
+      sky: "$blue$"                # operators = nord9
+      sapphire: "$aqua$"
+      blue: "$ice$"                # functions/methods = nord8, Nord's primary accent
+      lavender: "$fg_secondary$"
+      text: "$fg_primary$"
+      subtext1: "$fg_secondary$"
+      subtext0: "$grey1$"
+      overlay2: "$fg_dim$"
+      overlay1: "$fg_faint$"
+      overlay0: "$border$"         # NonText/fold column and, via fields.comment, the vim.g.colors.comment UI roles = the quiet line grey (Comment itself is overlay2 = fg_dim, nord3.5)
+      surface2: "$panel_raised$"
+      surface1: "$panel$"
+      surface0: "$panel_inset$"
+      base: "$bg_primary$"
+      mantle: "$bg_deep$"
+      crust: "$bg_abyss$"
+    fields:
+      bg: "base"
+      fg: "text"
+      alt_bg: "mantle"
+      alt_fg: "surface2"
+      comment: "overlay0"
+      yellow: "yellow"
+      green: "green"
+      orange: "peach"
+      blue: "blue"
+      red: "red"
+      mauve: "mauve"
+      pink: "pink"
+      teal: "teal"
+      sky: "sky"
+      accent: "pink"
+      dark_bg: "crust"
+      light_bg: "surface0"
+      none: "NONE"

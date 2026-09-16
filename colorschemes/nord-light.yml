@@ -1,0 +1,52 @@
+# Nord Light. Polar Night / Snow Storm are upstream Nord with the roles swapped
+# (Polar Night is the text ladder, Snow Storm the surfaces); Frost / Aurora carry
+# doom-nord-light's darkened counterparts (the established readable light-Nord set),
+# nudged only where a gruvbox-light floor demands it — every nudge is commented.
+# The Snow Storm side is too short for six surfaces, so the raised steps are
+# mixes of the page toward nord3 (mix(nord5, nord3, N)); the faint/grey1 steps are
+# samples of the same nord4..nord3.5 line the dark theme uses.
+origin:         &origin         "#2e3440"  # nord0: emphasis text (doom-nord-light fg-alt), 10.26:1
+bright:         &bright         "#3b4252"  # nord1: body text (doom-nord-light fg), 8.26:1
+brighter:       &brighter       "#434c5e"  # nord2 (unused by the theme config)
+brightest:      &brightest      "#4c566a"  # nord3: muted text, 6.06:1
+light:          &light          "#616e88"  # nord3 brightened: dim/chrome text, 4.21:1
+snow:           &snow           "#d8dee9"  # nord4: the deep chrome (ghostty "Nord Light" selection)
+snow_brighter:  &snow_brighter  "#e5e9f0"  # nord5: the page (ghostty "Nord Light" background)
+snow_brightest: &snow_brightest "#eceff4"  # nord6 (unused: nothing may be lighter than the page)
+polar_water:    &polar_water    "#24747d"  # doom teal #29838d darkened 4 pts: 3.65:1 -> 4.46:1 (cwd/colorls floor is 4.36)
+ice:            &ice            "#2c7088"  # doom dark-cyan, 4.56:1 (doom cyan #398eac is 3.06:1: too pale for the brand/H1)
+artic_water:    &artic_water    "#3869a0"  # doom blue #3b6ea8 darkened 2 pts: 4.33:1 -> 4.67:1 (H3/fzf info/colorls need 4.5)
+artic_ocean:    &artic_ocean    "#5272af"  # doom dark-blue (nord10's seat; unused, 3.93:1)
+# accents (doom-nord-light aurora)
+red:            &red            "#99324b"  # doom red, 5.92:1
+orange:         &orange         "#ac4426"  # doom orange, 4.78:1
+yellow:         &yellow         "#9a7500"  # doom yellow, 3.51:1 (gruvbox-light's gold sits at 3.49)
+green:          &green          "#447541"  # doom green #4f894c darkened 6 pts: 3.44:1 -> 4.46:1 (terminal green floor is 4.24)
+aqua:           *polar_water               # teal: cwd, colorls links, nvim teal/sapphire
+blue:           *artic_water               # info, fzf info, nvim keywords/operators
+purple:         &purple         "#97365b"  # doom magenta (nord15's counterpart), 5.76:1
+pink:           *purple                    # THE UI accent: the darkened counterpart of dark nord's pink
+peach:          *orange                    # as in the dark theme: one warm
+terracotta:     *orange                    # brand warm: fzf pointer, nvim flamingo
+maroon:         "#a44d64"                  # synthesised soft rose: mix(red, nord5, 15), 4.51:1 — nvim parameters
+# text ladder (Polar Night, darkest = emphasis: on light the "secondary" is the stronger one, as gruvbox-light)
+fg_primary:     *bright                    # nord1: body — fzf fg, interdimux query, colorls report, nvim text
+fg_secondary:   *origin                    # nord0: emphasis — colorls normal, fzf label, nvim subtext1/lavender
+fg_muted:       *brightest                 # nord3, 6.06:1 (5.46:1 on the chrome)
+fg_dim:         *light                     # nord3.5, 4.21:1 (3.66:1 on the selection)
+fg_faint:       "#8b95aa"                  # synthesised: mix(nord3.5, nord4, 35), 2.47:1 lines (body text reads 3.34:1 on it)
+# surfaces (the page is the lightest; chrome and raised steps both go darker)
+border:         "#aeb4c0"                  # synthesised: mix(nord5, nord3, 36), 1.71:1 — hard lines, nvim comments
+panel_raised:   "#bac0ca"                  # synthesised: mix(nord5, nord3, 28), 1.50:1
+panel:          "#c6ccd5"                  # synthesised: mix(nord5, nord3, 20), 1.33:1 — chips
+panel_inset:    "#d6dae3"                  # synthesised: mix(nord5, nord3, 10), 1.15:1 — the selection surface
+bg_primary:     *snow_brighter             # nord5 == ghostty "Nord Light" background
+bg_deep:        *snow                      # nord4, 1.11:1 — chrome, nvim mantle
+bg_abyss:       "#d0d4dd"                  # synthesised: mix(nord5, nord3, 14), 1.10:1 on bg_deep — nvim crust
+# greys (samples of the same nord4..nord3.5 line as the dark theme; grey1 must clear 3.24:1 for the zsh punctuation)
+grey0:          *light                     # nord3.5, the palette's own comment grey
+grey1:          "#6d7992"                  # synthesised: mix(nord3.5, nord4, 10), 3.59:1 (3.24:1 on the chrome) — leaf dim, zsh blue
+grey2:          "#a8b1c2"                  # synthesised: mix(nord4, nord3.5, 40): the dark theme's fg_muted (vocabulary only)
+# leaf ladder aliases (fg1 = emphasis must out-contrast fg0 = body)
+fg0:            *bright                    # = fg_primary
+fg1:            *origin                    # = fg_secondary

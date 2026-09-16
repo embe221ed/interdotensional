@@ -97,7 +97,7 @@ def test_web_stylesheet_carries_every_role(repo_project, theme, font):
 
 @pytest.mark.parametrize(
     "theme, blocks",
-    [("gruvbox-material-light", 4), ("gruvbox-material-dark", 4), ("nord", 1)],
+    [("gruvbox-material-light", 4), ("gruvbox-material-dark", 4), ("nord", 4)],
 )
 def test_web_stylesheet_ships_both_polarities_only_when_paired(
     repo_project, theme, blocks
@@ -106,7 +106,9 @@ def test_web_stylesheet_ships_both_polarities_only_when_paired(
     ships BOTH palettes: the active one on :root, the counterpart under the
     media query, and both again under [data-theme] so a manual choice beats the
     OS preference in either direction - four blocks. An unpaired theme has no
-    counterpart palette to emit, so it must stay at one."""
+    counterpart palette to emit, so it must stay at one (every theme in the
+    repo is paired since nord gained nord-light, so that branch is exercised
+    only by a future unpaired theme)."""
     from interdotensional.config import load_context
 
     css = _web_css(repo_project, load_context(repo_project, theme=theme))
@@ -119,6 +121,20 @@ def test_web_stylesheet_ships_both_polarities_only_when_paired(
         assert f"@media (prefers-color-scheme: {pair['polarity']})" in css
         assert ":root:not([data-theme])" in css
         assert f'--id-bg: {pair["tools"]["leaf"]["colors"]["bg"]};' in css
+
+
+def test_web_stylesheet_single_polarity_when_unpaired(repo_project):
+    """Every repo theme is paired, so the unpaired branch is exercised on a
+    context whose `pair` is cleared: one --id-bg block, no media query, no
+    [data-theme] override."""
+    from interdotensional.config import load_context
+
+    context = load_context(repo_project, theme="nord")
+    context.data["pair"] = None
+    css = _web_css(repo_project, context)
+    assert css.count("--id-bg: ") == 1
+    assert "prefers-color-scheme" not in css
+    assert "[data-theme" not in css
 
 
 def test_web_text_darken_prefers_the_web_map(repo_project):

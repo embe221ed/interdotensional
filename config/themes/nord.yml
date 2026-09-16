@@ -1,135 +1,190 @@
 name: "nord"
 polarity: "dark"
+pair: "nord-light"
 
+# Contrast note. Three upstream aurora hexes are pastel on nord0 (#2e3440): red
+# nord11 3.05:1, orange nord12 4.39:1, purple nord15 4.41:1. They are kept as-is
+# (Nord's identity; every Nord port renders them so) and every consumer line
+# below that misses its gruvbox floor because of one of them says so inline.
 tools:
 
   tmux:
-    clock: 110
+    clock: 173                     # nearest xterm index to $orange$ (nord12 #d08770 -> #d7875f, 4.47:1 on nord0: the warm accent, as the light theme's 130)
     colors:
-      dim: "$brighter$"
-      pink: "$purple$"
+      dim: "$fg_dim$"
+      pink: "$pink$"               # nord15: 4.41:1 on nord0 (floor 4.5); copy-mode current match 3.55:1
       yellow: "$yellow$"
       selected:
-        fg: "$purple$"
-        bg: "$bright$"
+        fg: "$orange$"             # nord12 on nord1: 3.54:1 (floor 4.5)
+        bg: "$panel_inset$"
 
   fzf:
-    fg: "$snow$"
+    fg: "$fg_primary$"
     bg: "-1"
-    hl: "$orange$"
-    selected_bg: "$brighter$"
-    info: "$ice$"
-    border: "$purple$"
-    prompt: "$green$"
-    pointer: "$red$"
+    hl: "$orange$"                 # nord12: 4.39:1 on nord0, 3.03:1 on the nord2 selection (floor 4.5)
+    selected_bg: "$panel$"
+    info: "$blue$"
+    border: "$pink$"
+    prompt: "$orange$"             # nord12: 4.39:1 (floor 4.5)
+    pointer: "$terracotta$"
     marker: "$yellow$"
-    spinner: "$polar_water$"
-    header: "$light$"
-    separator: "$brightest$"
-    label: "$snow$"
+    spinner: "$purple$"            # nord15: 4.41:1 (floor 4.5)
+    header: "$fg_dim$"
+    separator: "$border$"
+    label: "$fg_secondary$"
+
+  interdimux:
+    accent:        "$orange$"      # nord12: 4.39:1 (floor 4.5); menu_sel_fg on it 4.39:1
+    path:          "$yellow$"
+    git:           "$purple$"      # nord15: 4.41:1 (floor 4.5)
+    ssh:           "$blue$"
+    editor:        "$green$"
+    success:       "$green$"
+    danger:        "$red$"         # nord11: 3.05:1 (floor 4.5)
+    tree:          "$fg_faint$"
+    separator:     "$border$"
+    query:         "$fg_primary$"
+    match_current: "$orange$"      # nord12 on nord1: 3.54:1 (floor 4.5)
+    current_bg:    "$panel_inset$"
+    header:        "$fg_dim$"
+    border:        "$border$"
+    menu_sel_fg:   "$bg_primary$"
 
   ipython:
     pygments_style: "nord"
+
+  web:
+    prompt_dir: "$aqua$"          # zsh `%c`; no text_darken — a dark theme has no map to tune
+    # The same three aurora hexes miss 4.5:1 on the page as they do in the terminal:
+    # accent2 (nord12) 4.39:1 on bg, special (nord15) 4.41:1 on bg, danger (nord11)
+    # 3.05:1 / 3.32:1 on bg / bg_deep, pane_active (nord15) 4.41:1, select_fg (nord12
+    # on nord1) 3.54:1. Frost, yellow and green clear AA everywhere.
 
   leaf:
     base: "ocean"                # built-in preset backing any key the theme doesn't set
     syntax: "base16-ocean.dark"  # syntect theme for fenced code blocks
     colors:
-      # surfaces (polar night steps: origin content, nord1 chrome, nord2 chips)
-      bg:        "$origin$"      # content background
-      bg_deep:   "$bright$"      # chrome: TOC + status bar background
-      panel:     "$brighter$"    # chips: filename/search badges, inline code, active TOC row
-      border:    "$brightest$"   # hard lines: rules, heading underline, table separators
-      faint:     "$light$"       # soft lines: code frame/gutter, table borders, inactive TOC index ($brighter$ is invisible on the nord1 chrome)
-      # text ladder (snow storm body, stepping down into polar night greys)
-      fg:        "$snow$"        # body text
-      fg_strong: "$snow_brightest$" # bold text, active TOC entry, marked text
-      muted:     "$snow$"        # de-emphasized: inactive TOC entries (no step exists between nord3.5 and nord4; $light$ is unreadable at 2:1)
-      dim:       "$light$"       # chrome text: separators, shortcuts, code labels, blockquote bar (nord3.5, the palette's designated dim-text shade)
+      # surfaces
+      bg:        "$bg_primary$"  # content background
+      bg_deep:   "$bg_deep$"     # chrome: TOC + status bar background (nord0 stepped down — Nord has no darker shade)
+      panel:     "$panel$"       # chips: filename/search badges, inline code, active TOC row
+      border:    "$border$"      # hard lines: rules, heading underline, table separators
+      faint:     "$fg_faint$"    # soft lines: code frame/gutter, table borders, inactive TOC index (synthesised step above nord3.5, which is 2.4:1)
+      # text ladder (fg0 = body, fg1 = emphasis — holds in both polarities)
+      fg:        "$fg0$"         # body text
+      fg_strong: "$fg1$"         # bold text, active TOC entry, marked text
+      muted:     "$fg_muted$"    # de-emphasized: inactive TOC entries (synthesised step between nord4 and nord3.5; $light$ alone is unreadable at 2.4:1)
+      dim:       "$grey1$"       # chrome text: separators, shortcuts, code labels, blockquote bar (nord3.5 lifted to 4.5:1 — raw it misses the 3:1 chrome floor)
       # accents (frost ice brand, aurora orange secondary — echoes fzf hl)
-      accent:    "$ice$"         # brand: status badge, search, H1, table headers, scrollbar
-      accent2:   "$orange$"      # TOC marker, inline code, H5+, mermaid keywords
+      accent:    "$ice$"         # brand: status badge, search, H1, table headers, scrollbar (search chip on nord2: 4.31:1, floor 4.5)
+      accent2:   "$orange$"      # TOC marker, inline code, H5+, mermaid keywords (nord12: H5+ 4.39:1, inline code on nord2 3.03:1; floor 4.5)
       success:   "$green$"       # watch/reload badges, tips, checked tasks, H2
-      info:      "$artic_ocean$" # links, notes, H3 (nord10; $artic_water$ is near-identical to the ice H1)
-      special:   "$purple$"      # LaTeX, H4, important alerts
+      info:      "$blue$"        # links, notes, H3 (nord9; nord10 $artic_ocean$ reads at 3.1:1)
+      special:   "$purple$"      # LaTeX, H4, important alerts (nord15: H4 4.41:1, inline LaTeX on nord2 3.05:1; floors 4.5 / 4.23)
       warning:   "$yellow$"      # warning status + alerts
-      danger:    "$red$"         # errors, caution alerts
+      danger:    "$red$"         # errors, caution alerts (nord11: 3.05:1 on bg, 2.82:1 on the tinted error badge; floors 4.5 / 4.26)
 
   ghostty:
     name: "Nord"
 
   kitty:
-    name: "Nord"
 
   zsh:
     colors:
-      red: 131
-      cyan: 116
-      blue: 110
-      green: 108
-      yellow: 222
-      magenta: 139
-      comment: "$light$"
+      # truecolor from the nord palette (PROMPT-1). Roles, not literal names:
+      # a quieter map — muted-grey git structure, aurora purple branch (matches tmux).
+      red:     "$red$"      # error: failed ❯, RPS1 ✘ (nord11: 3.05:1, floor 4.5)
+      cyan:    "$aqua$"     # path: cwd
+      blue:    "$grey1$"    # muted structure: git:( ) punctuation, venv name, jobs ⚙
+      green:   "$green$"    # ok: prompt ❯ (success) + transient glyph
+      yellow:  "$yellow$"   # accents: dirty ✗, venv ‹ ›, vi ❮, command timer
+      magenta: "$pink$"     # branch (nord15 purple #b48ead — echoes the tmux accent; 4.41:1, floor 4.5)
+      comment: "$fg_faint$" # syntax-highlight comments
 
   colorls:
-    unrecognized_file: "$artic_water$"
-    recognized_file: "$polar_water$"
+    unrecognized_file: "$blue$"
+    recognized_file: "$aqua$"
     executable_file: "$green$"
-    dir: "$orange$"
-    dead_link: "$red$"
-    link: "$polar_water$"
+    dir: "$orange$"                # nord12: 4.39:1 (floor 4.5)
+    dead_link: "$red$"             # nord11: 3.05:1 (floor 4.5)
+    link: "$aqua$"
     device: "$green$"
-    write: "$artic_water$"
-    read: "$purple$"
-    exec: "$purple$"
-    no_access: "$light$"
-    day_old: "$purple$"
-    hour_old: "$orange$"
-    no_modifier: "$brightest$"
-    file_large: "$orange$"
+    write: "$blue$"
+    read: "$purple$"               # nord15: 4.41:1 (floor 4.5)
+    exec: "$pink$"                 # nord15: 4.41:1 (floor 4.5)
+    no_access: "$fg_dim$"
+    day_old: "$purple$"            # nord15: 4.41:1 (floor 4.5)
+    hour_old: "$peach$"            # nord12: 4.39:1 (floor 4.5)
+    no_modifier: "$fg_faint$"
+    file_large: "$orange$"         # nord12: 4.39:1 (floor 4.5)
     file_medium: "$yellow$"
-    file_small: "$light$"
-    report: "$snow$"
-    user: "$artic_water$"
-    tree: "$brightest$"
+    file_small: "$fg_muted$"
+    report: "$fg_primary$"
+    user: "$blue$"
+    tree: "$fg_faint$"
     empty: "$yellow$"
-    error: "$red$"
-    normal: "$snow$"
-    inode: "$artic_water$"
+    error: "$red$"                 # nord11: 3.05:1 (floor 4.5)
+    normal: "$fg_secondary$"
+    inode: "$blue$"
     addition: "$green$"
     modification: "$yellow$"
-    deletion: "$red$"
-    untracked: "$orange$"
-    unchanged: "$polar_water$"
+    deletion: "$red$"              # nord11: 3.05:1 (floor 4.5)
+    untracked: "$orange$"          # nord12: 4.39:1 (floor 4.5)
+    unchanged: "$aqua$"
 
   nvim:
-    colorscheme: "nord"
-    scheme: "nord"
-    theme: "polar_night"
+    colorscheme: "catppuccin"
+    scheme: "gruvbox-material"
+    theme: "mocha"
     vanilla: false
-    winblend: 8
+    winblend: 0
     plugin: |
-      {
-            "gbprod/nord.nvim",
-            lazy = false,
-            priority = 1000,
-          }
+      { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+    # Nord's syntax identity through catppuccin's keys (deviations from the gruvbox
+    # template are marked; the reasons live in docs/nord.md):
+    catppuccin_overrides:
+      rosewater: "$pink$"
+      flamingo: "$terracotta$"
+      pink: "$pink$"
+      mauve: "$blue$"              # keywords/conditionals = nord9 frost, not purple
+      red: "$red$"
+      maroon: "$maroon$"
+      peach: "$orange$"            # numbers/constants = nord12 (the key also feeds fields.orange: folders, matches)
+      yellow: "$yellow$"           # types/classes = nord13, not Nord's nord7: the key is also catppuccin's WARNING colour (DiagnosticWarn, GitSignsChange, notify warn) and feeds fields.yellow
+      green: "$green$"
+      teal: "$aqua$"               # hints/docstrings/list markers = nord7 (regex/escapes are catppuccin's pink key, not teal)
+      sky: "$blue$"                # operators = nord9
+      sapphire: "$aqua$"
+      blue: "$ice$"                # functions/methods = nord8, Nord's primary accent
+      lavender: "$fg_secondary$"
+      text: "$fg_primary$"
+      subtext1: "$fg_secondary$"
+      subtext0: "$grey1$"
+      overlay2: "$fg_dim$"
+      overlay1: "$fg_faint$"
+      overlay0: "$border$"         # NonText/fold column and, via fields.comment, the vim.g.colors.comment UI roles = nord3.5 (Comment itself is overlay2 = fg_dim)
+      surface2: "$panel_raised$"
+      surface1: "$panel$"
+      surface0: "$panel_inset$"
+      base: "$bg_primary$"
+      mantle: "$bg_deep$"
+      crust: "$bg_abyss$"
     fields:
-      bg: "polar_night.origin"
-      fg: "snow_storm.origin"
-      alt_bg: "polar_night.bright"
-      alt_fg: "polar_night.brightest"
-      comment: "polar_night.light"
-      yellow: "aurora.yellow"
-      green: "aurora.green"
-      orange: "aurora.orange"
-      blue: "frost.ice"
-      red: "aurora.red"
-      mauve: "aurora.purple"
-      pink: "aurora.purple"
-      teal: "frost.polar_water"
-      sky: "frost.ice"
-      accent: "frost.artic_ocean"
-      dark_bg: "polar_night.brighter"
-      light_bg: "polar_night.brightest"
+      bg: "base"
+      fg: "text"
+      alt_bg: "mantle"
+      alt_fg: "surface2"
+      comment: "overlay0"
+      yellow: "yellow"
+      green: "green"
+      orange: "peach"
+      blue: "blue"
+      red: "red"
+      mauve: "mauve"
+      pink: "pink"
+      teal: "teal"
+      sky: "sky"
+      accent: "pink"
+      dark_bg: "crust"
+      light_bg: "surface0"
       none: "NONE"
